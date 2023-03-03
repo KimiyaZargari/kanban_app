@@ -5,6 +5,7 @@ import 'package:kanban_app/presentation/core/config/strings.dart';
 import 'package:kanban_app/presentation/core/widgets/loading_widget.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
 import 'package:kanban_app/presentation/project/notifiers/projects.dart';
+import 'package:kanban_app/presentation/project/widgets/create_project_dialog.dart';
 
 class ProjectsPage extends ConsumerWidget {
   const ProjectsPage({Key? key}) : super(key: key);
@@ -15,7 +16,9 @@ class ProjectsPage extends ConsumerWidget {
     return PageBase(
         title: AppStrings.projects,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            showDialog(context: context, builder: (_) => CreateProjectDialog());
+          },
           child: const Icon(Icons.add_rounded),
         ),
         child: state.maybeWhen(
