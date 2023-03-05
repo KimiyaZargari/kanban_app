@@ -15,7 +15,7 @@ class ProjectRepository implements IProjectRepository {
   @override
   Future<void> openBox() async {
     projectsBox = await Hive.openBox(DatabaseKeys.projectKey);
-    // projectsBox.clear();
+    //   projectsBox.clear();
   }
 
   @override
@@ -25,7 +25,9 @@ class ProjectRepository implements IProjectRepository {
 
   @override
   void createProject(ProjectModel project) {
-    projectsBox.add(project.toJson());
+    int projectID = projectsBox.isEmpty ? 1 : projectsBox.values.last['id'] + 1;
+
+    projectsBox.add(project.copyWith(id: projectID).toJson());
   }
 
   @override
