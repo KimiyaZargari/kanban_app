@@ -28,7 +28,7 @@ class ProjectsPage extends ConsumerWidget {
             notifier.initiateProjectsPage();
             return const LoadingWidget();
           },
-          loaded: () => ListView(
+          loaded: () => ListView(padding: EdgeInsets.all(22),
             children: notifier.projects
                 .map((project) => ProjectCard(project))
                 .toList(),
