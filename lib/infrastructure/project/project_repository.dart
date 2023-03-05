@@ -26,8 +26,7 @@ class ProjectRepository implements IProjectRepository {
 
   @override
   void createProject(ProjectModel project) {
-    // TODO: implement createProject
-    throw UnimplementedError();
+    projectsBox.add(project.toJson());
   }
 
   @override
