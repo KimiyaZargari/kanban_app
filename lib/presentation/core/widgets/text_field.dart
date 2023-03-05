@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 class AppTextField extends StatelessWidget {
   final Function(String?)? onSaved;
   final TextInputType textInputType;
+  final TextEditingController? controller;
   final bool isLast;
   final int? maxLines, maxLength;
   final String label;
@@ -11,6 +12,7 @@ class AppTextField extends StatelessWidget {
 
   const AppTextField({
     Key? key,
+    this.controller,
     this.maxLines,
     this.maxLength,
     required this.label,
@@ -34,7 +36,7 @@ class AppTextField extends StatelessWidget {
         ),
         TextFormField(
           onSaved: onSaved,
-
+          controller: controller,
           maxLines: maxLines ?? 1,
           keyboardType: textInputType,
           textInputAction: isLast ? TextInputAction.done : TextInputAction.next,

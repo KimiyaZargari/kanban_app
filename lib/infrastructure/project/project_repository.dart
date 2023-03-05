@@ -10,13 +10,12 @@ final projectRepositoryProvider = Provider((ref) => ProjectRepository());
 class ProjectRepository implements IProjectRepository {
   late Box<Map> projectsBox;
 
-  ProjectRepository() ;
-
-
+  ProjectRepository();
 
   @override
   Future<void> openBox() async {
     projectsBox = await Hive.openBox(DatabaseKeys.projectKey);
+    // projectsBox.clear();
   }
 
   @override
@@ -44,6 +43,7 @@ class ProjectRepository implements IProjectRepository {
   @override
   List<ProjectModel> getProjects() {
     return List<ProjectModel>.from(projectsBox.values
-        .map((e) => ProjectModel.fromJson(jsonDecode(e.toString()))));
+        .toList()
+        .map((e) => ProjectModel.fromJson(jsonDecode(jsonEncode(e)))));
   }
 }
