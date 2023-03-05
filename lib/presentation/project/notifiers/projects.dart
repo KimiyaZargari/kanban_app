@@ -25,11 +25,11 @@ class ProjectsNotifier extends StateNotifier<ProjectsState> {
   initiateProjectsPage() async {
     OpenProjectsBox openProjectsBox = OpenProjectsBox(repository);
     await openProjectsBox(NoParam());
-
   }
 
   getProjects() async {
     GetProjects getProjects = GetProjects(repository);
     projects = await getProjects(NoParam());
+    state = _Loaded();
   }
 }

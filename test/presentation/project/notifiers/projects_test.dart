@@ -26,12 +26,20 @@ void main() {
           .thenAnswer((invocation) => projectsList);
     }
 
-
     test('gets projects', () async {
       arrangeProjectsRepositoryReturnsListOfProjects();
       await sut.getProjects();
       verify(() => mockProjectsRepository.getProjects()).called(1);
     });
-
+    test(
+        'indicates loading data setting projects to the data that was loaded and finish loading',
+        () async {
+      arrangeProjectsRepositoryReturnsListOfProjects();
+      final future =  sut.getProjects();
+      expect(sut.state, ProjectsState.initial());
+      await future;
+      expect(sut.projects, projectsList);
+      expect(sut.state, ProjectsState.loaded());
+    });
   });
 }
