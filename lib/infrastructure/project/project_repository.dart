@@ -8,9 +8,11 @@ import 'package:kanban_app/infrastructure/core/local_database.dart';
 final projectRepositoryProvider = Provider((ref) => ProjectRepository());
 
 class ProjectRepository implements IProjectRepository {
-  late final Box<Map> projectsBox;
+  late Box<Map> projectsBox;
 
-  ProjectRepository();
+  ProjectRepository() ;
+
+
 
   @override
   Future<void> openBox() async {

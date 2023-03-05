@@ -6,6 +6,7 @@ import 'package:kanban_app/presentation/core/widgets/loading_widget.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
 import 'package:kanban_app/presentation/project/notifiers/projects.dart';
 import 'package:kanban_app/presentation/project/widgets/create_project_dialog.dart';
+import 'package:kanban_app/presentation/project/widgets/project_card.dart';
 
 class ProjectsPage extends ConsumerWidget {
   const ProjectsPage({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class ProjectsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(projectsNotifierProvider);
+    final notifier = ref.watch(projectsNotifierProvider.notifier);
     return PageBase(
         title: AppStrings.projects,
         floatingActionButton: FloatingActionButton(
@@ -22,6 +24,15 @@ class ProjectsPage extends ConsumerWidget {
           child: const Icon(Icons.add_rounded),
         ),
         child: state.maybeWhen(
+          initial: () {
+            notifier.initiateProjectsPage();
+            return const LoadingWidget();
+          },
+          loaded: () => ListView(
+            children: notifier.projects
+                .map((project) => ProjectCard(project))
+                .toList(),
+          ),
           orElse: () => const LoadingWidget(),
         ));
   }

@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kanban_app/domain/project/i_project_repository.dart';
 import 'package:kanban_app/domain/project/project_model.dart';
-import 'package:kanban_app/infrastructure/project/project_repository.dart';
 import 'package:kanban_app/presentation/project/notifiers/projects.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -17,9 +16,9 @@ void main() {
 
   group('get projects initial data and load page', () {
     final projectsList = [
-      ProjectModel(name: 'test1', todo: 0, inProgress: 0, done: 0),
-      ProjectModel(name: 'test2', todo: 0, inProgress: 0, done: 0),
-      ProjectModel(name: 'test3', todo: 0, inProgress: 0, done: 0),
+      ProjectModel(name: 'test1', numberOfTasks: 0, ),
+      ProjectModel(name: 'test2',numberOfTasks: 0,  ),
+      ProjectModel(name: 'test3', numberOfTasks: 0, ),
     ];
     void arrangeProjectsRepositoryReturnsListOfProjects() {
       when(() => mockProjectsRepository.getProjects())
@@ -35,7 +34,7 @@ void main() {
         'indicates loading data setting projects to the data that was loaded and finish loading',
         () async {
       arrangeProjectsRepositoryReturnsListOfProjects();
-      final future =  sut.getProjects();
+      final future = sut.getProjects();
       expect(sut.state, ProjectsState.initial());
       await future;
       expect(sut.projects, projectsList);
