@@ -20,12 +20,16 @@ class ProjectsNotifier extends StateNotifier<ProjectsState> {
   IProjectRepository repository;
   late List<ProjectModel> projects;
 
-  ProjectsNotifier({required this.repository}) : super(_Initial()) {
-    _openProjectsBox();
-  }
+  ProjectsNotifier({required this.repository}) : super(_Initial());
 
-  _openProjectsBox() async {
+  initiateProjectsPage() async {
     OpenProjectsBox openProjectsBox = OpenProjectsBox(repository);
     await openProjectsBox(NoParam());
+
+  }
+
+  getProjects() async {
+    GetProjects getProjects = GetProjects(repository);
+    projects = await getProjects(NoParam());
   }
 }

@@ -10,6 +10,6 @@ class GetProjects implements UseCase<NoParam, List<ProjectModel>> {
 
   @override
   Future<List<ProjectModel>> call(_) async {
-    return await repository.getProjects();
+    return repository.getProjects();
   }
 }
