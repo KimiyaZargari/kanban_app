@@ -1,11 +1,15 @@
 import 'package:kanban_app/domain/project/project_model.dart';
 
 abstract class IProjectRepository {
-  Future<List<ProjectModel>> getProjects();
+  Future<void> openBox();
 
-  Future<void> createProject(ProjectModel project);
+  Future<void> closeBox();
 
-  Future<void> deleteProject(int projectId);
+  List<ProjectModel> getProjects();
 
-  Future<void> editProject(ProjectModel projectModel);
+  void createProject(ProjectModel project);
+
+  void deleteProject(int projectId);
+
+  void editProject(ProjectModel projectModel);
 }
