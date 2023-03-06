@@ -3,14 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kanban_app/presentation/core/widgets/text_field.dart';
+import 'package:kanban_app/presentation/project/notifiers/create_project.dart';
 import 'package:kanban_app/presentation/project/notifiers/projects.dart';
 
-class CreateProjectDialog extends StatelessWidget {
-  const CreateProjectDialog({Key? key}) : super(key: key);
+class CreateProjectPage extends ConsumerWidget {
+  const CreateProjectPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final TextEditingController controller = TextEditingController();
+  Widget build(BuildContext context, ref) {
+    final notifier = ref.watch(createProjectNotifierProvider.notifier);
 
     return Dialog(
       child: Padding(
@@ -25,10 +26,21 @@ class CreateProjectDialog extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 20.0),
-              child: AppTextField(
-                label: 'Project Name:',
-                controller: controller,
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: Form(
+                key: notifier.createProjectKey,
+                child: AppTextField(
+                  label: 'Project Name:',
+                  onSaved: (val) {
+                    notifier.projectName = val!;
+                  },
+                  validator: (val) {
+                    if (val?.trim().isEmpty ?? true) {
+                      return 'Please enter the project name!';
+                    }
+                    return null;
+                  },
+                ),
               ),
             ),
             Row(
@@ -38,19 +50,21 @@ class CreateProjectDialog extends StatelessWidget {
                     onPressed: () {
                       context.router.pop();
                     },
-                    child: Text('cancel'),
+                    child: const Text('cancel'),
                   ),
                 ),
                 const SizedBox(
                   width: 6,
                 ),
                 Consumer(builder: (context, ref, _) {
-                  final notifier = ref.watch(projectsNotifierProvider.notifier);
                   return Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        notifier.createProject(controller.text.trim());
-                        context.router.pop();
+                        if (notifier.createProjectKey.currentState
+                                ?.validate() ??
+                            false) {
+                          notifier.createProject();
+                        }
                       },
                       child: const Text('create'),
                     ),

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,8 +6,8 @@ import 'package:kanban_app/presentation/core/config/strings.dart';
 import 'package:kanban_app/presentation/core/widgets/loading_widget.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
 import 'package:kanban_app/presentation/project/notifiers/projects.dart';
-import 'package:kanban_app/presentation/project/widgets/create_project_dialog.dart';
 import 'package:kanban_app/presentation/project/widgets/project_card.dart';
+import 'package:kanban_app/presentation/routes/router.gr.dart';
 
 class ProjectsPage extends ConsumerWidget {
   const ProjectsPage({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class ProjectsPage extends ConsumerWidget {
         title: AppStrings.projects,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            showDialog(context: context, builder: (_) => CreateProjectDialog());
+            context.router.push(const CreateProjectRoute());
           },
           child: const Icon(Icons.add_rounded),
         ),
@@ -28,7 +29,8 @@ class ProjectsPage extends ConsumerWidget {
             notifier.initiateProjectsPage();
             return const LoadingWidget();
           },
-          loaded: () => ListView(padding: EdgeInsets.all(22),
+          loaded: () => ListView(
+            padding: EdgeInsets.all(22),
             children: notifier.projects
                 .map((project) => ProjectCard(project))
                 .toList(),

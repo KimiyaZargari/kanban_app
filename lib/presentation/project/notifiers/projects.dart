@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kanban_app/application/project/create_project.dart';
@@ -14,12 +15,14 @@ part 'projects.freezed.dart';
 part 'projects_state.dart';
 
 final projectsNotifierProvider =
-    StateNotifierProvider<ProjectsNotifier, ProjectsState>((ref) =>
-        ProjectsNotifier(repository: ref.watch(projectRepositoryProvider)));
+StateNotifierProvider<ProjectsNotifier, ProjectsState>((ref) =>
+    ProjectsNotifier(repository: ref.watch(projectRepositoryProvider)));
 
 class ProjectsNotifier extends StateNotifier<ProjectsState> {
   IProjectRepository repository;
   late List<ProjectModel> projects;
+  final createProjectTextController = TextEditingController();
+  final createProjectKey = GlobalKey<FormState>();
 
   ProjectsNotifier({required this.repository}) : super(_Initial());
 
@@ -35,9 +38,15 @@ class ProjectsNotifier extends StateNotifier<ProjectsState> {
     state = _Loaded();
   }
 
-  createProject(String name) async {
-    CreateProject createProject = CreateProject(repository);
-    await createProject(ProjectModel(name: name, numberOfTasks: 0));
-    getProjects();
+  //return validation result
+
+  Future<bool> createProject(String name) async {
+    if (createProjectKey.currentState?.validate() ?? false) {
+      CreateProject createProject = CreateProject(repository);
+      await createProject(ProjectModel(name: name, numberOfTasks: 0));
+      getProjects();
+      return true;
+    }
+    return false;
   }
 }

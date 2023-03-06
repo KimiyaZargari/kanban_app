@@ -20,7 +20,6 @@ mixin _$ProjectsState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loaded,
-    required TResult Function() creatingProject,
     required TResult Function(String message) networkError,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +27,6 @@ mixin _$ProjectsState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loaded,
-    TResult? Function()? creatingProject,
     TResult? Function(String message)? networkError,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +34,6 @@ mixin _$ProjectsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loaded,
-    TResult Function()? creatingProject,
     TResult Function(String message)? networkError,
     required TResult orElse(),
   }) =>
@@ -45,7 +42,6 @@ mixin _$ProjectsState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loaded value) loaded,
-    required TResult Function(_CreatingProject value) creatingProject,
     required TResult Function(_NetworkError value) networkError,
   }) =>
       throw _privateConstructorUsedError;
@@ -53,7 +49,6 @@ mixin _$ProjectsState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_CreatingProject value)? creatingProject,
     TResult? Function(_NetworkError value)? networkError,
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +56,6 @@ mixin _$ProjectsState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loaded value)? loaded,
-    TResult Function(_CreatingProject value)? creatingProject,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) =>
@@ -125,7 +119,6 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loaded,
-    required TResult Function() creatingProject,
     required TResult Function(String message) networkError,
   }) {
     return initial();
@@ -136,7 +129,6 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loaded,
-    TResult? Function()? creatingProject,
     TResult? Function(String message)? networkError,
   }) {
     return initial?.call();
@@ -147,7 +139,6 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loaded,
-    TResult Function()? creatingProject,
     TResult Function(String message)? networkError,
     required TResult orElse(),
   }) {
@@ -162,7 +153,6 @@ class _$_Initial implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loaded value) loaded,
-    required TResult Function(_CreatingProject value) creatingProject,
     required TResult Function(_NetworkError value) networkError,
   }) {
     return initial(this);
@@ -173,7 +163,6 @@ class _$_Initial implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_CreatingProject value)? creatingProject,
     TResult? Function(_NetworkError value)? networkError,
   }) {
     return initial?.call(this);
@@ -184,7 +173,6 @@ class _$_Initial implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loaded value)? loaded,
-    TResult Function(_CreatingProject value)? creatingProject,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {
@@ -237,7 +225,6 @@ class _$_Loaded implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loaded,
-    required TResult Function() creatingProject,
     required TResult Function(String message) networkError,
   }) {
     return loaded();
@@ -248,7 +235,6 @@ class _$_Loaded implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loaded,
-    TResult? Function()? creatingProject,
     TResult? Function(String message)? networkError,
   }) {
     return loaded?.call();
@@ -259,7 +245,6 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loaded,
-    TResult Function()? creatingProject,
     TResult Function(String message)? networkError,
     required TResult orElse(),
   }) {
@@ -274,7 +259,6 @@ class _$_Loaded implements _Loaded {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loaded value) loaded,
-    required TResult Function(_CreatingProject value) creatingProject,
     required TResult Function(_NetworkError value) networkError,
   }) {
     return loaded(this);
@@ -285,7 +269,6 @@ class _$_Loaded implements _Loaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_CreatingProject value)? creatingProject,
     TResult? Function(_NetworkError value)? networkError,
   }) {
     return loaded?.call(this);
@@ -296,7 +279,6 @@ class _$_Loaded implements _Loaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loaded value)? loaded,
-    TResult Function(_CreatingProject value)? creatingProject,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {
@@ -309,120 +291,6 @@ class _$_Loaded implements _Loaded {
 
 abstract class _Loaded implements ProjectsState {
   factory _Loaded() = _$_Loaded;
-}
-
-/// @nodoc
-abstract class _$$_CreatingProjectCopyWith<$Res> {
-  factory _$$_CreatingProjectCopyWith(
-          _$_CreatingProject value, $Res Function(_$_CreatingProject) then) =
-      __$$_CreatingProjectCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_CreatingProjectCopyWithImpl<$Res>
-    extends _$ProjectsStateCopyWithImpl<$Res, _$_CreatingProject>
-    implements _$$_CreatingProjectCopyWith<$Res> {
-  __$$_CreatingProjectCopyWithImpl(
-      _$_CreatingProject _value, $Res Function(_$_CreatingProject) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_CreatingProject implements _CreatingProject {
-  _$_CreatingProject();
-
-  @override
-  String toString() {
-    return 'ProjectsState.creatingProject()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_CreatingProject);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loaded,
-    required TResult Function() creatingProject,
-    required TResult Function(String message) networkError,
-  }) {
-    return creatingProject();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loaded,
-    TResult? Function()? creatingProject,
-    TResult? Function(String message)? networkError,
-  }) {
-    return creatingProject?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loaded,
-    TResult Function()? creatingProject,
-    TResult Function(String message)? networkError,
-    required TResult orElse(),
-  }) {
-    if (creatingProject != null) {
-      return creatingProject();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_CreatingProject value) creatingProject,
-    required TResult Function(_NetworkError value) networkError,
-  }) {
-    return creatingProject(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_CreatingProject value)? creatingProject,
-    TResult? Function(_NetworkError value)? networkError,
-  }) {
-    return creatingProject?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_CreatingProject value)? creatingProject,
-    TResult Function(_NetworkError value)? networkError,
-    required TResult orElse(),
-  }) {
-    if (creatingProject != null) {
-      return creatingProject(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _CreatingProject implements ProjectsState {
-  factory _CreatingProject() = _$_CreatingProject;
 }
 
 /// @nodoc
@@ -491,7 +359,6 @@ class _$_NetworkError implements _NetworkError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loaded,
-    required TResult Function() creatingProject,
     required TResult Function(String message) networkError,
   }) {
     return networkError(message);
@@ -502,7 +369,6 @@ class _$_NetworkError implements _NetworkError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loaded,
-    TResult? Function()? creatingProject,
     TResult? Function(String message)? networkError,
   }) {
     return networkError?.call(message);
@@ -513,7 +379,6 @@ class _$_NetworkError implements _NetworkError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loaded,
-    TResult Function()? creatingProject,
     TResult Function(String message)? networkError,
     required TResult orElse(),
   }) {
@@ -528,7 +393,6 @@ class _$_NetworkError implements _NetworkError {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loaded value) loaded,
-    required TResult Function(_CreatingProject value) creatingProject,
     required TResult Function(_NetworkError value) networkError,
   }) {
     return networkError(this);
@@ -539,7 +403,6 @@ class _$_NetworkError implements _NetworkError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_CreatingProject value)? creatingProject,
     TResult? Function(_NetworkError value)? networkError,
   }) {
     return networkError?.call(this);
@@ -550,7 +413,6 @@ class _$_NetworkError implements _NetworkError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loaded value)? loaded,
-    TResult Function(_CreatingProject value)? creatingProject,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {

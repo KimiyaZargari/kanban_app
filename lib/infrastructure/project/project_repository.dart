@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:kanban_app/domain/project/i_project_repository.dart';
@@ -24,10 +25,13 @@ class ProjectRepository implements IProjectRepository {
   }
 
   @override
-  void createProject(ProjectModel project) {
+  Either<Exception, Unit> createProject(ProjectModel project) {
+    if (projectsBox.values.where((element) => element['name']).isNotEmpty) {
+      return left(Exception('This project alredy exists'));
+    }
     int projectID = projectsBox.isEmpty ? 1 : projectsBox.values.last['id'] + 1;
-
     projectsBox.add(project.copyWith(id: projectID).toJson());
+    return right(unit);
   }
 
   @override
@@ -45,7 +49,6 @@ class ProjectRepository implements IProjectRepository {
   @override
   List<ProjectModel> getProjects() {
     return List<ProjectModel>.from(projectsBox.values
-        .toList()
         .map((e) => ProjectModel.fromJson(jsonDecode(jsonEncode(e)))));
   }
 }

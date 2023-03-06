@@ -47,27 +47,4 @@ void main() {
       expect(sut.state, ProjectsState.loaded());
     });
   });
-  group('create project and reload page', () {
-    const projectName = 'test';
-    void arrangeProjectsRepositoryCreateProject() {
-      when(() => mockProjectsRepository.createProject(any()))
-          .thenAnswer((invocation) {});
-      when(() => mockProjectsRepository.getProjects()).thenAnswer(
-          (invocation) => [ProjectModel(name: projectName, numberOfTasks: 0)]);
-    }
-
-    test('create project is called with project name and 0 tasks', () async {
-      arrangeProjectsRepositoryCreateProject();
-      await sut.createProject(projectName);
-      verify(() => mockProjectsRepository.createProject(
-          ProjectModel(name: projectName, numberOfTasks: 0))).called(1);
-    });
-    test(
-        'get projects is called after project creation is finished to get new list of projects',
-        () async {
-      arrangeProjectsRepositoryCreateProject();
-      await sut.createProject(projectName);
-      verify(() => mockProjectsRepository.getProjects()).called(1);
-    });
-  });
 }

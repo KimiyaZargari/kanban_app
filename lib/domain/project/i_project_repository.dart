@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:kanban_app/domain/project/project_model.dart';
 
 abstract class IProjectRepository {
@@ -7,7 +8,7 @@ abstract class IProjectRepository {
 
   List<ProjectModel> getProjects();
 
-  void createProject(ProjectModel project);
+  Either<Exception, Unit> createProject(ProjectModel project);
 
   void deleteProject(int projectId);
 
