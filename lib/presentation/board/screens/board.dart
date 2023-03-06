@@ -1,10 +1,10 @@
 import 'package:auto_route/annotations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kanban_app/presentation/board/notifiers/board.dart';
-import 'package:kanban_app/presentation/core/widgets/page_base.dart';
+import 'package:kanban_app/presentation/board/widgets/empty_column_drag_target.dart';
 import 'package:kanban_app/presentation/board/widgets/task_card.dart';
+import 'package:kanban_app/presentation/core/widgets/page_base.dart';
 
 class ProjectBoardPage extends ConsumerWidget {
   const ProjectBoardPage({@pathParam required int id, Key? key})
@@ -18,72 +18,68 @@ class ProjectBoardPage extends ConsumerWidget {
         title: 'Board',
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
-          child: Icon(Icons.add_rounded),
+          child: const Icon(Icons.add_rounded),
         ),
         child: Column(
           children: [
-            Row(
-              children: [
-                Expanded(
-                    child: Container(
-                  color: Theme.of(context).cardColor,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Text('To Do'),
-                )),
-                Expanded(
-                    child: Container(
-                  color: Theme.of(context).cardColor,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Text('In Progress'),
-                )),
-                Expanded(
-                    child: Container(
-                  color: Theme.of(context).cardColor,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Text('Done'),
-                )),
-              ],
-            ),
-            Expanded(
-              child: SingleChildScrollView(
+            Card(
+              child: Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
+                    Expanded(child: Text('To Do', textAlign: TextAlign.center)),
                     Expanded(
-                      child: Column(
-                        children: notifier.todo
-                            .map((e) => Draggable(
-                                  data: e,
-                                  child: TaskCard(e),
-                                  feedback: TaskCard(e),
-                                ))
-                            .toList(),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        child: Column(
-                          children: notifier.inProgress
-                              .map((e) => TaskCard(e))
-                              .toList(),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: notifier.done
-                            .map((e) => Draggable(
-                                data: e,
-                                feedback: TaskCard(e),
-                                child: TaskCard(e)))
-                            .toList(),
-                      ),
-                    ),
+                        child:
+                            Text('In Progress', textAlign: TextAlign.center)),
+                    Expanded(child: Text('Done', textAlign: TextAlign.center)),
                   ],
                 ),
+              ),
+            ),
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    child: notifier.todo.isEmpty
+                        ? const EmptyColumDragTarget()
+                        : ListView(
+                            children: notifier.todo
+                                .map((e) => TaskCard(
+                                      e,
+                                      column: 'todo',
+                                    ))
+                                .toList(),
+                          ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      child: notifier.inProgress.isEmpty
+                          ? EmptyColumDragTarget()
+                          : Column(
+                              children: notifier.inProgress
+                                  .map((e) => TaskCard(
+                                        e,
+                                        column: 'in progress',
+                                      ))
+                                  .toList(),
+                            ),
+                    ),
+                  ),
+                  Expanded(
+                    child: notifier.done.isEmpty
+                        ? EmptyColumDragTarget()
+                        : Column(
+                            children: notifier.done
+                                .map((e) => TaskCard(
+                                      e,
+                                      column: 'done',
+                                    ))
+                                .toList(),
+                          ),
+                  ),
+                ],
               ),
             ),
           ],

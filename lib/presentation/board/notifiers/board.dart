@@ -15,7 +15,6 @@ class BoardNotifier extends StateNotifier<BoardState> {
         'test 2',
         'test 3',
         'test 4',
-
         'this is a task with a long name',
         'this is a taaaaaask with a veryyyy  long name',
         'normal name'

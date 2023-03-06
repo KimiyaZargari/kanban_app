@@ -6,5 +6,6 @@ class BoardState with _$BoardState {
 
   factory BoardState.loaded() = _Loaded;
 
+
   factory BoardState.networkError(String message) = _NetworkError;
 }
