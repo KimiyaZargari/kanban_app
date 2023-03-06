@@ -8,7 +8,7 @@ abstract class IProjectRepository {
 
   List<ProjectModel> getProjects();
 
-  Either<Exception, Unit> createProject(ProjectModel project);
+  Either<Exception, int> createProject(ProjectModel project);
 
   void deleteProject(int projectId);
 

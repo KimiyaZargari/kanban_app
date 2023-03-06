@@ -30,6 +30,6 @@ class CreateProjectNotifier extends StateNotifier<CreateProjectState> {
     state = _Creating();
     CreateProject createProject = CreateProject(repository);
     (await createProject(ProjectModel(name: projectName, numberOfTasks: 0)))
-        .fold((l) => state = _ProjectExists(), (r) => state = _Created());
+        .fold((l) => state = _ProjectExists(), (r) => state = _Created(r));
   }
 }

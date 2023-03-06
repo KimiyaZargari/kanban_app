@@ -9,13 +9,15 @@ import 'package:kanban_app/infrastructure/core/local_database.dart';
 final projectRepositoryProvider = Provider((ref) => ProjectRepository());
 
 class ProjectRepository implements IProjectRepository {
-  late Box<Map> projectsBox;
+  late final Box<Map> projectsBox;
 
   ProjectRepository();
 
   @override
   Future<void> openBox() async {
-    projectsBox = await Hive.openBox(DatabaseKeys.projectKey);
+    if (!Hive.isBoxOpen(DatabaseKeys.projectKey)) {
+      projectsBox = await Hive.openBox(DatabaseKeys.projectKey);
+    }
     //   projectsBox.clear();
   }
 
@@ -25,7 +27,7 @@ class ProjectRepository implements IProjectRepository {
   }
 
   @override
-  Either<Exception, Unit> createProject(ProjectModel project) {
+  Either<Exception, int> createProject(ProjectModel project) {
     if (projectsBox.values
         .where((element) => element['name'] == project.name)
         .isNotEmpty) {
@@ -33,7 +35,7 @@ class ProjectRepository implements IProjectRepository {
     }
     int projectID = projectsBox.isEmpty ? 1 : projectsBox.values.last['id'] + 1;
     projectsBox.add(project.copyWith(id: projectID).toJson());
-    return right(unit);
+    return right(projectID);
   }
 
   @override

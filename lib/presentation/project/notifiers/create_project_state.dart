@@ -4,7 +4,7 @@ part of 'create_project.dart';
 class CreateProjectState with _$CreateProjectState {
   factory CreateProjectState.initial() = _Initial;
 
-  factory CreateProjectState.created() = _Created;
+  factory CreateProjectState.created(int projectId) = _Created;
 
   factory CreateProjectState.creating() = _Creating;
 

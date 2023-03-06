@@ -19,7 +19,7 @@ mixin _$CreateProjectState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() created,
+    required TResult Function(int projectId) created,
     required TResult Function() creating,
     required TResult Function() projectExists,
     required TResult Function(String message) networkError,
@@ -28,7 +28,7 @@ mixin _$CreateProjectState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? created,
+    TResult? Function(int projectId)? created,
     TResult? Function()? creating,
     TResult? Function()? projectExists,
     TResult? Function(String message)? networkError,
@@ -37,7 +37,7 @@ mixin _$CreateProjectState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? created,
+    TResult Function(int projectId)? created,
     TResult Function()? creating,
     TResult Function()? projectExists,
     TResult Function(String message)? networkError,
@@ -130,7 +130,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() created,
+    required TResult Function(int projectId) created,
     required TResult Function() creating,
     required TResult Function() projectExists,
     required TResult Function(String message) networkError,
@@ -142,7 +142,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? created,
+    TResult? Function(int projectId)? created,
     TResult? Function()? creating,
     TResult? Function()? projectExists,
     TResult? Function(String message)? networkError,
@@ -154,7 +154,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? created,
+    TResult Function(int projectId)? created,
     TResult Function()? creating,
     TResult Function()? projectExists,
     TResult Function(String message)? networkError,
@@ -216,6 +216,8 @@ abstract class _$$_CreatedCopyWith<$Res> {
   factory _$$_CreatedCopyWith(
           _$_Created value, $Res Function(_$_Created) then) =
       __$$_CreatedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int projectId});
 }
 
 /// @nodoc
@@ -224,63 +226,88 @@ class __$$_CreatedCopyWithImpl<$Res>
     implements _$$_CreatedCopyWith<$Res> {
   __$$_CreatedCopyWithImpl(_$_Created _value, $Res Function(_$_Created) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? projectId = null,
+  }) {
+    return _then(_$_Created(
+      null == projectId
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Created implements _Created {
-  _$_Created();
+  _$_Created(this.projectId);
+
+  @override
+  final int projectId;
 
   @override
   String toString() {
-    return 'CreateProjectState.created()';
+    return 'CreateProjectState.created(projectId: $projectId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Created);
+        (other.runtimeType == runtimeType &&
+            other is _$_Created &&
+            (identical(other.projectId, projectId) ||
+                other.projectId == projectId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, projectId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CreatedCopyWith<_$_Created> get copyWith =>
+      __$$_CreatedCopyWithImpl<_$_Created>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() created,
+    required TResult Function(int projectId) created,
     required TResult Function() creating,
     required TResult Function() projectExists,
     required TResult Function(String message) networkError,
   }) {
-    return created();
+    return created(projectId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? created,
+    TResult? Function(int projectId)? created,
     TResult? Function()? creating,
     TResult? Function()? projectExists,
     TResult? Function(String message)? networkError,
   }) {
-    return created?.call();
+    return created?.call(projectId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? created,
+    TResult Function(int projectId)? created,
     TResult Function()? creating,
     TResult Function()? projectExists,
     TResult Function(String message)? networkError,
     required TResult orElse(),
   }) {
     if (created != null) {
-      return created();
+      return created(projectId);
     }
     return orElse();
   }
@@ -327,7 +354,12 @@ class _$_Created implements _Created {
 }
 
 abstract class _Created implements CreateProjectState {
-  factory _Created() = _$_Created;
+  factory _Created(final int projectId) = _$_Created;
+
+  int get projectId;
+  @JsonKey(ignore: true)
+  _$$_CreatedCopyWith<_$_Created> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -369,7 +401,7 @@ class _$_Creating implements _Creating {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() created,
+    required TResult Function(int projectId) created,
     required TResult Function() creating,
     required TResult Function() projectExists,
     required TResult Function(String message) networkError,
@@ -381,7 +413,7 @@ class _$_Creating implements _Creating {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? created,
+    TResult? Function(int projectId)? created,
     TResult? Function()? creating,
     TResult? Function()? projectExists,
     TResult? Function(String message)? networkError,
@@ -393,7 +425,7 @@ class _$_Creating implements _Creating {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? created,
+    TResult Function(int projectId)? created,
     TResult Function()? creating,
     TResult Function()? projectExists,
     TResult Function(String message)? networkError,
@@ -489,7 +521,7 @@ class _$_ProjectExists implements _ProjectExists {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() created,
+    required TResult Function(int projectId) created,
     required TResult Function() creating,
     required TResult Function() projectExists,
     required TResult Function(String message) networkError,
@@ -501,7 +533,7 @@ class _$_ProjectExists implements _ProjectExists {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? created,
+    TResult? Function(int projectId)? created,
     TResult? Function()? creating,
     TResult? Function()? projectExists,
     TResult? Function(String message)? networkError,
@@ -513,7 +545,7 @@ class _$_ProjectExists implements _ProjectExists {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? created,
+    TResult Function(int projectId)? created,
     TResult Function()? creating,
     TResult Function()? projectExists,
     TResult Function(String message)? networkError,
@@ -635,7 +667,7 @@ class _$_NetworkError implements _NetworkError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() created,
+    required TResult Function(int projectId) created,
     required TResult Function() creating,
     required TResult Function() projectExists,
     required TResult Function(String message) networkError,
@@ -647,7 +679,7 @@ class _$_NetworkError implements _NetworkError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? created,
+    TResult? Function(int projectId)? created,
     TResult? Function()? creating,
     TResult? Function()? projectExists,
     TResult? Function(String message)? networkError,
@@ -659,7 +691,7 @@ class _$_NetworkError implements _NetworkError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? created,
+    TResult Function(int projectId)? created,
     TResult Function()? creating,
     TResult Function()? projectExists,
     TResult Function(String message)? networkError,
