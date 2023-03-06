@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
-  static const darkBackground = Color(0xff222222);
-  static const darkCardColor = Color(0xff282828);
-  static const primaryColor = Color(0xffd2afff);
-  static const error = Colors.orange;
+  static const darkBackground = Color(0xff191915);
+  static const darkCardColor = Color(0xff33332a);
+  static const primaryColor = Color(0xff99987d);
+  static const error = Colors.orangeAccent;
 }

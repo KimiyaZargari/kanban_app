@@ -54,6 +54,8 @@ ThemeData darkTheme() {
         primary: AppColors.primaryColor,
         error: AppColors.error,
       ),
+      cardColor: AppColors.darkCardColor,
+
       //  focusColor: Colors.deepPurpleAccent,
       cardTheme: base.cardTheme.copyWith(
           elevation: 0,
