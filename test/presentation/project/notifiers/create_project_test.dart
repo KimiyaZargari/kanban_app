@@ -39,6 +39,7 @@ void main() {
       await sut.createProject();
       verify(() => mockProjectsRepository.createProject(newProject)).called(1);
     });
+
     test(
         'when an error is occurred in the repository state should change to project exists',
         () async {

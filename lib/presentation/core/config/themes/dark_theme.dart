@@ -19,7 +19,9 @@ TextTheme _textTheme(TextTheme base) {
 
     labelSmall: const TextStyle(
         fontSize: 16, fontWeight: FontWeight.w400, color: Colors.white),
-
+    //error texts
+    displaySmall: const TextStyle(
+        fontSize: 14, fontWeight: FontWeight.w300, color: AppColors.error),
     bodyLarge: const TextStyle(
         fontSize: 18, fontWeight: FontWeight.w400, color: Colors.white),
 
@@ -50,6 +52,7 @@ ThemeData darkTheme() {
       primaryColor: AppColors.primaryColor,
       colorScheme: base.colorScheme.copyWith(
         primary: AppColors.primaryColor,
+        error: AppColors.error,
       ),
       //  focusColor: Colors.deepPurpleAccent,
       cardTheme: base.cardTheme.copyWith(

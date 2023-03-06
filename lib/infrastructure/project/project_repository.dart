@@ -26,7 +26,9 @@ class ProjectRepository implements IProjectRepository {
 
   @override
   Either<Exception, Unit> createProject(ProjectModel project) {
-    if (projectsBox.values.where((element) => element['name']).isNotEmpty) {
+    if (projectsBox.values
+        .where((element) => element['name'] == project.name)
+        .isNotEmpty) {
       return left(Exception('This project alredy exists'));
     }
     int projectID = projectsBox.isEmpty ? 1 : projectsBox.values.last['id'] + 1;

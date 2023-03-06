@@ -4,4 +4,5 @@ class AppStrings {
   AppStrings._();
 
   static const projects = 'Projects';
+  static const createProject = 'Create Project';
 }
