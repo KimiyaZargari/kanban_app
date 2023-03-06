@@ -4,41 +4,57 @@ import 'package:kanban_app/presentation/core/config/colors.dart';
 TextTheme _textTheme(TextTheme base) {
   return base.copyWith(
     titleLarge: const TextStyle(
-        fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
+        fontSize: 20,
+        fontWeight: FontWeight.w700,
+        color: AppColors.darkThemeTextColor),
     titleMedium: const TextStyle(
-        fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white),
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+        color: AppColors.darkThemeTextColor),
 
     titleSmall: const TextStyle(
-        fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: AppColors.darkThemeTextColor),
 
     labelLarge: const TextStyle(
-        fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white),
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+        color: AppColors.darkThemeTextColor),
 
     labelMedium: const TextStyle(
-        fontSize: 14, fontWeight: FontWeight.w400, color: Colors.white),
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: AppColors.darkThemeTextColor),
 
     labelSmall: const TextStyle(
-        fontSize: 16, fontWeight: FontWeight.w400, color: Colors.white),
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: AppColors.darkThemeTextColor),
     //error texts
     displaySmall: const TextStyle(
         fontSize: 14, fontWeight: FontWeight.w300, color: AppColors.error),
     bodyLarge: const TextStyle(
-        fontSize: 18, fontWeight: FontWeight.w400, color: Colors.white),
+        fontSize: 18,
+        fontWeight: FontWeight.w400,
+        color: AppColors.darkThemeTextColor),
 
     //done body
     bodyMedium: const TextStyle(
-        fontSize: 16, fontWeight: FontWeight.w400, color: Colors.white),
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: AppColors.darkThemeTextColor),
 
     // done small body in medical records, faq answers
     bodySmall: const TextStyle(
-        fontSize: 14, fontWeight: FontWeight.w300, color: Colors.white),
+        fontSize: 14, fontWeight: FontWeight.w300, color: AppColors.darkThemeTextColor),
   );
 }
 
 TextTheme _primaryTextTheme(TextTheme base) {
   return base.copyWith(
     bodyMedium: const TextStyle(
-        fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
+        fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.darkThemeTextColor),
   );
 }
 
@@ -58,7 +74,7 @@ ThemeData darkTheme() {
 
       //  focusColor: Colors.deepPurpleAccent,
       cardTheme: base.cardTheme.copyWith(
-          elevation: 0,
+          elevation: 10,
           color: AppColors.darkCardColor,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12)))),
@@ -66,7 +82,7 @@ ThemeData darkTheme() {
           style: ElevatedButton.styleFrom(
         textStyle: _textTheme(base.textTheme).labelLarge,
         backgroundColor: AppColors.primaryColor,
-        elevation: 0,
+        elevation: 10,
         disabledBackgroundColor: Colors.grey,
         padding: const EdgeInsets.symmetric(vertical: 10),
         shape: const RoundedRectangleBorder(
@@ -75,7 +91,7 @@ ThemeData darkTheme() {
       )),
       outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-        elevation: 0,
+        elevation: 10,
         foregroundColor: AppColors.primaryColor,
         disabledBackgroundColor: Colors.grey,
         textStyle: _textTheme(base.textTheme).labelLarge,
@@ -85,16 +101,16 @@ ThemeData darkTheme() {
         ),
       )),
       iconTheme: base.iconTheme.copyWith(
-        color: Colors.white,
+        color: AppColors.darkThemeTextColor,
       ),
       floatingActionButtonTheme: base.floatingActionButtonTheme.copyWith(
           backgroundColor: AppColors.primaryColor,
-          elevation: 0,
+          elevation: 10,
           foregroundColor: AppColors.darkCardColor),
       appBarTheme: base.appBarTheme.copyWith(
           color: AppColors.primaryColor,
           centerTitle: true,
-          elevation: 0,
+          elevation:10,
           foregroundColor: AppColors.darkCardColor),
       dialogTheme: base.dialogTheme.copyWith(
           backgroundColor: AppColors.darkCardColor,
