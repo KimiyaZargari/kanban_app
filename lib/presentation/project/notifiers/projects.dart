@@ -14,8 +14,8 @@ part 'projects.freezed.dart';
 part 'projects_state.dart';
 
 final projectsNotifierProvider =
-StateNotifierProvider<ProjectsNotifier, ProjectsState>((ref) =>
-    ProjectsNotifier(repository: ref.watch(projectRepositoryProvider)));
+    StateNotifierProvider.autoDispose<ProjectsNotifier, ProjectsState>((ref) =>
+        ProjectsNotifier(repository: ref.watch(projectRepositoryProvider)));
 
 class ProjectsNotifier extends StateNotifier<ProjectsState> {
   IProjectRepository repository;
@@ -24,7 +24,6 @@ class ProjectsNotifier extends StateNotifier<ProjectsState> {
   final createProjectKey = GlobalKey<FormState>();
 
   ProjectsNotifier({required this.repository}) : super(_Initial());
-
 
   getProjects() async {
     GetProjects getProjects = GetProjects(repository);

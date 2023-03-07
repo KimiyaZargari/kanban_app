@@ -10,10 +10,10 @@ part 'create_project.freezed.dart';
 
 part 'create_project_state.dart';
 
-final createProjectNotifierProvider =
-    StateNotifierProvider<CreateProjectNotifier, CreateProjectState>((ref) =>
-        CreateProjectNotifier(
-            repository: ref.watch(projectRepositoryProvider)));
+final createProjectNotifierProvider = StateNotifierProvider.autoDispose<
+        CreateProjectNotifier, CreateProjectState>(
+    (ref) => CreateProjectNotifier(
+        repository: ref.watch(projectRepositoryProvider)));
 
 class CreateProjectNotifier extends StateNotifier<CreateProjectState> {
   IProjectRepository repository;
