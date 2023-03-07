@@ -1,9 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 import 'package:kanban_app/application/board/get_board_data.dart';
 import 'package:kanban_app/domain/board/task_model.dart';
 import 'package:kanban_app/domain/core/no_param.dart';
 import 'package:kanban_app/infrastructure/board/board_repository.dart';
+import 'package:kanban_app/infrastructure/core/local_database.dart';
 
 import '../../../domain/board/i_board_repository.dart';
 
@@ -42,5 +44,14 @@ class BoardNotifier extends StateNotifier<BoardState> {
       tasks[to]?.insert(at, task);
     }
     state = _Loaded();
+  }
+
+  @override
+  void dispose() {
+    String baseName = '${DatabaseKeys.boardKey}_$projectId';
+    Hive.box<Map>('${baseName}_todo').close();
+    Hive.box<Map>('${baseName}_inProgress').close();
+    Hive.box<Map>('${baseName}_done').close();
+    super.dispose();
   }
 }

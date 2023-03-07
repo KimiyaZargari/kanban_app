@@ -17,7 +17,6 @@ class BoardRepository implements IBoardRepository {
 
   Future<void> _openBox(int projectId) async {
     final boxBaseName = "${DatabaseKeys.boardKey}_$projectId";
-
     await Future.wait<void>([
       _openToDo(boxBaseName),
       _openInProgressBox(boxBaseName),
@@ -29,6 +28,7 @@ class BoardRepository implements IBoardRepository {
 
   _openToDo(String boxName) async {
     final name = '${boxName}_todo';
+    print(Hive.isBoxOpen(name));
     if (!Hive.isBoxOpen(name)) toDoBox = await Hive.openBox(name);
   }
 
