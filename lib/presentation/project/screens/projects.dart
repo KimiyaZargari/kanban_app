@@ -32,7 +32,10 @@ class ProjectsPage extends ConsumerWidget {
           loaded: () => ListView(
             padding: const EdgeInsets.all(22),
             children: notifier.projects
-                .map((project) => ProjectCard(project))
+                .map((project) => ProjectCard(
+                      project,
+                      deleteProject: () => notifier.deleteProject(project.id!),
+                    ))
                 .toList(),
           ),
           orElse: () => const LoadingWidget(),

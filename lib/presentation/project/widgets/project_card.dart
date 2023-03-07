@@ -7,24 +7,29 @@ import '../../routes/router.gr.dart';
 import 'delete_project_dialog.dart';
 
 class ProjectCard extends StatelessWidget {
+  final Function() deleteProject;
   final ProjectModel project;
 
-  const ProjectCard(this.project, {Key? key}) : super(key: key);
+  const ProjectCard(this.project, {required this.deleteProject, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Dismissible(
         confirmDismiss: (_) async {
-          showDialog(context: context, builder: (_) => DeleteProjectDialog());
+          return await showDialog(
+              context: context, builder: (_) => const DeleteProjectDialog());
+        },
+        onDismissed: (_) {
+          deleteProject();
         },
         key: Key(project.name),
-        onDismissed: (direction) {},
         background: Card(
           color: Theme.of(context).colorScheme.error,
           child: Container(
             alignment: Alignment.centerRight,
-            padding: EdgeInsets.all(20),
-            child: Icon(Icons.delete),
+            padding: const EdgeInsets.all(20),
+            child: const Icon(Icons.delete),
           ),
         ),
         child: InkWell(

@@ -47,4 +47,14 @@ void main() {
       expect(sut.state, ProjectsState.loaded());
     });
   });
+  test('deleteProject', () async {
+    void arrangeProjectsRepositoryReturnsVoid() {
+      when(() => mockProjectsRepository.deleteProject(any()))
+          .thenAnswer((invocation) {});
+    }
+
+    arrangeProjectsRepositoryReturnsVoid();
+    await sut.deleteProject(1);
+    verify(() => mockProjectsRepository.deleteProject(1)).called(1);
+  });
 }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kanban_app/application/project/create_project.dart';
+import 'package:kanban_app/application/project/delete_project.dart';
 import 'package:kanban_app/application/project/get_projects.dart';
 import 'package:kanban_app/domain/project/i_project_repository.dart';
 import 'package:kanban_app/infrastructure/project/project_repository.dart';
@@ -14,7 +15,6 @@ part 'projects.freezed.dart';
 part 'projects_state.dart';
 
 final projectsNotifierProvider =
-
     StateNotifierProvider.autoDispose<ProjectsNotifier, ProjectsState>((ref) =>
         ProjectsNotifier(repository: ref.watch(projectRepositoryProvider)));
 
@@ -43,5 +43,10 @@ class ProjectsNotifier extends StateNotifier<ProjectsState> {
       return true;
     }
     return false;
+  }
+
+  deleteProject(int projectId) {
+    DeleteProject deleteProject = DeleteProject(repository);
+    deleteProject(projectId);
   }
 }
