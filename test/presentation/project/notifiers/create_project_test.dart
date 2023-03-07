@@ -23,9 +23,10 @@ void main() {
   });
 
   group('create new project', () {
-    final newProject = ProjectModel(name: 'new test', numberOfTasks: 0);
+    final newProject =
+        ProjectModel(name: 'new test', inProgress: 0, todo: 0, done: 0);
     final duplicateProject =
-        ProjectModel(name: 'duplicate test', numberOfTasks: 0);
+        ProjectModel(name: 'duplicate test', inProgress: 0, todo: 0, done: 0);
     void arrangeProjectsRepositoryCreateProject() {
       when(() => mockProjectsRepository.createProject(newProject))
           .thenAnswer((invocation) => right(unit));

@@ -22,7 +22,9 @@ ProjectModel _$ProjectModelFromJson(Map<String, dynamic> json) {
 mixin _$ProjectModel {
   int? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  int get numberOfTasks => throw _privateConstructorUsedError;
+  int get todo => throw _privateConstructorUsedError;
+  int get done => throw _privateConstructorUsedError;
+  int get inProgress => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +38,7 @@ abstract class $ProjectModelCopyWith<$Res> {
           ProjectModel value, $Res Function(ProjectModel) then) =
       _$ProjectModelCopyWithImpl<$Res, ProjectModel>;
   @useResult
-  $Res call({int? id, String name, int numberOfTasks});
+  $Res call({int? id, String name, int todo, int done, int inProgress});
 }
 
 /// @nodoc
@@ -54,7 +56,9 @@ class _$ProjectModelCopyWithImpl<$Res, $Val extends ProjectModel>
   $Res call({
     Object? id = freezed,
     Object? name = null,
-    Object? numberOfTasks = null,
+    Object? todo = null,
+    Object? done = null,
+    Object? inProgress = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -65,9 +69,17 @@ class _$ProjectModelCopyWithImpl<$Res, $Val extends ProjectModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      numberOfTasks: null == numberOfTasks
-          ? _value.numberOfTasks
-          : numberOfTasks // ignore: cast_nullable_to_non_nullable
+      todo: null == todo
+          ? _value.todo
+          : todo // ignore: cast_nullable_to_non_nullable
+              as int,
+      done: null == done
+          ? _value.done
+          : done // ignore: cast_nullable_to_non_nullable
+              as int,
+      inProgress: null == inProgress
+          ? _value.inProgress
+          : inProgress // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -81,7 +93,7 @@ abstract class _$$_ProjectModelCopyWith<$Res>
       __$$_ProjectModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String name, int numberOfTasks});
+  $Res call({int? id, String name, int todo, int done, int inProgress});
 }
 
 /// @nodoc
@@ -97,7 +109,9 @@ class __$$_ProjectModelCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = null,
-    Object? numberOfTasks = null,
+    Object? todo = null,
+    Object? done = null,
+    Object? inProgress = null,
   }) {
     return _then(_$_ProjectModel(
       id: freezed == id
@@ -108,9 +122,17 @@ class __$$_ProjectModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      numberOfTasks: null == numberOfTasks
-          ? _value.numberOfTasks
-          : numberOfTasks // ignore: cast_nullable_to_non_nullable
+      todo: null == todo
+          ? _value.todo
+          : todo // ignore: cast_nullable_to_non_nullable
+              as int,
+      done: null == done
+          ? _value.done
+          : done // ignore: cast_nullable_to_non_nullable
+              as int,
+      inProgress: null == inProgress
+          ? _value.inProgress
+          : inProgress // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -119,7 +141,12 @@ class __$$_ProjectModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ProjectModel extends _ProjectModel {
-  _$_ProjectModel({this.id, required this.name, required this.numberOfTasks})
+  _$_ProjectModel(
+      {this.id,
+      required this.name,
+      required this.todo,
+      required this.done,
+      required this.inProgress})
       : super._();
 
   factory _$_ProjectModel.fromJson(Map<String, dynamic> json) =>
@@ -130,11 +157,15 @@ class _$_ProjectModel extends _ProjectModel {
   @override
   final String name;
   @override
-  final int numberOfTasks;
+  final int todo;
+  @override
+  final int done;
+  @override
+  final int inProgress;
 
   @override
   String toString() {
-    return 'ProjectModel(id: $id, name: $name, numberOfTasks: $numberOfTasks)';
+    return 'ProjectModel(id: $id, name: $name, todo: $todo, done: $done, inProgress: $inProgress)';
   }
 
   @JsonKey(ignore: true)
@@ -155,7 +186,9 @@ abstract class _ProjectModel extends ProjectModel {
   factory _ProjectModel(
       {final int? id,
       required final String name,
-      required final int numberOfTasks}) = _$_ProjectModel;
+      required final int todo,
+      required final int done,
+      required final int inProgress}) = _$_ProjectModel;
   _ProjectModel._() : super._();
 
   factory _ProjectModel.fromJson(Map<String, dynamic> json) =
@@ -166,7 +199,11 @@ abstract class _ProjectModel extends ProjectModel {
   @override
   String get name;
   @override
-  int get numberOfTasks;
+  int get todo;
+  @override
+  int get done;
+  @override
+  int get inProgress;
   @override
   @JsonKey(ignore: true)
   _$$_ProjectModelCopyWith<_$_ProjectModel> get copyWith =>

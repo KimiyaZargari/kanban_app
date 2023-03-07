@@ -11,28 +11,48 @@ class ProjectCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         child: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20),
-      child: Row(
+      padding: const EdgeInsets.symmetric(vertical: 12.0),
+      child: Column(
         children: [
-          Expanded(
-              child: Text(
-            project.name,
-            style: Theme.of(context).textTheme.titleLarge,
-          )),
-          Column(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 8),
+            child: Text(
+              project.name,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+          Divider(
+            height: 40,
+          ),
+          Row(
             children: [
-              Text(
-                project.numberOfTasks.toString(),
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              Text(
-                'task(s)',
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
+              _getTaskNumberColumn('To Do', project.todo, context),
+              _getTaskNumberColumn('In Progress', project.inProgress, context),
+              _getTaskNumberColumn('Done', project.done, context)
             ],
           )
         ],
       ),
     ));
   }
+
+  Widget _getTaskNumberColumn(
+          String status, int number, BuildContext context) =>
+      Expanded(
+        child: Column(
+          children: [
+            Text(
+              status,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              number.toString(),
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ],
+        ),
+      );
 }

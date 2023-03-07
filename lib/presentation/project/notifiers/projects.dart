@@ -15,8 +15,8 @@ part 'projects.freezed.dart';
 part 'projects_state.dart';
 
 final projectsNotifierProvider =
-StateNotifierProvider<ProjectsNotifier, ProjectsState>((ref) =>
-    ProjectsNotifier(repository: ref.watch(projectRepositoryProvider)));
+    StateNotifierProvider<ProjectsNotifier, ProjectsState>((ref) =>
+        ProjectsNotifier(repository: ref.watch(projectRepositoryProvider)));
 
 class ProjectsNotifier extends StateNotifier<ProjectsState> {
   IProjectRepository repository;
@@ -43,7 +43,8 @@ class ProjectsNotifier extends StateNotifier<ProjectsState> {
   Future<bool> createProject(String name) async {
     if (createProjectKey.currentState?.validate() ?? false) {
       CreateProject createProject = CreateProject(repository);
-      await createProject(ProjectModel(name: name, numberOfTasks: 0));
+      await createProject(
+          ProjectModel(name: name, todo: 0, done: 0, inProgress: 0));
       getProjects();
       return true;
     }

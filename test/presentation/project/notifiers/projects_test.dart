@@ -22,9 +22,9 @@ void main() {
 
   group('get projects initial data and load page', () {
     final projectsList = [
-      ProjectModel(name: 'test1', numberOfTasks: 0),
-      ProjectModel(name: 'test2', numberOfTasks: 0),
-      ProjectModel(name: 'test3', numberOfTasks: 0),
+      ProjectModel(name: 'test1', inProgress: 0, todo: 0, done: 0),
+      ProjectModel(name: 'test2', inProgress: 0, todo: 0, done: 0),
+      ProjectModel(name: 'test3', inProgress: 0, todo: 0, done: 0),
     ];
     void arrangeProjectsRepositoryReturnsListOfProjects() {
       when(() => mockProjectsRepository.getProjects())

@@ -13,6 +13,7 @@ void main() async {
   final appDocumentDirectory = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
 
+
   runApp(MyApp());
 }
 

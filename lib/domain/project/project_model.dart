@@ -11,7 +11,9 @@ class ProjectModel with _$ProjectModel {
   factory ProjectModel({
     int? id,
     required String name,
-    required int numberOfTasks,
+    required int todo,
+    required int done,
+    required int inProgress,
   }) = _ProjectModel;
 
   factory ProjectModel.fromJson(Map<String, dynamic> json) =>
