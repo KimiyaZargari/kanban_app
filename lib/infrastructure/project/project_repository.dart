@@ -41,8 +41,7 @@ class ProjectRepository implements IProjectRepository {
 
   @override
   void deleteProject(int projectId) {
-    // TODO: implement deleteProject
-    throw UnimplementedError();
+ projectsBox.delete(projectId.toString());
   }
 
   @override
