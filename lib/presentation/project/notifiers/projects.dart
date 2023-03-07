@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kanban_app/application/project/create_project.dart';
 import 'package:kanban_app/application/project/get_projects.dart';
-import 'package:kanban_app/application/project/open_projects_box.dart';
 import 'package:kanban_app/domain/project/i_project_repository.dart';
 import 'package:kanban_app/infrastructure/project/project_repository.dart';
 
@@ -26,11 +25,6 @@ class ProjectsNotifier extends StateNotifier<ProjectsState> {
 
   ProjectsNotifier({required this.repository}) : super(_Initial());
 
-  initiateProjectsPage() async {
-    OpenProjectsBox openProjectsBox = OpenProjectsBox(repository);
-    await openProjectsBox(NoParam());
-    getProjects();
-  }
 
   getProjects() async {
     GetProjects getProjects = GetProjects(repository);

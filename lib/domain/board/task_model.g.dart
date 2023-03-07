@@ -13,7 +13,7 @@ _$_TaskModel _$$_TaskModelFromJson(Map<String, dynamic> json) => _$_TaskModel(
       intervals: (json['intervals'] as List<dynamic>)
           .map((e) => DateTime.parse(e as String))
           .toList(),
-      completedAt: json['completedAt'] as String,
+      completedAt: DateTime.parse(json['completedAt'] as String),
     );
 
 Map<String, dynamic> _$$_TaskModelToJson(_$_TaskModel instance) =>
@@ -22,5 +22,5 @@ Map<String, dynamic> _$$_TaskModelToJson(_$_TaskModel instance) =>
       'name': instance.name,
       'status': instance.status,
       'intervals': instance.intervals.map((e) => e.toIso8601String()).toList(),
-      'completedAt': instance.completedAt,
+      'completedAt': instance.completedAt.toIso8601String(),
     };

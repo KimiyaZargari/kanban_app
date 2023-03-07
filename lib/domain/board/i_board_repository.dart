@@ -3,11 +3,7 @@ import 'package:kanban_app/domain/board/task_model.dart';
 import 'package:kanban_app/domain/project/project_model.dart';
 
 abstract class IBoardRepository {
-  Future<void> openBox();
-
-  Future<void> closeBox();
-
-  List<Map<String, List<TaskModel>>> getBoardData();
+  Future<Map<String, List<TaskModel>>> getBoardData(int projectId);
 
   void createTask(TaskModel task);
 

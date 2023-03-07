@@ -14,7 +14,7 @@ class ProjectRepository implements IProjectRepository {
   ProjectRepository();
 
   @override
-  Future<void> openBox() async {
+  Future<void> _openBox() async {
     if (!Hive.isBoxOpen(DatabaseKeys.projectKey)) {
       projectsBox = await Hive.openBox(DatabaseKeys.projectKey);
     }
@@ -51,7 +51,8 @@ class ProjectRepository implements IProjectRepository {
   }
 
   @override
-  List<ProjectModel> getProjects() {
+  Future<List<ProjectModel>> getProjects() async {
+    await _openBox();
     return List<ProjectModel>.from(projectsBox.values
         .map((e) => ProjectModel.fromJson(jsonDecode(jsonEncode(e)))));
   }

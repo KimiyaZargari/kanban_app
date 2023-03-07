@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kanban_app/domain/board/task_model.dart';
 
 class TaskCard extends StatelessWidget {
-  final String name;
+  final TaskModel task;
   final bool isFeedback;
   final double width;
 
-  const TaskCard(this.name,
+  const TaskCard(this.task,
       {this.isFeedback = false, required this.width, Key? key})
       : super(key: key);
 
@@ -27,7 +28,7 @@ class TaskCard extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    name,
+                    task.name,
                     textAlign: TextAlign.justify,
                     style: Theme.of(context).textTheme.bodySmall,
                     softWrap: true,

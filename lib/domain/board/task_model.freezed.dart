@@ -24,7 +24,7 @@ mixin _$TaskModel {
   String get name => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   List<DateTime> get intervals => throw _privateConstructorUsedError;
-  String get completedAt => throw _privateConstructorUsedError;
+  DateTime get completedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +42,7 @@ abstract class $TaskModelCopyWith<$Res> {
       String name,
       String status,
       List<DateTime> intervals,
-      String completedAt});
+      DateTime completedAt});
 }
 
 /// @nodoc
@@ -84,7 +84,7 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
       completedAt: null == completedAt
           ? _value.completedAt
           : completedAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
     ) as $Val);
   }
 }
@@ -101,7 +101,7 @@ abstract class _$$_TaskModelCopyWith<$Res> implements $TaskModelCopyWith<$Res> {
       String name,
       String status,
       List<DateTime> intervals,
-      String completedAt});
+      DateTime completedAt});
 }
 
 /// @nodoc
@@ -141,7 +141,7 @@ class __$$_TaskModelCopyWithImpl<$Res>
       completedAt: null == completedAt
           ? _value.completedAt
           : completedAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
     ));
   }
 }
@@ -176,7 +176,7 @@ class _$_TaskModel extends _TaskModel {
   }
 
   @override
-  final String completedAt;
+  final DateTime completedAt;
 
   @override
   String toString() {
@@ -203,7 +203,7 @@ abstract class _TaskModel extends TaskModel {
       required final String name,
       required final String status,
       required final List<DateTime> intervals,
-      required final String completedAt}) = _$_TaskModel;
+      required final DateTime completedAt}) = _$_TaskModel;
   _TaskModel._() : super._();
 
   factory _TaskModel.fromJson(Map<String, dynamic> json) =
@@ -218,7 +218,7 @@ abstract class _TaskModel extends TaskModel {
   @override
   List<DateTime> get intervals;
   @override
-  String get completedAt;
+  DateTime get completedAt;
   @override
   @JsonKey(ignore: true)
   _$$_TaskModelCopyWith<_$_TaskModel> get copyWith =>
