@@ -35,13 +35,13 @@ class ProjectRepository implements IProjectRepository {
       return left(Exception('This project alredy exists'));
     }
     int projectID = projectsBox.isEmpty ? 1 : projectsBox.values.last['id'] + 1;
-    projectsBox.add(project.copyWith(id: projectID).toJson());
+    projectsBox.put(projectID, project.copyWith(id: projectID).toJson());
     return right(projectID);
   }
 
   @override
-  void deleteProject(int projectId) {
- projectsBox.delete(projectId.toString());
+  void deleteProject(int projectId) async {
+    await projectsBox.delete(projectId);
   }
 
   @override

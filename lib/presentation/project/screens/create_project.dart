@@ -5,6 +5,7 @@ import 'package:kanban_app/presentation/core/widgets/loading_widget.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
 import 'package:kanban_app/presentation/core/widgets/text_field.dart';
 import 'package:kanban_app/presentation/project/notifiers/create_project.dart';
+import 'package:kanban_app/presentation/project/notifiers/projects.dart';
 import 'package:kanban_app/presentation/routes/router.gr.dart';
 
 import '../../core/config/strings.dart';
@@ -20,6 +21,7 @@ class CreateProjectPage extends ConsumerWidget {
       next.maybeWhen(
           orElse: () {},
           created: (id) {
+            ref.read(projectsNotifierProvider.notifier).getProjects();
             context.router.popAndPush(ProjectBoardRoute(id: id));
           });
     });

@@ -48,5 +48,6 @@ class ProjectsNotifier extends StateNotifier<ProjectsState> {
   deleteProject(int projectId) {
     DeleteProject deleteProject = DeleteProject(repository);
     deleteProject(projectId);
+    getProjects();
   }
 }
