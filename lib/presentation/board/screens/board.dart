@@ -1,8 +1,9 @@
 import 'package:auto_route/annotations.dart';
+import 'package:dotted_border/dotted_border.dart';
+import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kanban_app/presentation/board/notifiers/board.dart';
-import 'package:kanban_app/presentation/board/widgets/empty_column_drag_target.dart';
 import 'package:kanban_app/presentation/board/widgets/task_card.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
 
@@ -38,50 +39,64 @@ class ProjectBoardPage extends ConsumerWidget {
               ),
             ),
             Expanded(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: notifier.todo.isEmpty
-                        ? const EmptyColumDragTarget()
-                        : ListView(
-                            children: notifier.todo
-                                .map((e) => TaskCard(
-                                      e,
-                                      column: 'todo',
-                                    ))
-                                .toList(),
-                          ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      child: notifier.inProgress.isEmpty
-                          ? EmptyColumDragTarget()
-                          : Column(
-                              children: notifier.inProgress
-                                  .map((e) => TaskCard(
-                                        e,
-                                        column: 'in progress',
-                                      ))
-                                  .toList(),
+                child: DragAndDropLists(
+              listWidth:
+                  MediaQuery.of(context).size.width / notifier.tasks.length,
+              listDraggingWidth: 0,
+              listPadding: const EdgeInsets.all(0),
+              // crossAxisAlignment: CrossAxisAlignment.stretch,
+              axis: Axis.horizontal,
+              onItemReorder: (int oldItemIndex, int oldListIndex,
+                  int newItemIndex, int newListIndex) {
+                notifier.moveTask(
+                    task: notifier.tasks[notifier.tasks.keys
+                        .toList()[oldListIndex]]![oldItemIndex],
+                    from: notifier.tasks.keys.toList()[oldListIndex],
+                    to: notifier.tasks.keys.toList()[newListIndex],
+                    at: newItemIndex);
+              },
+              onItemDraggingChanged: (_, dragging) {
+                ref.read(dragTaskNotifierProvider.notifier).state = dragging;
+              },
+              onListReorder: (int oldListIndex, int newListIndex) {},
+              children: notifier.tasks
+                  .map((column, tasks) => MapEntry(
+                      column,
+                      DragAndDropList(
+                        canDrag: false,
+                        contentsWhenEmpty: Container(),
+                        lastTarget: Consumer(builder: (context, ref, _) {
+                          final dragging = ref.watch(dragTaskNotifierProvider);
+                          return Visibility(
+                            visible: dragging,
+                            child: DottedBorder(
+                              borderType: BorderType.RRect,
+                              dashPattern: [8, 8],
+                              radius: Radius.circular(16),
+                              color: Theme.of(context).dividerColor,
+                              borderPadding: EdgeInsets.all(2),
+                              padding: EdgeInsets.all(4),
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height - 200,
+                              ),
                             ),
-                    ),
-                  ),
-                  Expanded(
-                    child: notifier.done.isEmpty
-                        ? EmptyColumDragTarget()
-                        : Column(
-                            children: notifier.done
-                                .map((e) => TaskCard(
-                                      e,
-                                      column: 'done',
-                                    ))
-                                .toList(),
-                          ),
-                  ),
-                ],
-              ),
-            ),
+                          );
+                        }),
+                        children: tasks
+                            .map((task) => DragAndDropItem(
+                                feedbackWidget: TaskCard(
+                                  task,
+                                  isFeedback: true,
+                                ),
+                                child: TaskCard(
+                                  task,
+                                )))
+                            .toList(),
+                      )))
+                  .values
+                  .toList(),
+            )),
           ],
         ));
   }

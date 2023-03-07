@@ -108,10 +108,10 @@ ThemeData darkTheme() {
           elevation: 10,
           foregroundColor: AppColors.darkCardColor),
       appBarTheme: base.appBarTheme.copyWith(
-          color: AppColors.primaryColor,
+          color: AppColors.darkBackground,
           centerTitle: true,
-          elevation:10,
-          foregroundColor: AppColors.darkCardColor),
+          elevation:0,
+          foregroundColor: AppColors.darkThemeTextColor),
       dialogTheme: base.dialogTheme.copyWith(
           backgroundColor: AppColors.darkCardColor,
           shape: const RoundedRectangleBorder(
