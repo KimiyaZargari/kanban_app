@@ -6,7 +6,8 @@ import 'package:kanban_app/domain/project/i_project_repository.dart';
 import 'package:kanban_app/domain/project/project_model.dart';
 import 'package:kanban_app/infrastructure/core/local_database.dart';
 
-final projectRepositoryProvider = Provider((ref) => ProjectRepository());
+final projectRepositoryProvider =
+    Provider.autoDispose((ref) => ProjectRepository());
 
 class ProjectRepository implements IProjectRepository {
   late final Box<Map> projectsBox;

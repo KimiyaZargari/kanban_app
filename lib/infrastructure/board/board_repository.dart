@@ -7,7 +7,8 @@ import 'package:kanban_app/domain/board/i_board_repository.dart';
 import 'package:kanban_app/domain/board/task_model.dart';
 import 'package:kanban_app/infrastructure/core/local_database.dart';
 
-final boardRepositoryProvider = Provider((ref) => BoardRepository());
+final boardRepositoryProvider =
+    Provider.autoDispose((ref) => BoardRepository());
 
 class BoardRepository implements IBoardRepository {
   late final Box<Map> toDoBox, inProgressBox, doneBox;
@@ -16,6 +17,7 @@ class BoardRepository implements IBoardRepository {
 
   Future<void> _openBox(int projectId) async {
     final boxBaseName = "${DatabaseKeys.boardKey}_$projectId";
+
     await Future.wait<void>([
       _openToDo(boxBaseName),
       _openInProgressBox(boxBaseName),
