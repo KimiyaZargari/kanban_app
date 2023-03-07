@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 class DeleteProjectDialog extends StatelessWidget {
@@ -28,11 +29,20 @@ class DeleteProjectDialog extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                    child:
-                        OutlinedButton(onPressed: () {}, child: Text("Yes!"))),
+                    child: OutlinedButton(
+                        onPressed: () {
+                          context.router.pop(true);
+                        },
+                        child: Text("Yes!"))),
+                SizedBox(
+                  width: 12,
+                ),
                 Expanded(
-                    child:
-                        FilledButton(onPressed: () {}, child: Text('cancel')))
+                    child: ElevatedButton(
+                        onPressed: () {
+                          context.router.pop(false);
+                        },
+                        child: Text('cancel')))
               ],
             )
           ],

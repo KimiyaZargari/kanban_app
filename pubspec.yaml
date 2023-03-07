@@ -46,7 +46,8 @@ dependencies:
   hive_flutter: ^1.1.0
   path_provider: ^2.0.13
   hive_generator: ^2.0.0
-
+  dotted_border: ^2.0.0+3
+  drag_and_drop_lists: ^0.3.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

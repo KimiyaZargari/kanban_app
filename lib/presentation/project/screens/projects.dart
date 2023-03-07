@@ -26,11 +26,11 @@ class ProjectsPage extends ConsumerWidget {
         ),
         child: state.maybeWhen(
           initial: () {
-            notifier.initiateProjectsPage();
+            notifier.getProjects();
             return const LoadingWidget();
           },
           loaded: () => ListView(
-            padding: EdgeInsets.all(22),
+            padding: const EdgeInsets.all(22),
             children: notifier.projects
                 .map((project) => ProjectCard(project))
                 .toList(),

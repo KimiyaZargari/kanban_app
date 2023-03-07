@@ -29,7 +29,7 @@ void main() {
         ProjectModel(name: 'duplicate test', inProgress: 0, todo: 0, done: 0);
     void arrangeProjectsRepositoryCreateProject() {
       when(() => mockProjectsRepository.createProject(newProject))
-          .thenAnswer((invocation) => right(unit));
+          .thenAnswer((invocation) => right(1));
       when(() => mockProjectsRepository.createProject(duplicateProject))
           .thenAnswer((invocation) => Left(Exception('project duplicate')));
     }
@@ -55,7 +55,7 @@ void main() {
       arrangeProjectsRepositoryCreateProject();
       sut.projectName = newProject.name;
       await sut.createProject();
-      expect(sut.state, CreateProjectState.created());
+      expect(sut.state, CreateProjectState.created(1));
     });
   });
 }

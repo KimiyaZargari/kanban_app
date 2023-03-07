@@ -28,7 +28,7 @@ void main() {
     ];
     void arrangeProjectsRepositoryReturnsListOfProjects() {
       when(() => mockProjectsRepository.getProjects())
-          .thenAnswer((invocation) => projectsList);
+          .thenAnswer((invocation) async => projectsList);
     }
 
     test('get projects is called', () async {

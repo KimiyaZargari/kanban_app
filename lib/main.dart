@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'package:kanban_app/domain/project/project_model.dart';
-import 'package:kanban_app/infrastructure/core/local_database.dart';
 import 'package:kanban_app/presentation/core/config/themes/dark_theme.dart';
 import 'package:kanban_app/presentation/routes/router.gr.dart';
 import 'package:path_provider/path_provider.dart';
