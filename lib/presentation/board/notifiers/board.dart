@@ -6,7 +6,8 @@ part 'board.freezed.dart';
 part 'board_state.dart';
 
 final boardNotifierProvider =
-    StateNotifierProvider.autoDispose<BoardNotifier, BoardState>((ref) => BoardNotifier());
+    StateNotifierProvider.autoDispose<BoardNotifier, BoardState>(
+        (ref) => BoardNotifier());
 final dragTaskNotifierProvider = StateProvider<bool>((ref) => false);
 
 class BoardNotifier extends StateNotifier<BoardState> {
@@ -22,8 +23,12 @@ class BoardNotifier extends StateNotifier<BoardState> {
       'normal name'
     ],
     'In Progress': [],
-    'Done': []
+    'Done': [],
+    'QA Passed': []
   };
+  init(){
+
+  }
 
   moveTask(
       {required String task,
@@ -31,7 +36,7 @@ class BoardNotifier extends StateNotifier<BoardState> {
       required String to,
       int? at}) {
     tasks[from]?.remove(task);
-    if (at == null || at >tasks[to]!.length) {
+    if (at == null || at > tasks[to]!.length) {
       tasks[to]?.add(task);
     } else {
       tasks[to]?.insert(at, task);

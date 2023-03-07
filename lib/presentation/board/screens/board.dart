@@ -23,23 +23,9 @@ class ProjectBoardPage extends ConsumerWidget {
         ),
         child: Column(
           children: [
-            Card(
-              child: Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Row(
-                  children: const [
-                    Expanded(child: Text('To Do', textAlign: TextAlign.center)),
-                    Expanded(
-                        child:
-                            Text('In Progress', textAlign: TextAlign.center)),
-                    Expanded(child: Text('Done', textAlign: TextAlign.center)),
-                  ],
-                ),
-              ),
-            ),
             Expanded(
                 child: DragAndDropLists(
+              //  disableScrolling: true,
               listWidth:
                   MediaQuery.of(context).size.width / notifier.tasks.length,
               listDraggingWidth: 0,
@@ -63,6 +49,11 @@ class ProjectBoardPage extends ConsumerWidget {
                   .map((column, tasks) => MapEntry(
                       column,
                       DragAndDropList(
+                        header: Container(
+                            color: Theme.of(context).cardColor,
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            alignment: Alignment.center,
+                            child: Text(column, textAlign: TextAlign.center)),
                         canDrag: false,
                         contentsWhenEmpty: Container(),
                         lastTarget: Consumer(builder: (context, ref, _) {
@@ -87,10 +78,14 @@ class ProjectBoardPage extends ConsumerWidget {
                             .map((task) => DragAndDropItem(
                                 feedbackWidget: TaskCard(
                                   task,
+                                  width: MediaQuery.of(context).size.width /
+                                      notifier.tasks.length,
                                   isFeedback: true,
                                 ),
                                 child: TaskCard(
                                   task,
+                                  width: MediaQuery.of(context).size.width /
+                                      notifier.tasks.length,
                                 )))
                             .toList(),
                       )))
