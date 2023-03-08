@@ -71,7 +71,7 @@ void main() {
 
     void arrangeProjectsRepositoryReturnsListOfProjects() {
       when(() => mockBoardsRepository.createTask(any()))
-          .thenAnswer((invocation) async => right(unit));
+          .thenAnswer((invocation) async => right(1));
     }
 
     test('indicates that notifier requests repository to create task',

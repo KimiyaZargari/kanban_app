@@ -1,8 +1,10 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:kanban_app/application/board/create_task.dart';
+import 'package:kanban_app/application/board/edit_task.dart';
 import 'package:kanban_app/application/board/get_board_data.dart';
 import 'package:kanban_app/domain/board/task_model.dart';
 import 'package:kanban_app/infrastructure/board/board_repository.dart';
@@ -31,7 +33,7 @@ class BoardNotifier extends StateNotifier<BoardState> {
     return (await createTask(task)).fold((l) {
       return false;
     }, (r) {
-      tasks[task.status]!.add(task);
+      tasks[task.status]!.add(task.copyWith(id: r));
       return true;
     });
   }
@@ -67,13 +69,16 @@ class BoardNotifier extends StateNotifier<BoardState> {
     _changeTaskStatus(task: task, to: TaskStatus.done.toString(), at: at);
   }
 
-  _changeTaskStatus({required TaskModel task, required String to, int? at}) {
+  _changeTaskStatus(
+      {required TaskModel task, required String to, int? at}) async {
     task = task.copyWith(status: to);
     if (at == null || at > tasks[to]!.length) {
       tasks[to]?.add(task);
     } else {
       tasks[to]?.insert(at, task);
     }
+    EditTask editTask = EditTask(repository);
+    await editTask(task);
     state = _Loaded();
   }
 

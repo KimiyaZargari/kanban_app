@@ -21,14 +21,15 @@ class BoardRepository implements IBoardRepository {
   }
 
   @override
-  Future<Either<Exception, Unit>> createTask(TaskModel task) async {
+  Future<Either<Exception, int>> createTask(TaskModel task) async {
     if (tasksBox.values
         .where((element) => element['title'] == task.title)
         .isNotEmpty) {
       return left(Exception('This task already exists!'));
     }
-    await tasksBox.add(task.toJson());
-    return right(unit);
+    final id = await tasksBox.add(task.toJson());
+    await tasksBox.putAt(id, task.copyWith(id: id).toJson());
+    return right(id);
   }
 
   @override
@@ -38,9 +39,8 @@ class BoardRepository implements IBoardRepository {
   }
 
   @override
-  void editTask(TaskModel projectModel) {
-    // TODO: implement editProject
-    throw UnimplementedError();
+  Future<void> editTask(TaskModel task) async {
+    await tasksBox.putAt(task.id!, task.toJson());
   }
 
   @override

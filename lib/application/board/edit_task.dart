@@ -6,13 +6,13 @@ import 'package:kanban_app/domain/project/project_model.dart';
 import '../../domain/project/i_project_repository.dart';
 import '../core/usecase.dart';
 
-class CreateTask implements UseCase<TaskModel, Either<Exception, int>> {
+class EditTask implements UseCase<TaskModel, void> {
   IBoardRepository repository;
 
-  CreateTask(this.repository);
+  EditTask(this.repository);
 
   @override
-  Future<Either<Exception, int>> call(task) async {
-    return await repository.createTask(task);
+  Future<void> call(task) async{
+    return await repository.editTask(task);
   }
 }

@@ -18,7 +18,7 @@ class TaskCard extends StatelessWidget {
       children: [
         Container(
           constraints: BoxConstraints(
-            minHeight: width,
+            minHeight: width /1.2,
           ),
           width: width,
           child: Card(
@@ -36,20 +36,34 @@ class TaskCard extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                     softWrap: true,
                   ),
+                  SizedBox(height: 2,),
                   if (task.status == TaskStatus.inProgress.toString())
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text((task.getDuration() ?? Duration.zero)
-                            .toString()
-                            .substring(0, 7)),
+                        Text(
+                          (task.getDuration() ?? Duration.zero)
+                              .toString()
+                              .substring(0, 7),
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
                         if (task.intervals!.length.isOdd)
-                          IconButton(
-                              onPressed: () {}, icon: const Icon(Icons.pause))
+                          GestureDetector(
+                              onTap: () {},
+                              child: Icon(
+                                Icons.pause,
+                                size: 20,
+                                color: Theme.of(context).colorScheme.error,
+                              ))
                         else
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.play_arrow_rounded))
+                          GestureDetector(
+                              onTap: () {},
+                              child: Icon(
+                                Icons.play_arrow_rounded,
+                                size: 20,
+                                color: Theme.of(context).colorScheme.error,
+                              ))
                       ],
                     )
                   else if (task.status == TaskStatus.done.toString())

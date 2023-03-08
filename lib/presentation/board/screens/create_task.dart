@@ -70,7 +70,7 @@ class CreateTaskPage extends ConsumerWidget {
                         notifier.title = val!;
                       },
                       controller: notifier.titleController,
-                      maxLength: 30,
+                      maxLength: 100,
                       validator: (val) {
                         if (val?.trim().isEmpty ?? true) {
                           return 'Please enter task title!';
