@@ -29,14 +29,33 @@ class ProjectsPage extends ConsumerWidget {
             notifier.getProjects();
             return const LoadingWidget();
           },
-          loaded: () => ListView(
-            padding: const EdgeInsets.all(22),
-            children: notifier.projects
-                .map((project) => ProjectCard(
-                      project,
-                      deleteProject: () => notifier.deleteProject(project.id!),
-                    ))
-                .toList(),
+          loaded: () => Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(22, 30, 22, 0),
+                child: Text(
+                  notifier.projects.isNotEmpty
+                      ? 'Swipe left to delete project and right to edit!'
+                      : 'You have not created any projects yet!\nStart by clicking on the plus icon on the bottom right corner.',
+                  textAlign: TextAlign.center,
+                  style: notifier.projects.isNotEmpty
+                      ? Theme.of(context).textTheme.bodyMedium
+                      : Theme.of(context).textTheme.bodyLarge,
+                ),
+              ),
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.all(22),
+                  children: notifier.projects
+                      .map((project) => ProjectCard(
+                            project,
+                            deleteProject: () =>
+                                notifier.deleteProject(project.id!),
+                          ))
+                      .toList(),
+                ),
+              ),
+            ],
           ),
           orElse: () => const LoadingWidget(),
         ));
