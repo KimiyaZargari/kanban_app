@@ -17,7 +17,7 @@ class TaskModel with _$TaskModel {
     DateTime? completedAt,
   }) = _TaskModel;
 
-  Duration? getDuration() {
+  String? getDuration() {
     if (intervals == null || intervals!.isEmpty) {
       return null;
     }
@@ -32,7 +32,15 @@ class TaskModel with _$TaskModel {
         }
       }
     }
-    return res;
+    int hours = res.inHours.remainder(24);
+    int minutes = res.inMinutes.remainder(60);
+    if (res.inDays != 0) {
+      return "${res.inDays}:${hours < 10 ? '0$hours' : hours}:${minutes < 10 ? '0$minutes' : minutes}";
+    } else if (res.inHours == 0) {
+      return '${res.inMinutes} mins';
+    } else {
+      return "${hours < 10 ? '0$hours' : hours}:${minutes < 10 ? '0$minutes' : minutes}";
+    }
   }
 
   factory TaskModel.fromJson(Map<String, dynamic> json) =>
@@ -53,12 +61,9 @@ class EditTaskModel with _$EditTaskModel {
   EditTaskModel._();
 
   factory EditTaskModel({
-
     required TaskModel oldTask,
     required TaskModel newTask,
-
   }) = _EditTaskModel;
-
 }
 
 enum TaskStatus {

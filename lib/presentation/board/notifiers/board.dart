@@ -51,6 +51,20 @@ class BoardNotifier extends StateNotifier<BoardState> {
     await _changeTaskStatus(task: task, to: TaskStatus.toDo.toString(), at: at);
   }
 
+  logTaskTime({required TaskModel task}) async {
+    List<DateTime> intervals =
+        task.intervals == null ? [] : [...task.intervals!];
+    intervals.add(DateTime.now());
+
+    EditTask editTask = EditTask(repository);
+    await editTask(EditTaskModel(
+        oldTask: task, newTask: task.copyWith(intervals: intervals)));
+    final index = tasks[task.status]!.indexOf(task);
+    tasks[task.status]!
+        .replaceRange(index, index + 1, [task.copyWith(intervals: intervals)]);
+    state = BoardState.loaded();
+  }
+
   takeTaskToInProgress(
       {required TaskModel task,
       required bool shouldStartTimer,

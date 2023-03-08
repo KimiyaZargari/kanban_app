@@ -51,8 +51,10 @@ class BoardRepository implements IBoardRepository {
   @override
   Future<void> editTask(EditTaskModel model) async {
     await tasksBox.putAt(model.newTask.id!, model.newTask.toJson());
-    _updateTaskNumber(model.oldTask.status, -1);
-    _updateTaskNumber(model.newTask.status, 1);
+    if (model.oldTask.status != model.newTask.status) {
+      _updateTaskNumber(model.oldTask.status, -1);
+      _updateTaskNumber(model.newTask.status, 1);
+    }
   }
 
   @override

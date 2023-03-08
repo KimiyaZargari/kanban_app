@@ -1,15 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:kanban_app/domain/board/task_model.dart';
+import 'package:kanban_app/presentation/board/notifiers/board.dart';
+import 'package:kanban_app/presentation/board/notifiers/create_task.dart';
+import 'package:kanban_app/presentation/board/notifiers/timer_notifier.dart';
 
 class TaskCard extends StatelessWidget {
   final TaskModel task;
-  final bool isFeedback;
+
   final double width;
+  final Function() logTime;
 
   const TaskCard(this.task,
-      {this.isFeedback = false, required this.width, Key? key})
+      {required this.logTime, required this.width, Key? key})
       : super(key: key);
 
   @override
@@ -18,11 +23,10 @@ class TaskCard extends StatelessWidget {
       children: [
         Container(
           constraints: BoxConstraints(
-            minHeight: width /1.2,
+            minHeight: width / 1.2,
           ),
           width: width,
           child: Card(
-            color: isFeedback ? Theme.of(context).primaryColor : null,
             elevation: 2,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -36,40 +40,66 @@ class TaskCard extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                     softWrap: true,
                   ),
-                  SizedBox(height: 2,),
+                  const SizedBox(
+                    height: 2,
+                  ),
                   if (task.status == TaskStatus.inProgress.toString())
+                    Consumer(builder: (context, ref, _) {
+                      ref.watch(timerProvider(task.id!));
+                      final timerNotifier =
+                          ref.watch(timerProvider(task.id!).notifier);
+                      if (timerNotifier.timer == null &&
+                          (task.intervals?.length.isOdd ?? false)) {
+                        timerNotifier.startTimer();
+                      }
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            (task.getDuration() ?? '00:00:00'),
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                          if (task.intervals!.length.isOdd)
+                            GestureDetector(
+                                onTap: () {
+                                  timerNotifier.cancelTimer();
+                                  logTime();
+                                },
+                                child: Icon(
+                                  Icons.pause,
+                                  size: 22,
+                                  color: Theme.of(context).colorScheme.error,
+                                ))
+                          else
+                            GestureDetector(
+                                onTap: () {
+                                  timerNotifier.startTimer();
+                                  logTime();
+                                },
+                                child: Icon(
+                                  Icons.play_arrow_rounded,
+                                  size: 22,
+                                  color: Theme.of(context).colorScheme.error,
+                                ))
+                        ],
+                      );
+                    })
+                  else if (task.status == TaskStatus.done.toString())
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          (task.getDuration() ?? Duration.zero)
-                              .toString()
-                              .substring(0, 7),
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        if (task.intervals!.length.isOdd)
-                          GestureDetector(
-                              onTap: () {},
-                              child: Icon(
-                                Icons.pause,
-                                size: 20,
-                                color: Theme.of(context).colorScheme.error,
-                              ))
-                        else
-                          GestureDetector(
-                              onTap: () {},
-                              child: Icon(
-                                Icons.play_arrow_rounded,
-                                size: 20,
-                                color: Theme.of(context).colorScheme.error,
-                              ))
+                            DateFormat('dd/MM/yy')
+                                .format(task.completedAt!)
+                                .toString(),
+                            style: Theme.of(context).textTheme.bodySmall),
+                        Icon(
+                          Icons.check,
+                          color: Theme.of(context).primaryColor,
+                        )
                       ],
-                    )
-                  else if (task.status == TaskStatus.done.toString())
-                    Text(DateFormat('dd MMM yyyy')
-                        .format(task.completedAt!)
-                        .toString())
+                    ),
                 ],
               ),
             ),

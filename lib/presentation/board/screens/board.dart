@@ -64,7 +64,7 @@ class ProjectBoardPage extends ConsumerWidget {
                                     builder: (_) => const ToDoDialog()) ??
                                 false;
                           }
-                          if (takeBack??true)
+                          if (takeBack ?? true)
                             await notifier.takeTaskToToDo(
                                 task: notifier.tasks[notifier.tasks.keys
                                     .toList()[oldListIndex]]![oldItemIndex],
@@ -150,13 +150,35 @@ class ProjectBoardPage extends ConsumerWidget {
                                 }),
                                 children: tasks
                                     .map((task) => DragAndDropItem(
-                                        feedbackWidget: TaskCard(
-                                          task,
+                                        feedbackWidget: Container(
+                                          constraints: BoxConstraints(
+                                            minHeight: (MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    3) /
+                                                1.2,
+                                          ),
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width /
-                                              notifier.tasks.length,
-                                          isFeedback: true,
+                                              3,
+                                          child: Card(
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            elevation: 2,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                task.title,
+                                                textAlign: TextAlign.justify,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall,
+                                                softWrap: true,
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                         child: TaskCard(
                                           task,
@@ -164,6 +186,7 @@ class ProjectBoardPage extends ConsumerWidget {
                                                   .size
                                                   .width /
                                               notifier.tasks.length,
+                                          logTime: () =>notifier.logTaskTime(task: task),
                                         )))
                                     .toList(),
                               )))
