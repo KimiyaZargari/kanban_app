@@ -19,7 +19,7 @@ class ProjectRepository implements IProjectRepository {
     if (!Hive.isBoxOpen(DatabaseKeys.projectKey)) {
       projectsBox = await Hive.openBox(DatabaseKeys.projectKey);
     }
-    //   projectsBox.clear();
+       //projectsBox.clear();
   }
 
   @override
@@ -42,6 +42,7 @@ class ProjectRepository implements IProjectRepository {
   @override
   void deleteProject(int projectId) async {
     await projectsBox.delete(projectId);
+    await Hive.deleteBoxFromDisk('${DatabaseKeys.boardKey}_$projectId');
   }
 
   @override

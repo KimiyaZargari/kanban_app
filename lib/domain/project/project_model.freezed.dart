@@ -22,8 +22,11 @@ ProjectModel _$ProjectModelFromJson(Map<String, dynamic> json) {
 mixin _$ProjectModel {
   int? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'To Do')
   int get todo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Done')
   int get done => throw _privateConstructorUsedError;
+  @JsonKey(name: 'In Progress')
   int get inProgress => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +41,12 @@ abstract class $ProjectModelCopyWith<$Res> {
           ProjectModel value, $Res Function(ProjectModel) then) =
       _$ProjectModelCopyWithImpl<$Res, ProjectModel>;
   @useResult
-  $Res call({int? id, String name, int todo, int done, int inProgress});
+  $Res call(
+      {int? id,
+      String name,
+      @JsonKey(name: 'To Do') int todo,
+      @JsonKey(name: 'Done') int done,
+      @JsonKey(name: 'In Progress') int inProgress});
 }
 
 /// @nodoc
@@ -93,7 +101,12 @@ abstract class _$$_ProjectModelCopyWith<$Res>
       __$$_ProjectModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String name, int todo, int done, int inProgress});
+  $Res call(
+      {int? id,
+      String name,
+      @JsonKey(name: 'To Do') int todo,
+      @JsonKey(name: 'Done') int done,
+      @JsonKey(name: 'In Progress') int inProgress});
 }
 
 /// @nodoc
@@ -144,9 +157,9 @@ class _$_ProjectModel extends _ProjectModel {
   _$_ProjectModel(
       {this.id,
       required this.name,
-      required this.todo,
-      required this.done,
-      required this.inProgress})
+      @JsonKey(name: 'To Do') required this.todo,
+      @JsonKey(name: 'Done') required this.done,
+      @JsonKey(name: 'In Progress') required this.inProgress})
       : super._();
 
   factory _$_ProjectModel.fromJson(Map<String, dynamic> json) =>
@@ -157,10 +170,13 @@ class _$_ProjectModel extends _ProjectModel {
   @override
   final String name;
   @override
+  @JsonKey(name: 'To Do')
   final int todo;
   @override
+  @JsonKey(name: 'Done')
   final int done;
   @override
+  @JsonKey(name: 'In Progress')
   final int inProgress;
 
   @override
@@ -184,11 +200,12 @@ class _$_ProjectModel extends _ProjectModel {
 
 abstract class _ProjectModel extends ProjectModel {
   factory _ProjectModel(
-      {final int? id,
-      required final String name,
-      required final int todo,
-      required final int done,
-      required final int inProgress}) = _$_ProjectModel;
+          {final int? id,
+          required final String name,
+          @JsonKey(name: 'To Do') required final int todo,
+          @JsonKey(name: 'Done') required final int done,
+          @JsonKey(name: 'In Progress') required final int inProgress}) =
+      _$_ProjectModel;
   _ProjectModel._() : super._();
 
   factory _ProjectModel.fromJson(Map<String, dynamic> json) =
@@ -199,10 +216,13 @@ abstract class _ProjectModel extends ProjectModel {
   @override
   String get name;
   @override
+  @JsonKey(name: 'To Do')
   int get todo;
   @override
+  @JsonKey(name: 'Done')
   int get done;
   @override
+  @JsonKey(name: 'In Progress')
   int get inProgress;
   @override
   @JsonKey(ignore: true)

@@ -79,7 +79,7 @@ class ProjectBoardPage extends ConsumerWidget {
                                 context: context,
                                 builder: (_) =>
                                     DoneDialog((val) => setCompletion(val)));
-                          }else{
+                          } else {
                             completion = null;
                           }
                           if (confirm ?? oldListIndex == newListIndex) {

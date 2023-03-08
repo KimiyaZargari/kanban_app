@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:kanban_app/domain/board/i_board_repository.dart';
@@ -28,6 +29,12 @@ class BoardRepository implements IBoardRepository {
       return left(Exception('This task already exists!'));
     }
     final id = await tasksBox.add(task.toJson());
+    final projectID = int.parse(tasksBox.name.characters.last);
+    print(projectID);
+
+    var project = Hive.box<Map>(DatabaseKeys.projectKey).get(projectID);
+    project![task.status]++;
+    Hive.box<Map>(DatabaseKeys.projectKey).put(projectID, project);
     await tasksBox.putAt(id, task.copyWith(id: id).toJson());
     return right(id);
   }
