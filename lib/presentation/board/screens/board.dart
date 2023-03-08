@@ -28,7 +28,9 @@ class ProjectBoardPage extends ConsumerWidget {
     return PageBase(
         title: 'Board',
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            context.router.push(CreateTaskRoute(projectId: projectId));
+          },
           child: const Icon(Icons.add_rounded),
         ),
         child: state.maybeWhen(
@@ -50,7 +52,7 @@ class ProjectBoardPage extends ConsumerWidget {
                       axis: Axis.horizontal,
                       onItemReorder: (int oldItemIndex, int oldListIndex,
                           int newItemIndex, int newListIndex) {
-                        notifier.moveTask(
+                        notifier.changeTaskStatus(
                             task: notifier.tasks[notifier.tasks.keys
                                 .toList()[oldListIndex]]![oldItemIndex],
                             from: notifier.tasks.keys.toList()[oldListIndex],

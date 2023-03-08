@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'task_model.freezed.dart';
@@ -27,4 +28,33 @@ class TaskModel with _$TaskModel {
 
   @override
   int get hashCode => Object.hash(runtimeType, id, name);
+}
+
+enum TaskStatus {
+  toDo,
+  inProgress,
+  done;
+
+  @override
+  String toString() {
+    switch (this) {
+      case TaskStatus.toDo:
+        return 'To Do';
+      case TaskStatus.inProgress:
+        return 'In Progress';
+      case TaskStatus.done:
+        return 'Done';
+    }
+  }
+
+  IconData getIcon() {
+    switch (this) {
+      case TaskStatus.toDo:
+        return Icons.list_alt_rounded;
+      case TaskStatus.inProgress:
+        return Icons.timelapse_rounded;
+      case TaskStatus.done:
+        return Icons.done_rounded;
+    }
+  }
 }

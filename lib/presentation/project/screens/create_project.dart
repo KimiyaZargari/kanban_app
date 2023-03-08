@@ -91,7 +91,7 @@ class CreateProjectPage extends ConsumerWidget {
                       },
                       child: state.maybeWhen(
                         creating: () => const LoadingWidget(),
-                        orElse: () => const Text('create'),
+                        orElse: () => const Text(AppStrings.create),
                       ),
                     ),
                   );

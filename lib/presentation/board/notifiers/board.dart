@@ -32,7 +32,7 @@ class BoardNotifier extends StateNotifier<BoardState> {
     state = _Loaded();
   }
 
-  moveTask(
+  changeTaskStatus(
       {required TaskModel task,
       required String from,
       required String to,
@@ -45,6 +45,7 @@ class BoardNotifier extends StateNotifier<BoardState> {
     }
     state = _Loaded();
   }
+
 
   @override
   void dispose() {

@@ -4,7 +4,7 @@ import 'package:kanban_app/presentation/core/config/colors.dart';
 TextTheme _textTheme(TextTheme base) {
   return base.copyWith(
     titleLarge: const TextStyle(
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: FontWeight.w700,
         color: AppColors.darkThemeTextColor),
     titleMedium: const TextStyle(
@@ -23,7 +23,7 @@ TextTheme _textTheme(TextTheme base) {
         color: AppColors.darkThemeTextColor),
 
     labelMedium: const TextStyle(
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: FontWeight.w400,
         color: AppColors.darkThemeTextColor),
 
@@ -47,14 +47,18 @@ TextTheme _textTheme(TextTheme base) {
 
     // done small body in medical records, faq answers
     bodySmall: const TextStyle(
-        fontSize: 14, fontWeight: FontWeight.w300, color: AppColors.darkThemeTextColor),
+        fontSize: 14,
+        fontWeight: FontWeight.w300,
+        color: AppColors.darkThemeTextColor),
   );
 }
 
 TextTheme _primaryTextTheme(TextTheme base) {
   return base.copyWith(
     bodyMedium: const TextStyle(
-        fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.darkThemeTextColor),
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: AppColors.darkThemeTextColor),
   );
 }
 
@@ -69,9 +73,43 @@ ThemeData darkTheme() {
       colorScheme: base.colorScheme.copyWith(
         primary: AppColors.primaryColor,
         error: AppColors.error,
+        secondary: AppColors.primaryColor2,
       ),
       cardColor: AppColors.darkCardColor,
-
+      menuTheme: const MenuThemeData(
+          style: MenuStyle(
+        elevation: MaterialStatePropertyAll<double>(10),
+        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)))),
+        backgroundColor:
+            MaterialStatePropertyAll<Color>(AppColors.darkCardColor),
+      )),
+      inputDecorationTheme: base.inputDecorationTheme.copyWith(
+        focusedBorder: OutlineInputBorder(
+          borderSide:
+              const BorderSide(width: 1.5, color: AppColors.primaryColor),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(width: 1.5, color: Colors.grey),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(width: 1.5, color: AppColors.error),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(width: 1.5, color: AppColors.error),
+            borderRadius: BorderRadius.circular(10)),
+        disabledBorder: OutlineInputBorder(),
+        errorMaxLines: 2,
+        contentPadding: const EdgeInsets.all(16),
+      ),
+      checkboxTheme: base.checkboxTheme.copyWith(
+          fillColor:
+              const MaterialStatePropertyAll<Color>(AppColors.primaryColor),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(4)))),
       //  focusColor: Colors.deepPurpleAccent,
       cardTheme: base.cardTheme.copyWith(
           elevation: 10,
@@ -82,6 +120,7 @@ ThemeData darkTheme() {
           style: ElevatedButton.styleFrom(
         textStyle: _textTheme(base.textTheme).labelLarge,
         backgroundColor: AppColors.primaryColor,
+        foregroundColor: AppColors.darkCardColor,
         elevation: 10,
         disabledBackgroundColor: Colors.grey,
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -92,7 +131,7 @@ ThemeData darkTheme() {
       outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
         elevation: 10,
-        foregroundColor: AppColors.primaryColor,
+        foregroundColor: AppColors.error,
         disabledBackgroundColor: Colors.grey,
         textStyle: _textTheme(base.textTheme).labelLarge,
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -110,7 +149,7 @@ ThemeData darkTheme() {
       appBarTheme: base.appBarTheme.copyWith(
           color: AppColors.darkBackground,
           centerTitle: true,
-          elevation:0,
+          elevation: 0,
           foregroundColor: AppColors.darkThemeTextColor),
       dialogTheme: base.dialogTheme.copyWith(
           backgroundColor: AppColors.darkCardColor,
