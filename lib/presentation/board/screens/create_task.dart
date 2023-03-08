@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kanban_app/presentation/board/notifiers/board.dart';
+import 'package:kanban_app/presentation/board/notifiers/create_task.dart';
 import 'package:kanban_app/presentation/core/config/strings.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
 import 'package:kanban_app/presentation/core/widgets/text_field.dart';
@@ -23,8 +24,8 @@ class CreateTaskPage extends ConsumerWidget {
         .routeData
         .pathParams
         .getInt('id');
-    final state = ref.watch(boardNotifierProvider(projectId));
-    final notifier = ref.watch(boardNotifierProvider(projectId).notifier);
+    final state = ref.watch(createTaskNotifierProvider(projectId));
+    final notifier = ref.watch(createTaskNotifierProvider(projectId).notifier);
     return PageBase(
         title: AppStrings.createTask,
         child: Form(
@@ -112,17 +113,24 @@ class CreateTaskPage extends ConsumerWidget {
                               child: AppTextField(
                                 readOnly: true,
                                 controller: notifier.completedAtController,
+                                validator: (val) {
+                                  if (val?.trim().isEmpty ?? true) {
+                                    return 'Please enter task completion date';
+                                  }
+                                  return null;
+                                },
                                 label: AppStrings.completedAt,
                                 onTap: () async {
-                                  final selectedTime = await showDatePicker(
+                                  final time = await showDatePicker(
                                       context: context,
                                       initialDate: DateTime.now(),
                                       firstDate: DateTime(2023),
                                       lastDate: DateTime.now());
-                                  if (selectedTime != null) {
+                                  if (time != null) {
+                                    notifier.completedAt = time;
                                     notifier.completedAtController.text =
                                         DateFormat('dd  MMM  yyyy')
-                                            .format(selectedTime)
+                                            .format(time)
                                             .toString();
                                   }
                                 },
@@ -131,7 +139,7 @@ class CreateTaskPage extends ConsumerWidget {
                         ],
                       );
                     }),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     AppTextField(
@@ -149,7 +157,7 @@ class CreateTaskPage extends ConsumerWidget {
                 decoration: BoxDecoration(
                     color: Theme.of(context).cardColor,
                     borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(16))),
+                        const BorderRadius.vertical(top: Radius.circular(16))),
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
                 child: Row(
                   children: [
@@ -179,6 +187,23 @@ class CreateTaskPage extends ConsumerWidget {
                             if (notifier.formKey.currentState?.validate() ??
                                 false) {
                               notifier.formKey.currentState!.save();
+                              final status =
+                                  ref.read(newTaskStateNotifierProvider);
+                              ref
+                                  .read(
+                                      boardNotifierProvider(projectId).notifier)
+                                  .createTask(TaskModel(
+                                      name: notifier.title!,
+                                      status: status.toString(),
+                                      completedAt: status == TaskStatus.done
+                                          ? notifier.completedAt
+                                          : null,
+                                      intervals: status ==
+                                                  TaskStatus.inProgress &&
+                                              ref.read(
+                                                  startTimerNotifierProvider)
+                                          ? [DateTime.now()]
+                                          : []));
                             }
                           },
                           child: const Text(AppStrings.create)),

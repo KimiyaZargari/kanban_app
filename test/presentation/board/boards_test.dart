@@ -1,34 +1,33 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kanban_app/domain/board/i_board_repository.dart';
 import 'package:kanban_app/domain/board/task_model.dart';
-import 'package:kanban_app/domain/project/i_project_repository.dart';
-import 'package:kanban_app/domain/project/project_model.dart';
 import 'package:kanban_app/presentation/board/notifiers/board.dart';
-import 'package:kanban_app/presentation/project/notifiers/projects.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockBoardsRepository extends Mock implements IBoardRepository {}
 
+class FakeTask extends Fake implements TaskModel {}
+
 void main() {
   late BoardNotifier sut;
   late MockBoardsRepository mockBoardsRepository;
-
+  late Map<String, List<TaskModel>> boardData;
+  setUpAll(() {
+    registerFallbackValue(FakeTask());
+  });
 
   setUp(() {
     mockBoardsRepository = MockBoardsRepository();
     sut = BoardNotifier(repository: mockBoardsRepository, projectId: 1);
+    boardData = {
+      TaskStatus.toDo.toString(): [],
+      TaskStatus.inProgress.toString(): [],
+      TaskStatus.done.toString(): [],
+    };
   });
 
   group('get project\'s initial data and load page', () {
-    final boardData = {
-      'To Do': [
-        TaskModel(
-            name: 'test',
-            status: 'ToDo',
-            intervals: [],
-            completedAt: DateTime.now()),
-      ],
-    };
     void arrangeProjectsRepositoryReturnsListOfProjects() {
       when(() => mockBoardsRepository.getBoardData(any()))
           .thenAnswer((invocation) async => boardData);
@@ -47,6 +46,42 @@ void main() {
       await sut.getData();
       expect(sut.tasks, boardData);
       expect(sut.state, BoardState.loaded());
+    });
+  });
+  group('create task', () {
+    final toDoTask =
+        TaskModel(name: 'to do test', status: TaskStatus.toDo.toString());
+    final inProgressTaskWithoutTimer = TaskModel(
+      name: 'in progress test',
+      status: TaskStatus.inProgress.toString(),
+    );
+    final inProgressTaskWithTimer = TaskModel(
+        name: 'in progress test',
+        status: TaskStatus.inProgress.toString(),
+        intervals: []);
+    final doneTask = TaskModel(
+        name: 'done test',
+        status: TaskStatus.done.toString(),
+        completedAt: DateTime.now());
+
+    void arrangeProjectsRepositoryReturnsListOfProjects() {
+      when(() => mockBoardsRepository.createTask(any()))
+          .thenAnswer((invocation) {
+        return right(1);
+      });
+    }
+
+    test('indicates that notifier requests repository to create task',
+        () async {
+      arrangeProjectsRepositoryReturnsListOfProjects();
+      await sut.createTask(toDoTask);
+      verify(() => mockBoardsRepository.createTask(toDoTask)).called(1);
+    });
+    test('indicates that created (to do) task is added to board', () async {
+      arrangeProjectsRepositoryReturnsListOfProjects();
+      sut.tasks = boardData;
+      await sut.createTask(toDoTask);
+      expect(sut.tasks[TaskStatus.toDo]!.last, toDoTask);
     });
   });
 }

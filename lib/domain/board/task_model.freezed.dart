@@ -23,8 +23,8 @@ mixin _$TaskModel {
   int? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
-  List<DateTime> get intervals => throw _privateConstructorUsedError;
-  DateTime get completedAt => throw _privateConstructorUsedError;
+  List<DateTime>? get intervals => throw _privateConstructorUsedError;
+  DateTime? get completedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,8 +41,8 @@ abstract class $TaskModelCopyWith<$Res> {
       {int? id,
       String name,
       String status,
-      List<DateTime> intervals,
-      DateTime completedAt});
+      List<DateTime>? intervals,
+      DateTime? completedAt});
 }
 
 /// @nodoc
@@ -61,8 +61,8 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
     Object? id = freezed,
     Object? name = null,
     Object? status = null,
-    Object? intervals = null,
-    Object? completedAt = null,
+    Object? intervals = freezed,
+    Object? completedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -77,14 +77,14 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      intervals: null == intervals
+      intervals: freezed == intervals
           ? _value.intervals
           : intervals // ignore: cast_nullable_to_non_nullable
-              as List<DateTime>,
-      completedAt: null == completedAt
+              as List<DateTime>?,
+      completedAt: freezed == completedAt
           ? _value.completedAt
           : completedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -100,8 +100,8 @@ abstract class _$$_TaskModelCopyWith<$Res> implements $TaskModelCopyWith<$Res> {
       {int? id,
       String name,
       String status,
-      List<DateTime> intervals,
-      DateTime completedAt});
+      List<DateTime>? intervals,
+      DateTime? completedAt});
 }
 
 /// @nodoc
@@ -118,8 +118,8 @@ class __$$_TaskModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = null,
     Object? status = null,
-    Object? intervals = null,
-    Object? completedAt = null,
+    Object? intervals = freezed,
+    Object? completedAt = freezed,
   }) {
     return _then(_$_TaskModel(
       id: freezed == id
@@ -134,14 +134,14 @@ class __$$_TaskModelCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      intervals: null == intervals
+      intervals: freezed == intervals
           ? _value._intervals
           : intervals // ignore: cast_nullable_to_non_nullable
-              as List<DateTime>,
-      completedAt: null == completedAt
+              as List<DateTime>?,
+      completedAt: freezed == completedAt
           ? _value.completedAt
           : completedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ));
   }
 }
@@ -153,8 +153,8 @@ class _$_TaskModel extends _TaskModel {
       {this.id,
       required this.name,
       required this.status,
-      required final List<DateTime> intervals,
-      required this.completedAt})
+      final List<DateTime>? intervals,
+      this.completedAt})
       : _intervals = intervals,
         super._();
 
@@ -167,16 +167,18 @@ class _$_TaskModel extends _TaskModel {
   final String name;
   @override
   final String status;
-  final List<DateTime> _intervals;
+  final List<DateTime>? _intervals;
   @override
-  List<DateTime> get intervals {
+  List<DateTime>? get intervals {
+    final value = _intervals;
+    if (value == null) return null;
     if (_intervals is EqualUnmodifiableListView) return _intervals;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_intervals);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final DateTime completedAt;
+  final DateTime? completedAt;
 
   @override
   String toString() {
@@ -202,8 +204,8 @@ abstract class _TaskModel extends TaskModel {
       {final int? id,
       required final String name,
       required final String status,
-      required final List<DateTime> intervals,
-      required final DateTime completedAt}) = _$_TaskModel;
+      final List<DateTime>? intervals,
+      final DateTime? completedAt}) = _$_TaskModel;
   _TaskModel._() : super._();
 
   factory _TaskModel.fromJson(Map<String, dynamic> json) =
@@ -216,9 +218,9 @@ abstract class _TaskModel extends TaskModel {
   @override
   String get status;
   @override
-  List<DateTime> get intervals;
+  List<DateTime>? get intervals;
   @override
-  DateTime get completedAt;
+  DateTime? get completedAt;
   @override
   @JsonKey(ignore: true)
   _$$_TaskModelCopyWith<_$_TaskModel> get copyWith =>

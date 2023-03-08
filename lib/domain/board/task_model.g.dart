@@ -10,10 +10,12 @@ _$_TaskModel _$$_TaskModelFromJson(Map<String, dynamic> json) => _$_TaskModel(
       id: json['id'] as int?,
       name: json['name'] as String,
       status: json['status'] as String,
-      intervals: (json['intervals'] as List<dynamic>)
-          .map((e) => DateTime.parse(e as String))
+      intervals: (json['intervals'] as List<dynamic>?)
+          ?.map((e) => DateTime.parse(e as String))
           .toList(),
-      completedAt: DateTime.parse(json['completedAt'] as String),
+      completedAt: json['completedAt'] == null
+          ? null
+          : DateTime.parse(json['completedAt'] as String),
     );
 
 Map<String, dynamic> _$$_TaskModelToJson(_$_TaskModel instance) =>
@@ -21,6 +23,6 @@ Map<String, dynamic> _$$_TaskModelToJson(_$_TaskModel instance) =>
       'id': instance.id,
       'name': instance.name,
       'status': instance.status,
-      'intervals': instance.intervals.map((e) => e.toIso8601String()).toList(),
-      'completedAt': instance.completedAt.toIso8601String(),
+      'intervals': instance.intervals?.map((e) => e.toIso8601String()).toList(),
+      'completedAt': instance.completedAt?.toIso8601String(),
     };

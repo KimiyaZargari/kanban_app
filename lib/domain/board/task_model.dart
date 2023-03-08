@@ -13,8 +13,8 @@ class TaskModel with _$TaskModel {
     int? id,
     required String name,
     required String status,
-    required List<DateTime> intervals,
-    required DateTime completedAt,
+     List<DateTime>? intervals,
+     DateTime? completedAt,
   }) = _TaskModel;
 
   factory TaskModel.fromJson(Map<String, dynamic> json) =>
