@@ -10,6 +10,7 @@ import 'package:kanban_app/infrastructure/core/local_database.dart';
 import '../../../domain/board/i_board_repository.dart';
 
 part 'board.freezed.dart';
+
 part 'board_state.dart';
 
 final boardNotifierProvider = StateNotifierProvider.autoDispose
@@ -25,9 +26,11 @@ class BoardNotifier extends StateNotifier<BoardState> {
       : super(_Initial());
   late Map<String, List<TaskModel>> tasks;
 
-  createTask(TaskModel task) {
+  createTask(TaskModel task) async {
     CreateTask createTask = CreateTask(repository);
-    (createTask(task));
+    (await createTask(task)).fold((l) {}, (r) {
+      tasks[task.status]!.add(task);
+    });
   }
 
   getData() async {
@@ -53,9 +56,7 @@ class BoardNotifier extends StateNotifier<BoardState> {
   @override
   void dispose() {
     String baseName = '${DatabaseKeys.boardKey}_$projectId';
-    Hive.box<Map>('${baseName}_todo').close();
-    Hive.box<Map>('${baseName}_inProgress').close();
-    Hive.box<Map>('${baseName}_done').close();
+    Hive.box(baseName).close();
     super.dispose();
   }
 }

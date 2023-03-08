@@ -11,35 +11,13 @@ final boardRepositoryProvider =
     Provider.autoDispose((ref) => BoardRepository());
 
 class BoardRepository implements IBoardRepository {
-  late final Box<Map> toDoBox, inProgressBox, doneBox;
+  late final Box tasksBox;
 
   BoardRepository();
 
   Future<void> _openBox(int projectId) async {
-    final boxBaseName = "${DatabaseKeys.boardKey}_$projectId";
-    await Future.wait<void>([
-      _openToDo(boxBaseName),
-      _openInProgressBox(boxBaseName),
-      _openDoneBox(boxBaseName),
-    ]);
-
-    //   projectsBox.clear();
-  }
-
-  _openToDo(String boxName) async {
-    final name = '${boxName}_todo';
-    print(Hive.isBoxOpen(name));
-    if (!Hive.isBoxOpen(name)) toDoBox = await Hive.openBox(name);
-  }
-
-  _openInProgressBox(String boxName) async {
-    final name = '${boxName}_inProgress';
-    if (!Hive.isBoxOpen(name)) inProgressBox = await Hive.openBox(name);
-  }
-
-  _openDoneBox(String boxName) async {
-    final name = '${boxName}_done';
-    if (!Hive.isBoxOpen(name)) doneBox = await Hive.openBox(name);
+    final boxName = "${DatabaseKeys.boardKey}_$projectId";
+    if (!Hive.isBoxOpen(boxName)) tasksBox = await Hive.openBox(boxName);
   }
 
   @override
@@ -62,13 +40,16 @@ class BoardRepository implements IBoardRepository {
   @override
   Future<Map<String, List<TaskModel>>> getBoardData(int projectId) async {
     await _openBox(projectId);
-    List<TaskModel> todo, inProgress, done;
-    todo = List<TaskModel>.from(toDoBox.values
-        .map((e) => TaskModel.fromJson(jsonDecode(jsonEncode(e)))));
-    inProgress = List<TaskModel>.from(inProgressBox.values
-        .map((e) => TaskModel.fromJson(jsonDecode(jsonEncode(e)))));
-    done = List<TaskModel>.from(doneBox.values
-        .map((e) => TaskModel.fromJson(jsonDecode(jsonEncode(e)))));
-    return {'To Do': todo, 'In Progress': inProgress, 'Done': done};
+    Map<String, List<TaskModel>> tasks = {
+      TaskStatus.toDo.toString(): [],
+      TaskStatus.inProgress.toString(): [],
+      TaskStatus.done.toString(): [],
+    };
+
+    for (var element in tasksBox.values) {
+      final task = TaskModel.fromJson(jsonDecode(jsonEncode(element)));
+      tasks[task.status]!.add(task);
+    }
+    return tasks;
   }
 }

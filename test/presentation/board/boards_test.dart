@@ -49,8 +49,13 @@ void main() {
     });
   });
   group('create task', () {
+    setUp(() {
+      sut.tasks = boardData;
+    });
+
     final toDoTask =
         TaskModel(name: 'to do test', status: TaskStatus.toDo.toString());
+
     final inProgressTaskWithoutTimer = TaskModel(
       name: 'in progress test',
       status: TaskStatus.inProgress.toString(),
@@ -77,11 +82,10 @@ void main() {
       await sut.createTask(toDoTask);
       verify(() => mockBoardsRepository.createTask(toDoTask)).called(1);
     });
-    test('indicates that created (to do) task is added to board', () async {
+    test('indicates that created task is added to board', () async {
       arrangeProjectsRepositoryReturnsListOfProjects();
-      sut.tasks = boardData;
       await sut.createTask(toDoTask);
-      expect(sut.tasks[TaskStatus.toDo]!.last, toDoTask);
+      expect(sut.tasks[TaskStatus.toDo.toString()]!.last, toDoTask);
     });
   });
 }
