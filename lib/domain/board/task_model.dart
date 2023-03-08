@@ -48,6 +48,19 @@ class TaskModel with _$TaskModel {
   int get hashCode => Object.hash(runtimeType, id, title);
 }
 
+@freezed
+class EditTaskModel with _$EditTaskModel {
+  EditTaskModel._();
+
+  factory EditTaskModel({
+
+    required TaskModel oldTask,
+    required TaskModel newTask,
+
+  }) = _EditTaskModel;
+
+}
+
 enum TaskStatus {
   toDo,
   inProgress,

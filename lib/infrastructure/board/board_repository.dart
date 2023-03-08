@@ -29,14 +29,17 @@ class BoardRepository implements IBoardRepository {
       return left(Exception('This task already exists!'));
     }
     final id = await tasksBox.add(task.toJson());
-    final projectID = int.parse(tasksBox.name.characters.last);
-    print(projectID);
 
-    var project = Hive.box<Map>(DatabaseKeys.projectKey).get(projectID);
-    project![task.status]++;
-    Hive.box<Map>(DatabaseKeys.projectKey).put(projectID, project);
     await tasksBox.putAt(id, task.copyWith(id: id).toJson());
+    _updateTaskNumber(task.status, 1);
     return right(id);
+  }
+
+  _updateTaskNumber(String status, int val) {
+    final projectID = int.parse(tasksBox.name.characters.last);
+    var project = Hive.box<Map>(DatabaseKeys.projectKey).get(projectID);
+    project![status] += val;
+    Hive.box<Map>(DatabaseKeys.projectKey).put(projectID, project);
   }
 
   @override
@@ -46,8 +49,10 @@ class BoardRepository implements IBoardRepository {
   }
 
   @override
-  Future<void> editTask(TaskModel task) async {
-    await tasksBox.putAt(task.id!, task.toJson());
+  Future<void> editTask(EditTaskModel model) async {
+    await tasksBox.putAt(model.newTask.id!, model.newTask.toJson());
+    _updateTaskNumber(model.oldTask.status, -1);
+    _updateTaskNumber(model.newTask.status, 1);
   }
 
   @override

@@ -9,6 +9,7 @@ import 'package:kanban_app/presentation/board/widgets/done_dialog.dart';
 import 'package:kanban_app/presentation/board/widgets/in_progress_dialog.dart';
 import 'package:kanban_app/presentation/board/widgets/task_card.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
+import 'package:kanban_app/presentation/project/notifiers/projects.dart';
 import 'package:kanban_app/presentation/routes/router.gr.dart';
 
 import '../../core/widgets/loading_widget.dart';
@@ -62,7 +63,7 @@ class ProjectBoardPage extends ConsumerWidget {
                                     builder: (_) => const InProgressDialog()) ??
                                 false;
                           }
-                          notifier.takeTaskToInProgress(
+                          await notifier.takeTaskToInProgress(
                               task: notifier.tasks[notifier.tasks.keys
                                   .toList()[oldListIndex]]![oldItemIndex],
                               shouldStartTimer: shouldStartTimer,
@@ -83,17 +84,16 @@ class ProjectBoardPage extends ConsumerWidget {
                             completion = null;
                           }
                           if (confirm ?? oldListIndex == newListIndex) {
-                            notifier.takeTaskToDone(
+                            await notifier.takeTaskToDone(
                                 task: notifier.tasks[notifier.tasks.keys
                                     .toList()[oldListIndex]]![oldItemIndex],
                                 completion: completion,
                                 at: newItemIndex);
                           }
                         }
-                        // notifier.changeTaskStatus(
-                        //     task:
-                        //     to: notifier.tasks.keys.toList()[newListIndex],
-                        //     at: newItemIndex);
+                        ref
+                            .read(projectsNotifierProvider.notifier)
+                            .getProjects();
                       },
                       onItemDraggingChanged: (_, dragging) {
                         ref.read(dragTaskNotifierProvider.notifier).state =

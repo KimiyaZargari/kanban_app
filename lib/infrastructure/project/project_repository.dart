@@ -19,7 +19,7 @@ class ProjectRepository implements IProjectRepository {
     if (!Hive.isBoxOpen(DatabaseKeys.projectKey)) {
       projectsBox = await Hive.openBox(DatabaseKeys.projectKey);
     }
-       //projectsBox.clear();
+    //projectsBox.clear();
   }
 
   @override

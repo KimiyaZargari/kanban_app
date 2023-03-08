@@ -6,7 +6,7 @@ import 'package:kanban_app/domain/project/project_model.dart';
 import '../../domain/project/i_project_repository.dart';
 import '../core/usecase.dart';
 
-class EditTask implements UseCase<TaskModel, void> {
+class EditTask implements UseCase<EditTaskModel, void> {
   IBoardRepository repository;
 
   EditTask(this.repository);

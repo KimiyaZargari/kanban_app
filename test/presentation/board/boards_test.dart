@@ -7,7 +7,7 @@ import 'package:mocktail/mocktail.dart';
 
 class MockBoardsRepository extends Mock implements IBoardRepository {}
 
-class FakeTask extends Fake implements TaskModel {}
+class FakeTask extends Fake implements EditTaskModel {}
 
 void main() {
   late BoardNotifier sut;

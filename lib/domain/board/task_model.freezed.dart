@@ -226,3 +226,163 @@ abstract class _TaskModel extends TaskModel {
   _$$_TaskModelCopyWith<_$_TaskModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$EditTaskModel {
+  TaskModel get oldTask => throw _privateConstructorUsedError;
+  TaskModel get newTask => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $EditTaskModelCopyWith<EditTaskModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $EditTaskModelCopyWith<$Res> {
+  factory $EditTaskModelCopyWith(
+          EditTaskModel value, $Res Function(EditTaskModel) then) =
+      _$EditTaskModelCopyWithImpl<$Res, EditTaskModel>;
+  @useResult
+  $Res call({TaskModel oldTask, TaskModel newTask});
+
+  $TaskModelCopyWith<$Res> get oldTask;
+  $TaskModelCopyWith<$Res> get newTask;
+}
+
+/// @nodoc
+class _$EditTaskModelCopyWithImpl<$Res, $Val extends EditTaskModel>
+    implements $EditTaskModelCopyWith<$Res> {
+  _$EditTaskModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? oldTask = null,
+    Object? newTask = null,
+  }) {
+    return _then(_value.copyWith(
+      oldTask: null == oldTask
+          ? _value.oldTask
+          : oldTask // ignore: cast_nullable_to_non_nullable
+              as TaskModel,
+      newTask: null == newTask
+          ? _value.newTask
+          : newTask // ignore: cast_nullable_to_non_nullable
+              as TaskModel,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TaskModelCopyWith<$Res> get oldTask {
+    return $TaskModelCopyWith<$Res>(_value.oldTask, (value) {
+      return _then(_value.copyWith(oldTask: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TaskModelCopyWith<$Res> get newTask {
+    return $TaskModelCopyWith<$Res>(_value.newTask, (value) {
+      return _then(_value.copyWith(newTask: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_EditTaskModelCopyWith<$Res>
+    implements $EditTaskModelCopyWith<$Res> {
+  factory _$$_EditTaskModelCopyWith(
+          _$_EditTaskModel value, $Res Function(_$_EditTaskModel) then) =
+      __$$_EditTaskModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({TaskModel oldTask, TaskModel newTask});
+
+  @override
+  $TaskModelCopyWith<$Res> get oldTask;
+  @override
+  $TaskModelCopyWith<$Res> get newTask;
+}
+
+/// @nodoc
+class __$$_EditTaskModelCopyWithImpl<$Res>
+    extends _$EditTaskModelCopyWithImpl<$Res, _$_EditTaskModel>
+    implements _$$_EditTaskModelCopyWith<$Res> {
+  __$$_EditTaskModelCopyWithImpl(
+      _$_EditTaskModel _value, $Res Function(_$_EditTaskModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? oldTask = null,
+    Object? newTask = null,
+  }) {
+    return _then(_$_EditTaskModel(
+      oldTask: null == oldTask
+          ? _value.oldTask
+          : oldTask // ignore: cast_nullable_to_non_nullable
+              as TaskModel,
+      newTask: null == newTask
+          ? _value.newTask
+          : newTask // ignore: cast_nullable_to_non_nullable
+              as TaskModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_EditTaskModel extends _EditTaskModel {
+  _$_EditTaskModel({required this.oldTask, required this.newTask}) : super._();
+
+  @override
+  final TaskModel oldTask;
+  @override
+  final TaskModel newTask;
+
+  @override
+  String toString() {
+    return 'EditTaskModel(oldTask: $oldTask, newTask: $newTask)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_EditTaskModel &&
+            (identical(other.oldTask, oldTask) || other.oldTask == oldTask) &&
+            (identical(other.newTask, newTask) || other.newTask == newTask));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, oldTask, newTask);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_EditTaskModelCopyWith<_$_EditTaskModel> get copyWith =>
+      __$$_EditTaskModelCopyWithImpl<_$_EditTaskModel>(this, _$identity);
+}
+
+abstract class _EditTaskModel extends EditTaskModel {
+  factory _EditTaskModel(
+      {required final TaskModel oldTask,
+      required final TaskModel newTask}) = _$_EditTaskModel;
+  _EditTaskModel._() : super._();
+
+  @override
+  TaskModel get oldTask;
+  @override
+  TaskModel get newTask;
+  @override
+  @JsonKey(ignore: true)
+  _$$_EditTaskModelCopyWith<_$_EditTaskModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}

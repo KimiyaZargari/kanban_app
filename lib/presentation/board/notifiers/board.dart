@@ -45,18 +45,18 @@ class BoardNotifier extends StateNotifier<BoardState> {
   }
 
   takeTaskToInProgress(
-      {required TaskModel task, required bool shouldStartTimer, int? at}) {
+      {required TaskModel task, required bool shouldStartTimer, int? at}) async{
     tasks[task.status]?.remove(task);
     List<DateTime> intervals =
         task.intervals == null ? [] : [...task.intervals!];
 
     if (shouldStartTimer) intervals.add(DateTime.now());
     task = task.copyWith(intervals: intervals);
-    _changeTaskStatus(task: task, to: TaskStatus.inProgress.toString(), at: at);
+    await _changeTaskStatus(task: task, to: TaskStatus.inProgress.toString(), at: at);
   }
 
   takeTaskToDone(
-      {required TaskModel task, required DateTime? completion, int? at}) {
+      {required TaskModel task, required DateTime? completion, int? at}) async {
     tasks[task.status]?.remove(task);
     List<DateTime> intervals =
         task.intervals == null ? [] : [...task.intervals!];
@@ -66,19 +66,19 @@ class BoardNotifier extends StateNotifier<BoardState> {
       intervals: intervals,
     );
     if (completion != null) task = task.copyWith(completedAt: completion);
-    _changeTaskStatus(task: task, to: TaskStatus.done.toString(), at: at);
+    await _changeTaskStatus(task: task, to: TaskStatus.done.toString(), at: at);
   }
 
   _changeTaskStatus(
       {required TaskModel task, required String to, int? at}) async {
-    task = task.copyWith(status: to);
+    final newTask = task.copyWith(status: to);
     if (at == null || at > tasks[to]!.length) {
-      tasks[to]?.add(task);
+      tasks[to]?.add(newTask);
     } else {
-      tasks[to]?.insert(at, task);
+      tasks[to]?.insert(at, newTask);
     }
     EditTask editTask = EditTask(repository);
-    await editTask(task);
+    await editTask(EditTaskModel(oldTask: task, newTask: newTask));
     state = _Loaded();
   }
 
