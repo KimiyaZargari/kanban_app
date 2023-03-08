@@ -44,15 +44,25 @@ class BoardNotifier extends StateNotifier<BoardState> {
     state = _Loaded();
   }
 
+  takeTaskToToDo({required TaskModel task, int? at}) async {
+    tasks[task.status]?.remove(task);
+    List<DateTime> intervals = [];
+    task = task.copyWith(intervals: intervals, completedAt: null);
+    await _changeTaskStatus(task: task, to: TaskStatus.toDo.toString(), at: at);
+  }
+
   takeTaskToInProgress(
-      {required TaskModel task, required bool shouldStartTimer, int? at}) async{
+      {required TaskModel task,
+      required bool shouldStartTimer,
+      int? at}) async {
     tasks[task.status]?.remove(task);
     List<DateTime> intervals =
         task.intervals == null ? [] : [...task.intervals!];
 
     if (shouldStartTimer) intervals.add(DateTime.now());
     task = task.copyWith(intervals: intervals);
-    await _changeTaskStatus(task: task, to: TaskStatus.inProgress.toString(), at: at);
+    await _changeTaskStatus(
+        task: task, to: TaskStatus.inProgress.toString(), at: at);
   }
 
   takeTaskToDone(
