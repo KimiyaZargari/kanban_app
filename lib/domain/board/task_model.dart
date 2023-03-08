@@ -13,9 +13,24 @@ class TaskModel with _$TaskModel {
     int? id,
     required String title,
     required String status,
-     List<DateTime>? intervals,
-     DateTime? completedAt,
+    List<DateTime>? intervals,
+    DateTime? completedAt,
   }) = _TaskModel;
+
+  Duration? getDuration() {
+    if (intervals == null || intervals!.isEmpty) {
+      return null;
+    }
+    var res = Duration.zero;
+    for (int i = 0; i < intervals!.length; i++) {
+      if (i + 1 < intervals!.length) {
+        res += intervals![i + 1].difference(intervals![i]);
+      } else {
+        res += DateTime.now().difference(intervals![i]);
+      }
+    }
+    return res;
+  }
 
   factory TaskModel.fromJson(Map<String, dynamic> json) =>
       _$TaskModelFromJson(json);

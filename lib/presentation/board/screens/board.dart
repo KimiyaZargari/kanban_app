@@ -5,6 +5,7 @@ import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kanban_app/presentation/board/notifiers/board.dart';
+import 'package:kanban_app/presentation/board/widgets/in_progress_dialog.dart';
 import 'package:kanban_app/presentation/board/widgets/task_card.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
 import 'package:kanban_app/presentation/routes/router.gr.dart';
@@ -51,13 +52,21 @@ class ProjectBoardPage extends ConsumerWidget {
                       // crossAxisAlignment: CrossAxisAlignment.stretch,
                       axis: Axis.horizontal,
                       onItemReorder: (int oldItemIndex, int oldListIndex,
-                          int newItemIndex, int newListIndex) {
-                        notifier.changeTaskStatus(
-                            task: notifier.tasks[notifier.tasks.keys
-                                .toList()[oldListIndex]]![oldItemIndex],
-                            from: notifier.tasks.keys.toList()[oldListIndex],
-                            to: notifier.tasks.keys.toList()[newListIndex],
-                            at: newItemIndex);
+                          int newItemIndex, int newListIndex) async {
+                        if (newListIndex == 1) {
+                          final shouldStartTimer = await showDialog<bool>(
+                              context: context,
+                              builder: (_) => const InProgressDialog());
+                          notifier.takeTaskToInProgress(
+                              task: notifier.tasks[notifier.tasks.keys
+                                  .toList()[oldListIndex]]![oldItemIndex],
+                              shouldStartTimer: shouldStartTimer ?? false,
+                              at: newItemIndex);
+                        }
+                        // notifier.changeTaskStatus(
+                        //     task:
+                        //     to: notifier.tasks.keys.toList()[newListIndex],
+                        //     at: newItemIndex);
                       },
                       onItemDraggingChanged: (_, dragging) {
                         ref.read(dragTaskNotifierProvider.notifier).state =

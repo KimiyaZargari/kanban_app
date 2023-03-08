@@ -26,13 +26,23 @@ class TaskCard extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     task.title,
                     textAlign: TextAlign.justify,
                     style: Theme.of(context).textTheme.bodySmall,
                     softWrap: true,
-                  )
+                  ),
+                  if (task.status == TaskStatus.inProgress.toString())
+                    Row(
+                      children: [
+                        Text((task.getDuration() ?? Duration.zero)
+                            .toString()
+                            .substring(0, 7))
+                      ],
+                    )
                 ],
               ),
             ),

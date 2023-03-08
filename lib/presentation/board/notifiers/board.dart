@@ -29,7 +29,6 @@ class BoardNotifier extends StateNotifier<BoardState> {
   Future<bool> createTask(TaskModel task) async {
     CreateTask createTask = CreateTask(repository);
     return (await createTask(task)).fold((l) {
-      print('leftie');
       return false;
     }, (r) {
       tasks[task.status]!.add(task);
@@ -43,12 +42,20 @@ class BoardNotifier extends StateNotifier<BoardState> {
     state = _Loaded();
   }
 
-  changeTaskStatus(
-      {required TaskModel task,
-      required String from,
-      required String to,
-      int? at}) {
-    tasks[from]?.remove(task);
+  takeTaskToInProgress(
+      {required TaskModel task, required bool shouldStartTimer, int? at}) {
+    tasks[task.status]?.remove(task);
+    final intervals = task.intervals;
+    if (intervals == null) intervals == [];
+    if (shouldStartTimer) intervals!.add(DateTime.now());
+    task = task.copyWith(intervals: intervals);
+    _changeTaskStatus(task: task, to: TaskStatus.inProgress.toString());
+  }
+
+  takeTaskToDone() {}
+
+  _changeTaskStatus({required TaskModel task, required String to, int? at}) {
+    task = task.copyWith(status: to);
     if (at == null || at > tasks[to]!.length) {
       tasks[to]?.add(task);
     } else {
