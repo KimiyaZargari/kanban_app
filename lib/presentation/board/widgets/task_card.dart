@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:kanban_app/domain/board/task_model.dart';
 
 class TaskCard extends StatelessWidget {
@@ -37,12 +38,24 @@ class TaskCard extends StatelessWidget {
                   ),
                   if (task.status == TaskStatus.inProgress.toString())
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text((task.getDuration() ?? Duration.zero)
                             .toString()
-                            .substring(0, 7))
+                            .substring(0, 7)),
+                        if (task.intervals!.length.isOdd)
+                          IconButton(
+                              onPressed: () {}, icon: const Icon(Icons.pause))
+                        else
+                          IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.play_arrow_rounded))
                       ],
                     )
+                  else if (task.status == TaskStatus.done.toString())
+                    Text(DateFormat('dd MMM yyyy')
+                        .format(task.completedAt!)
+                        .toString())
                 ],
               ),
             ),

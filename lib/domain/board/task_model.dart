@@ -22,11 +22,14 @@ class TaskModel with _$TaskModel {
       return null;
     }
     var res = Duration.zero;
-    for (int i = 0; i < intervals!.length; i++) {
+
+    for (int i = 0; i < intervals!.length + 1; i += 2) {
       if (i + 1 < intervals!.length) {
         res += intervals![i + 1].difference(intervals![i]);
       } else {
-        res += DateTime.now().difference(intervals![i]);
+        if (i < intervals!.length) {
+          res += DateTime.now().difference(intervals![i]);
+        }
       }
     }
     return res;

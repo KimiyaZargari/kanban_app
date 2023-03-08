@@ -8,7 +8,7 @@ class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
   final bool isLast;
   final int? maxLines, maxLength;
-  final String label;
+  final String? label;
   final bool readOnly;
   final String? Function(String?)? validator;
 
@@ -19,7 +19,7 @@ class AppTextField extends StatelessWidget {
     this.maxLength,
     this.onTap,
     this.readOnly = false,
-    required this.label,
+    this.label,
     this.onSaved,
     this.isLast = false,
     this.textInputType = TextInputType.text,
@@ -31,13 +31,14 @@ class AppTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8, left: 8),
-          child: Text(
-            '$label:',
-            style: Theme.of(context).textTheme.labelMedium,
+        if (label != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8, left: 8),
+            child: Text(
+              '$label:',
+              style: Theme.of(context).textTheme.labelMedium,
+            ),
           ),
-        ),
         TextFormField(
           onTap: onTap,
 

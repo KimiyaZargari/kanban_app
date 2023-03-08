@@ -5,6 +5,7 @@ import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kanban_app/presentation/board/notifiers/board.dart';
+import 'package:kanban_app/presentation/board/widgets/done_dialog.dart';
 import 'package:kanban_app/presentation/board/widgets/in_progress_dialog.dart';
 import 'package:kanban_app/presentation/board/widgets/task_card.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
@@ -54,14 +55,40 @@ class ProjectBoardPage extends ConsumerWidget {
                       onItemReorder: (int oldItemIndex, int oldListIndex,
                           int newItemIndex, int newListIndex) async {
                         if (newListIndex == 1) {
-                          final shouldStartTimer = await showDialog<bool>(
-                              context: context,
-                              builder: (_) => const InProgressDialog());
+                          bool shouldStartTimer = false;
+                          if (newListIndex != oldListIndex) {
+                            shouldStartTimer = await showDialog<bool>(
+                                    context: context,
+                                    builder: (_) => const InProgressDialog()) ??
+                                false;
+                          }
                           notifier.takeTaskToInProgress(
                               task: notifier.tasks[notifier.tasks.keys
                                   .toList()[oldListIndex]]![oldItemIndex],
-                              shouldStartTimer: shouldStartTimer ?? false,
+                              shouldStartTimer: shouldStartTimer,
                               at: newItemIndex);
+                        } else if (newListIndex == 2) {
+                          DateTime? completion = DateTime.now();
+                          setCompletion(DateTime val) {
+                            completion = val;
+                          }
+
+                          bool? confirm;
+                          if (oldListIndex != newListIndex) {
+                            confirm = await showDialog<bool>(
+                                context: context,
+                                builder: (_) =>
+                                    DoneDialog((val) => setCompletion(val)));
+                          }else{
+                            completion = null;
+                          }
+                          if (confirm ?? oldListIndex == newListIndex) {
+                            notifier.takeTaskToDone(
+                                task: notifier.tasks[notifier.tasks.keys
+                                    .toList()[oldListIndex]]![oldItemIndex],
+                                completion: completion,
+                                at: newItemIndex);
+                          }
                         }
                         // notifier.changeTaskStatus(
                         //     task:
