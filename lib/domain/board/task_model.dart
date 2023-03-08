@@ -11,7 +11,7 @@ class TaskModel with _$TaskModel {
 
   factory TaskModel({
     int? id,
-    required String name,
+    required String title,
     required String status,
      List<DateTime>? intervals,
      DateTime? completedAt,
@@ -23,11 +23,11 @@ class TaskModel with _$TaskModel {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is TaskModel && other.id == id && other.name == name;
+    return other is TaskModel && other.id == id && other.title == title;
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, title);
 }
 
 enum TaskStatus {

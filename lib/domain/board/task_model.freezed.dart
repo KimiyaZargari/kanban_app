@@ -21,7 +21,7 @@ TaskModel _$TaskModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TaskModel {
   int? get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   List<DateTime>? get intervals => throw _privateConstructorUsedError;
   DateTime? get completedAt => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ abstract class $TaskModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      String name,
+      String title,
       String status,
       List<DateTime>? intervals,
       DateTime? completedAt});
@@ -59,7 +59,7 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = null,
+    Object? title = null,
     Object? status = null,
     Object? intervals = freezed,
     Object? completedAt = freezed,
@@ -69,9 +69,9 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
       status: null == status
           ? _value.status
@@ -98,7 +98,7 @@ abstract class _$$_TaskModelCopyWith<$Res> implements $TaskModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      String name,
+      String title,
       String status,
       List<DateTime>? intervals,
       DateTime? completedAt});
@@ -116,7 +116,7 @@ class __$$_TaskModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = null,
+    Object? title = null,
     Object? status = null,
     Object? intervals = freezed,
     Object? completedAt = freezed,
@@ -126,9 +126,9 @@ class __$$_TaskModelCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
       status: null == status
           ? _value.status
@@ -151,7 +151,7 @@ class __$$_TaskModelCopyWithImpl<$Res>
 class _$_TaskModel extends _TaskModel {
   _$_TaskModel(
       {this.id,
-      required this.name,
+      required this.title,
       required this.status,
       final List<DateTime>? intervals,
       this.completedAt})
@@ -164,7 +164,7 @@ class _$_TaskModel extends _TaskModel {
   @override
   final int? id;
   @override
-  final String name;
+  final String title;
   @override
   final String status;
   final List<DateTime>? _intervals;
@@ -182,7 +182,7 @@ class _$_TaskModel extends _TaskModel {
 
   @override
   String toString() {
-    return 'TaskModel(id: $id, name: $name, status: $status, intervals: $intervals, completedAt: $completedAt)';
+    return 'TaskModel(id: $id, title: $title, status: $status, intervals: $intervals, completedAt: $completedAt)';
   }
 
   @JsonKey(ignore: true)
@@ -202,7 +202,7 @@ class _$_TaskModel extends _TaskModel {
 abstract class _TaskModel extends TaskModel {
   factory _TaskModel(
       {final int? id,
-      required final String name,
+      required final String title,
       required final String status,
       final List<DateTime>? intervals,
       final DateTime? completedAt}) = _$_TaskModel;
@@ -214,7 +214,7 @@ abstract class _TaskModel extends TaskModel {
   @override
   int? get id;
   @override
-  String get name;
+  String get title;
   @override
   String get status;
   @override

@@ -54,26 +54,24 @@ void main() {
     });
 
     final toDoTask =
-        TaskModel(name: 'to do test', status: TaskStatus.toDo.toString());
+        TaskModel(title: 'to do test', status: TaskStatus.toDo.toString());
 
     final inProgressTaskWithoutTimer = TaskModel(
-      name: 'in progress test',
+      title: 'in progress test',
       status: TaskStatus.inProgress.toString(),
     );
     final inProgressTaskWithTimer = TaskModel(
-        name: 'in progress test',
+        title: 'in progress test',
         status: TaskStatus.inProgress.toString(),
         intervals: []);
     final doneTask = TaskModel(
-        name: 'done test',
+        title: 'done test',
         status: TaskStatus.done.toString(),
         completedAt: DateTime.now());
 
     void arrangeProjectsRepositoryReturnsListOfProjects() {
       when(() => mockBoardsRepository.createTask(any()))
-          .thenAnswer((invocation) {
-        return right(1);
-      });
+          .thenAnswer((invocation) async => right(unit));
     }
 
     test('indicates that notifier requests repository to create task',

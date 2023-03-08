@@ -25,10 +25,30 @@ class CreateTaskNotifier extends StateNotifier<CreateTaskState> {
   final int projectId;
   IBoardRepository repository;
   final TextEditingController completedAtController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
   String? title, description;
   final formKey = GlobalKey<FormState>();
   DateTime? completedAt;
 
   CreateTaskNotifier({required this.repository, required this.projectId})
       : super(_Initial());
+
+  _clearDataForNextTask() {
+    titleController.clear();
+    descriptionController.clear();
+  }
+
+  notifyCreatingTask() {
+    state = CreateTaskState.creating();
+  }
+
+  notifyTaskCreationFinished() {
+    state = CreateTaskState.created();
+  }
+
+  notifyCreateAnotherTask() {
+    _clearDataForNextTask();
+    state = CreateTaskState.initial();
+  }
 }

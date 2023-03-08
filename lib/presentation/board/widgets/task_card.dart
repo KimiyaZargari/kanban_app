@@ -28,7 +28,7 @@ class TaskCard extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    task.name,
+                    task.title,
                     textAlign: TextAlign.justify,
                     style: Theme.of(context).textTheme.bodySmall,
                     softWrap: true,

@@ -3,13 +3,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:kanban_app/presentation/board/notifiers/board.dart';
 import 'package:kanban_app/presentation/board/notifiers/create_task.dart';
+import 'package:kanban_app/presentation/board/widgets/select_task_status.dart';
 import 'package:kanban_app/presentation/core/config/strings.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
 import 'package:kanban_app/presentation/core/widgets/text_field.dart';
 import 'package:kanban_app/presentation/routes/router.gr.dart';
-import 'package:intl/intl.dart';
 import '../../../domain/board/task_model.dart';
 
 class CreateTaskPage extends ConsumerWidget {
@@ -26,6 +27,32 @@ class CreateTaskPage extends ConsumerWidget {
         .getInt('id');
     final state = ref.watch(createTaskNotifierProvider(projectId));
     final notifier = ref.watch(createTaskNotifierProvider(projectId).notifier);
+    ref.listen(createTaskNotifierProvider(projectId), (previous, next) {
+      if (previous == CreateTaskState.creating() &&
+          next == CreateTaskState.initial()) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          elevation: 10,
+          content: Container(
+            margin: EdgeInsets.all(10),
+            child: Text(
+              'Task Created Successfully',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
+          duration: const Duration(seconds: 3),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: BorderSide(color: Theme.of(context).cardColor)),
+          backgroundColor: Theme.of(context).primaryColor,
+        ));
+        // Fluttertoast.showToast(
+        //     msg: 'Task Successfully Created',
+        //     backgroundColor: Theme.of(context).primaryColor,
+        //     textColor: Theme.of(context).textTheme.bodyMedium!.color);
+      } else if (next == CreateTaskState.created()) {
+        context.router.pop();
+      }
+    });
     return PageBase(
         title: AppStrings.createTask,
         child: Form(
@@ -35,13 +62,14 @@ class CreateTaskPage extends ConsumerWidget {
               Expanded(
                 child: ListView(
                   shrinkWrap: true,
-                  padding: EdgeInsets.all(22),
+                  padding: const EdgeInsets.all(22),
                   children: [
                     AppTextField(
                       label: AppStrings.title,
                       onSaved: (val) {
                         notifier.title = val!;
                       },
+                      controller: notifier.titleController,
                       maxLength: 30,
                       validator: (val) {
                         if (val?.trim().isEmpty ?? true) {
@@ -58,92 +86,15 @@ class CreateTaskPage extends ConsumerWidget {
                         style: Theme.of(context).textTheme.labelMedium,
                       ),
                     ),
-                    Consumer(builder: (context, ref, _) {
-                      final taskStatus =
-                          ref.watch(newTaskStateNotifierProvider);
-                      final startTimer = ref.watch(startTimerNotifierProvider);
-                      final taskStatusNotifier =
-                          ref.watch(newTaskStateNotifierProvider.notifier);
-                      final startTimerNotifier =
-                          ref.watch(startTimerNotifierProvider.notifier);
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          DropdownMenu<TaskStatus>(
-                              initialSelection: taskStatus,
-                              onSelected: (val) {
-                                if (val != null) taskStatusNotifier.state = val;
-                              },
-                              dropdownMenuEntries: [
-                                DropdownMenuEntry(
-                                    leadingIcon:
-                                        Icon(TaskStatus.toDo.getIcon()),
-                                    value: TaskStatus.toDo,
-                                    label: TaskStatus.toDo.toString()),
-                                DropdownMenuEntry(
-                                    leadingIcon:
-                                        Icon(TaskStatus.inProgress.getIcon()),
-                                    value: TaskStatus.inProgress,
-                                    label: TaskStatus.inProgress.toString()),
-                                DropdownMenuEntry(
-                                    leadingIcon:
-                                        Icon(TaskStatus.done.getIcon()),
-                                    value: TaskStatus.done,
-                                    label: TaskStatus.done.toString()),
-                              ]),
-                          if (taskStatus == TaskStatus.inProgress)
-                            Row(
-                              children: [
-                                Checkbox(
-                                    value: startTimer,
-                                    onChanged: (val) {
-                                      if (val != null) {
-                                        startTimerNotifier.state = val;
-                                      }
-                                    }),
-                                Text(
-                                  'Start task timer',
-                                  style: Theme.of(context).textTheme.bodySmall,
-                                )
-                              ],
-                            )
-                          else if (taskStatus == TaskStatus.done)
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20.0),
-                              child: AppTextField(
-                                readOnly: true,
-                                controller: notifier.completedAtController,
-                                validator: (val) {
-                                  if (val?.trim().isEmpty ?? true) {
-                                    return 'Please enter task completion date';
-                                  }
-                                  return null;
-                                },
-                                label: AppStrings.completedAt,
-                                onTap: () async {
-                                  final time = await showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime(2023),
-                                      lastDate: DateTime.now());
-                                  if (time != null) {
-                                    notifier.completedAt = time;
-                                    notifier.completedAtController.text =
-                                        DateFormat('dd  MMM  yyyy')
-                                            .format(time)
-                                            .toString();
-                                  }
-                                },
-                              ),
-                            )
-                        ],
-                      );
-                    }),
+                    SelectTaskStatus(
+                        projectId: projectId,
+                        completedAtController: notifier.completedAtController),
                     const SizedBox(
                       height: 20,
                     ),
                     AppTextField(
                       maxLines: 5,
+                      controller: notifier.descriptionController,
                       label: AppStrings.description,
                       maxLength: 200,
                       onSaved: (val) {
@@ -159,57 +110,64 @@ class CreateTaskPage extends ConsumerWidget {
                     borderRadius:
                         const BorderRadius.vertical(top: Radius.circular(16))),
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-                child: Row(
-                  children: [
-                    Consumer(builder: (context, ref, _) {
-                      final createAnother =
-                          ref.watch(createAnotherTaskNotifierProvider);
-                      final createAnotherNotifier =
-                          ref.watch(createAnotherTaskNotifierProvider.notifier);
-                      return Checkbox(
+                child: Consumer(builder: (context, ref, _) {
+                  final createAnother =
+                      ref.watch(createAnotherTaskNotifierProvider);
+                  final createAnotherNotifier =
+                      ref.watch(createAnotherTaskNotifierProvider.notifier);
+                  return Row(
+                    children: [
+                      Checkbox(
                           value: createAnother,
                           onChanged: (val) {
                             if (val != null) {
                               createAnotherNotifier.state = val;
                             }
-                          });
-                    }),
-                    Text(
-                      AppStrings.createAnother,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    const SizedBox(
-                      width: 24,
-                    ),
-                    Expanded(
-                      child: ElevatedButton(
-                          onPressed: () {
-                            if (notifier.formKey.currentState?.validate() ??
-                                false) {
-                              notifier.formKey.currentState!.save();
-                              final status =
-                                  ref.read(newTaskStateNotifierProvider);
-                              ref
-                                  .read(
-                                      boardNotifierProvider(projectId).notifier)
-                                  .createTask(TaskModel(
-                                      name: notifier.title!,
-                                      status: status.toString(),
-                                      completedAt: status == TaskStatus.done
-                                          ? notifier.completedAt
-                                          : null,
-                                      intervals: status ==
-                                                  TaskStatus.inProgress &&
-                                              ref.read(
-                                                  startTimerNotifierProvider)
-                                          ? [DateTime.now()]
-                                          : []));
-                            }
-                          },
-                          child: const Text(AppStrings.create)),
-                    )
-                  ],
-                ),
+                          }),
+                      Text(
+                        AppStrings.createAnother,
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      const SizedBox(
+                        width: 24,
+                      ),
+                      Expanded(
+                        child: ElevatedButton(
+                            onPressed: () async {
+                              if (notifier.formKey.currentState?.validate() ??
+                                  false) {
+                                notifier.formKey.currentState!.save();
+                                final status =
+                                    ref.read(newTaskStateNotifierProvider);
+                                final task = TaskModel(
+                                    title: notifier.title!,
+                                    status: status.toString(),
+                                    completedAt: status == TaskStatus.done
+                                        ? notifier.completedAt
+                                        : null,
+                                    intervals: status ==
+                                                TaskStatus.inProgress &&
+                                            ref.read(startTimerNotifierProvider)
+                                        ? [DateTime.now()]
+                                        : []);
+                                notifier.notifyCreatingTask();
+                                if (await ref
+                                    .read(boardNotifierProvider(projectId)
+                                        .notifier)
+                                    .createTask(task)) {
+                                  if (createAnother) {
+                                    notifier.notifyCreateAnotherTask();
+                                  } else {
+                                    notifier.notifyTaskCreationFinished();
+                                  }
+                                }
+                              }
+                            },
+                            child: const Text(AppStrings.create)),
+                      )
+                    ],
+                  );
+                }),
               )
             ],
           ),

@@ -5,7 +5,7 @@ import 'package:kanban_app/domain/project/project_model.dart';
 abstract class IBoardRepository {
   Future<Map<String, List<TaskModel>>> getBoardData(int projectId);
 
-  Either<Exception, int> createTask(TaskModel task);
+  Future<Either<Exception, Unit>> createTask(TaskModel task);
 
   void editTask(TaskModel task);
 

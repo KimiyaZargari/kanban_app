@@ -26,10 +26,14 @@ class BoardNotifier extends StateNotifier<BoardState> {
       : super(_Initial());
   late Map<String, List<TaskModel>> tasks;
 
-  createTask(TaskModel task) async {
+  Future<bool> createTask(TaskModel task) async {
     CreateTask createTask = CreateTask(repository);
-    (await createTask(task)).fold((l) {}, (r) {
+    return (await createTask(task)).fold((l) {
+      print('leftie');
+      return false;
+    }, (r) {
       tasks[task.status]!.add(task);
+      return true;
     });
   }
 

@@ -28,14 +28,14 @@ class ProjectRepository implements IProjectRepository {
   }
 
   @override
-  Either<Exception, int> createProject(ProjectModel project) {
+  Future<Either<Exception, int>> createProject(ProjectModel project) async {
     if (projectsBox.values
         .where((element) => element['name'] == project.name)
         .isNotEmpty) {
-      return left(Exception('This project alredy exists'));
+      return left(Exception('This project already exists!'));
     }
     int projectID = projectsBox.isEmpty ? 1 : projectsBox.values.last['id'] + 1;
-    projectsBox.put(projectID, project.copyWith(id: projectID).toJson());
+    await projectsBox.put(projectID, project.copyWith(id: projectID).toJson());
     return right(projectID);
   }
 

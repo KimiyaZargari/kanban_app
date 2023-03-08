@@ -8,7 +8,7 @@ part of 'task_model.dart';
 
 _$_TaskModel _$$_TaskModelFromJson(Map<String, dynamic> json) => _$_TaskModel(
       id: json['id'] as int?,
-      name: json['name'] as String,
+      title: json['title'] as String,
       status: json['status'] as String,
       intervals: (json['intervals'] as List<dynamic>?)
           ?.map((e) => DateTime.parse(e as String))
@@ -21,7 +21,7 @@ _$_TaskModel _$$_TaskModelFromJson(Map<String, dynamic> json) => _$_TaskModel(
 Map<String, dynamic> _$$_TaskModelToJson(_$_TaskModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'name': instance.name,
+      'title': instance.title,
       'status': instance.status,
       'intervals': instance.intervals?.map((e) => e.toIso8601String()).toList(),
       'completedAt': instance.completedAt?.toIso8601String(),

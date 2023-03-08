@@ -6,7 +6,7 @@ abstract class IProjectRepository {
 
   Future<List<ProjectModel>> getProjects();
 
-  Either<Exception, int> createProject(ProjectModel project);
+  Future<Either<Exception, int>> createProject(ProjectModel project);
 
   void deleteProject(int projectId);
 

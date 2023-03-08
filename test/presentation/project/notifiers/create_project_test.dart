@@ -29,9 +29,9 @@ void main() {
         ProjectModel(name: 'duplicate test', inProgress: 0, todo: 0, done: 0);
     void arrangeProjectsRepositoryCreateProject() {
       when(() => mockProjectsRepository.createProject(newProject))
-          .thenAnswer((invocation) => right(1));
+          .thenAnswer((invocation) async => right(1));
       when(() => mockProjectsRepository.createProject(duplicateProject))
-          .thenAnswer((invocation) => Left(Exception('project duplicate')));
+          .thenAnswer((invocation) async=> left(Exception('project duplicate')));
     }
 
     test('create new project is called once from repository', () async {

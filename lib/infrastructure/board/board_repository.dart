@@ -21,8 +21,14 @@ class BoardRepository implements IBoardRepository {
   }
 
   @override
-  Either<Exception, int> createTask(TaskModel project) {
-    throw UnimplementedError();
+  Future<Either<Exception, Unit>> createTask(TaskModel task) async {
+    if (tasksBox.values
+        .where((element) => element['title'] == task.title)
+        .isNotEmpty) {
+      return left(Exception('This task already exists!'));
+    }
+    await tasksBox.add(task.toJson());
+    return right(unit);
   }
 
   @override
