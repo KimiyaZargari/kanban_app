@@ -3,7 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kanban_app/presentation/board/notifiers/create_task.dart';
+import 'package:kanban_app/presentation/board/notifiers/board.dart';
 import 'package:kanban_app/presentation/core/config/strings.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
 import 'package:kanban_app/presentation/core/widgets/text_field.dart';
@@ -23,8 +23,8 @@ class CreateTaskPage extends ConsumerWidget {
         .routeData
         .pathParams
         .getInt('id');
-    final state = ref.watch(createTaskNotifierProvider(projectId));
-    final notifier = ref.watch(createTaskNotifierProvider(projectId).notifier);
+    final state = ref.watch(boardNotifierProvider(projectId));
+    final notifier = ref.watch(boardNotifierProvider(projectId).notifier);
     return PageBase(
         title: AppStrings.createTask,
         child: Form(

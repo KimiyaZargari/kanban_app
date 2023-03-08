@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
@@ -17,15 +18,25 @@ final boardNotifierProvider = StateNotifierProvider.autoDispose
     .family<BoardNotifier, BoardState, int>((ref, projectId) => BoardNotifier(
         repository: ref.watch(boardRepositoryProvider), projectId: projectId));
 final dragTaskNotifierProvider = StateProvider<bool>((ref) => false);
+final newTaskStateNotifierProvider =
+    StateProvider<TaskStatus>((ref) => TaskStatus.toDo);
+final startTimerNotifierProvider = StateProvider<bool>((ref) => false);
+final createAnotherTaskNotifierProvider = StateProvider<bool>((ref) => false);
 
 class BoardNotifier extends StateNotifier<BoardState> {
   final int projectId;
   IBoardRepository repository;
+  final TextEditingController completedAtController = TextEditingController();
+  String? title, description;
+  final formKey = GlobalKey<FormState>();
 
   BoardNotifier({required this.repository, required this.projectId})
       : super(_Initial());
   late Map<String, List<TaskModel>> tasks;
 
+  createTask(){
+    
+  }
   getData() async {
     GetBoardData getBoardData = GetBoardData(repository);
     tasks = await getBoardData(projectId);
@@ -45,7 +56,6 @@ class BoardNotifier extends StateNotifier<BoardState> {
     }
     state = _Loaded();
   }
-
 
   @override
   void dispose() {

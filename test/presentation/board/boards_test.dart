@@ -9,14 +9,10 @@ import 'package:mocktail/mocktail.dart';
 
 class MockBoardsRepository extends Mock implements IBoardRepository {}
 
-class FakeProject extends Fake implements ProjectModel {}
-
 void main() {
   late BoardNotifier sut;
   late MockBoardsRepository mockBoardsRepository;
-  setUpAll(() {
-    registerFallbackValue(FakeProject());
-  });
+
 
   setUp(() {
     mockBoardsRepository = MockBoardsRepository();
