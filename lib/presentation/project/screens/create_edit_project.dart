@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kanban_app/domain/project/project_model.dart';
 import 'package:kanban_app/presentation/core/widgets/loading_widget.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
 import 'package:kanban_app/presentation/core/widgets/text_field.dart';
@@ -10,8 +11,10 @@ import 'package:kanban_app/presentation/routes/router.gr.dart';
 
 import '../../core/config/strings.dart';
 
-class CreateProjectPage extends ConsumerWidget {
-  const CreateProjectPage({Key? key}) : super(key: key);
+class CreateEditProjectPage extends ConsumerWidget {
+  final ProjectModel? project;
+
+  const CreateEditProjectPage({this.project, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, ref) {
@@ -28,7 +31,7 @@ class CreateProjectPage extends ConsumerWidget {
     });
 
     return PageBase(
-      title: AppStrings.createProject,
+      title: project == null ? AppStrings.createProject : AppStrings.editProject,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 22.0),
         child: Column(
@@ -43,6 +46,7 @@ class CreateProjectPage extends ConsumerWidget {
                     key: notifier.createProjectKey,
                     child: AppTextField(
                       label: 'Project Name:',
+                      initialValue: project?.name,
                       onSaved: (val) {
                         notifier.projectName = val!;
                       },
@@ -50,7 +54,6 @@ class CreateProjectPage extends ConsumerWidget {
                         if (val?.trim().isEmpty ?? true) {
                           return 'Please enter the project name!';
                         }
-
                         return null;
                       },
                       maxLength: 40,
@@ -75,7 +78,7 @@ class CreateProjectPage extends ConsumerWidget {
                     onPressed: () {
                       context.router.pop();
                     },
-                    child: const Text('cancel'),
+                    child: const Text(AppStrings.cancel),
                   ),
                 ),
                 const SizedBox(
@@ -94,7 +97,9 @@ class CreateProjectPage extends ConsumerWidget {
                       },
                       child: state.maybeWhen(
                         creating: () => const LoadingWidget(),
-                        orElse: () => const Text(AppStrings.create),
+                        orElse: () => Text(project == null
+                            ? AppStrings.create
+                            : AppStrings.save),
                       ),
                     ),
                   );

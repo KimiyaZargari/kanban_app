@@ -5,6 +5,7 @@ class AppStrings {
 
   static const projects = 'Projects';
   static const createProject = 'Create Project';
+  static const editProject = 'Edit Project';
   static const createTask = 'Create Task';
   static const editTask = 'Edit Task';
   static const create = 'Create';
@@ -15,4 +16,5 @@ class AppStrings {
   static const delete = 'Delete';
   static const edit = 'Edit';
   static const cancel = 'Cancel';
+  static const save = 'Save';
 }

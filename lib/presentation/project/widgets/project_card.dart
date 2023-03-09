@@ -18,20 +18,36 @@ class ProjectCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Dismissible(
-          confirmDismiss: (_) async {
-            return await showDialog(
-                context: context, builder: (_) => const DeleteProjectDialog());
+          confirmDismiss: (direction) async {
+            if (direction == DismissDirection.endToStart) {
+              return await showDialog(
+                  context: context,
+                  builder: (_) => const DeleteProjectDialog());
+            } else {
+              context.router.push( CreateEditProjectRoute(project: project));
+              return false;
+            }
           },
-          onDismissed: (_) {
-            deleteProject();
+          onDismissed: (direction) {
+            if (direction == DismissDirection.endToStart) {
+              deleteProject();
+            }
           },
           key: Key(project.name),
-          background: Card(
+          secondaryBackground: Card(
             color: Theme.of(context).colorScheme.error,
             child: Container(
               alignment: Alignment.centerRight,
               padding: const EdgeInsets.all(20),
               child: const Icon(Icons.delete),
+            ),
+          ),
+          background: Card(
+            color: Theme.of(context).colorScheme.tertiary,
+            child: Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.all(20),
+              child: const Icon(Icons.edit),
             ),
           ),
           child: InkWell(

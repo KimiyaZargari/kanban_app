@@ -20,7 +20,7 @@ class ProjectsPage extends ConsumerWidget {
         title: AppStrings.projects,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.router.push(const CreateProjectRoute());
+            context.router.push( CreateEditProjectRoute());
           },
           child: const Icon(Icons.add_rounded),
         ),

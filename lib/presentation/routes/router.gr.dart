@@ -12,13 +12,14 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i5;
-import 'package:flutter/cupertino.dart' as _i7;
+import 'package:flutter/cupertino.dart' as _i8;
 import 'package:flutter/material.dart' as _i6;
 
-import '../../domain/board/task_model.dart' as _i8;
+import '../../domain/board/task_model.dart' as _i9;
+import '../../domain/project/project_model.dart' as _i7;
 import '../board/screens/board.dart' as _i3;
 import '../board/screens/create_edit_task.dart' as _i4;
-import '../project/screens/create_project.dart' as _i2;
+import '../project/screens/create_edit_project.dart' as _i2;
 import '../project/screens/projects.dart' as _i1;
 
 class AppRouter extends _i5.RootStackRouter {
@@ -33,10 +34,15 @@ class AppRouter extends _i5.RootStackRouter {
         child: const _i1.ProjectsPage(),
       );
     },
-    CreateProjectRoute.name: (routeData) {
+    CreateEditProjectRoute.name: (routeData) {
+      final args = routeData.argsAs<CreateEditProjectRouteArgs>(
+          orElse: () => const CreateEditProjectRouteArgs());
       return _i5.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i2.CreateProjectPage(),
+        child: _i2.CreateEditProjectPage(
+          project: args.project,
+          key: args.key,
+        ),
       );
     },
     ProjectBoardRoute.name: (routeData) {
@@ -88,7 +94,7 @@ class AppRouter extends _i5.RootStackRouter {
           path: '/projects',
         ),
         _i5.RouteConfig(
-          CreateProjectRoute.name,
+          CreateEditProjectRoute.name,
           path: '/create_projects',
         ),
         _i5.RouteConfig(
@@ -115,15 +121,38 @@ class ProjectsRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.CreateProjectPage]
-class CreateProjectRoute extends _i5.PageRouteInfo<void> {
-  const CreateProjectRoute()
-      : super(
-          CreateProjectRoute.name,
+/// [_i2.CreateEditProjectPage]
+class CreateEditProjectRoute
+    extends _i5.PageRouteInfo<CreateEditProjectRouteArgs> {
+  CreateEditProjectRoute({
+    _i7.ProjectModel? project,
+    _i8.Key? key,
+  }) : super(
+          CreateEditProjectRoute.name,
           path: '/create_projects',
+          args: CreateEditProjectRouteArgs(
+            project: project,
+            key: key,
+          ),
         );
 
-  static const String name = 'CreateProjectRoute';
+  static const String name = 'CreateEditProjectRoute';
+}
+
+class CreateEditProjectRouteArgs {
+  const CreateEditProjectRouteArgs({
+    this.project,
+    this.key,
+  });
+
+  final _i7.ProjectModel? project;
+
+  final _i8.Key? key;
+
+  @override
+  String toString() {
+    return 'CreateEditProjectRouteArgs{project: $project, key: $key}';
+  }
 }
 
 /// generated route for
@@ -132,7 +161,7 @@ class ProjectBoardRoute extends _i5.PageRouteInfo<ProjectBoardRouteArgs> {
   ProjectBoardRoute({
     required int id,
     String projectName = 'Board',
-    _i7.Key? key,
+    _i8.Key? key,
   }) : super(
           ProjectBoardRoute.name,
           path: 'board/:id',
@@ -159,7 +188,7 @@ class ProjectBoardRouteArgs {
 
   final String projectName;
 
-  final _i7.Key? key;
+  final _i8.Key? key;
 
   @override
   String toString() {
@@ -172,8 +201,8 @@ class ProjectBoardRouteArgs {
 class CreateEditTaskRoute extends _i5.PageRouteInfo<CreateEditTaskRouteArgs> {
   CreateEditTaskRoute({
     required int projectId,
-    _i8.TaskModel? task,
-    _i7.Key? key,
+    _i9.TaskModel? task,
+    _i8.Key? key,
   }) : super(
           CreateEditTaskRoute.name,
           path: 'board/:id/create_task',
@@ -197,9 +226,9 @@ class CreateEditTaskRouteArgs {
 
   final int projectId;
 
-  final _i8.TaskModel? task;
+  final _i9.TaskModel? task;
 
-  final _i7.Key? key;
+  final _i8.Key? key;
 
   @override
   String toString() {

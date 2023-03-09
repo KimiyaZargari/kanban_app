@@ -8,7 +8,7 @@ class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
   final bool isLast;
   final int? maxLines, maxLength;
-  final String? label;
+  final String? label, initialValue;
   final bool readOnly;
   final String? Function(String?)? validator;
 
@@ -20,6 +20,7 @@ class AppTextField extends StatelessWidget {
     this.onTap,
     this.readOnly = false,
     this.label,
+    this.initialValue,
     this.onSaved,
     this.isLast = false,
     this.textInputType = TextInputType.text,
@@ -41,7 +42,7 @@ class AppTextField extends StatelessWidget {
           ),
         TextFormField(
           onTap: onTap,
-
+initialValue: initialValue,
           readOnly: readOnly,
           onSaved: onSaved,
           controller: controller,

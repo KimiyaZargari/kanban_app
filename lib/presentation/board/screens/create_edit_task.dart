@@ -184,7 +184,7 @@ class CreateEditTaskPage extends ConsumerWidget {
                                       }
                                     }
                                   },
-                                  child: const Text('Done'))
+                                  child: const Text(AppStrings.save))
                               : ElevatedButton(
                                   onPressed: () async {
                                     if (notifier.formKey.currentState

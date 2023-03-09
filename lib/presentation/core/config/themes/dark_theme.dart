@@ -68,11 +68,11 @@ ThemeData darkTheme() {
       scaffoldBackgroundColor: AppColors.darkBackground,
       textTheme: _textTheme(base.textTheme),
       primaryTextTheme: _primaryTextTheme(base.textTheme),
-
       primaryColor: AppColors.primaryColor,
       colorScheme: base.colorScheme.copyWith(
         primary: AppColors.primaryColor,
         error: AppColors.error,
+        tertiary: AppColors.green,
         secondary: AppColors.primaryColor2,
       ),
       cardColor: AppColors.darkCardColor,

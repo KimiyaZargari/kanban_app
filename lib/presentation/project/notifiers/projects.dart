@@ -32,19 +32,6 @@ class ProjectsNotifier extends StateNotifier<ProjectsState> {
     state = _Loaded();
   }
 
-  //return validation result
-
-  Future<bool> createProject(String name) async {
-    if (createProjectKey.currentState?.validate() ?? false) {
-      CreateProject createProject = CreateProject(repository);
-      await createProject(
-          ProjectModel(name: name, todo: 0, done: 0, inProgress: 0));
-      getProjects();
-      return true;
-    }
-    return false;
-  }
-
   deleteProject(int projectId) {
     DeleteProject deleteProject = DeleteProject(repository);
     deleteProject(projectId);

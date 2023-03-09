@@ -72,6 +72,7 @@ ThemeData lightTheme() {
       colorScheme: base.colorScheme.copyWith(
         primary: AppColors.primaryColor,
         error: AppColors.error,
+        tertiary: AppColors.green,
         secondary: AppColors.primaryColor2,
       ),
       cardColor: AppColors.lightCardColor,
