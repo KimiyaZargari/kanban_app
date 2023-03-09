@@ -21,6 +21,7 @@ mixin _$CreateEditTaskState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function() duplicateTask,
     required TResult Function(String message) networkError,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,6 +30,7 @@ mixin _$CreateEditTaskState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? loaded,
+    TResult? Function()? duplicateTask,
     TResult? Function(String message)? networkError,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,6 +39,7 @@ mixin _$CreateEditTaskState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? duplicateTask,
     TResult Function(String message)? networkError,
     required TResult orElse(),
   }) =>
@@ -46,6 +49,7 @@ mixin _$CreateEditTaskState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DuplicateTask value) duplicateTask,
     required TResult Function(_NetworkError value) networkError,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +58,7 @@ mixin _$CreateEditTaskState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_DuplicateTask value)? duplicateTask,
     TResult? Function(_NetworkError value)? networkError,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +67,7 @@ mixin _$CreateEditTaskState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DuplicateTask value)? duplicateTask,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) =>
@@ -126,6 +132,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function() duplicateTask,
     required TResult Function(String message) networkError,
   }) {
     return initial();
@@ -137,6 +144,7 @@ class _$_Initial implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? loaded,
+    TResult? Function()? duplicateTask,
     TResult? Function(String message)? networkError,
   }) {
     return initial?.call();
@@ -148,6 +156,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? duplicateTask,
     TResult Function(String message)? networkError,
     required TResult orElse(),
   }) {
@@ -163,6 +172,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DuplicateTask value) duplicateTask,
     required TResult Function(_NetworkError value) networkError,
   }) {
     return initial(this);
@@ -174,6 +184,7 @@ class _$_Initial implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_DuplicateTask value)? duplicateTask,
     TResult? Function(_NetworkError value)? networkError,
   }) {
     return initial?.call(this);
@@ -185,6 +196,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DuplicateTask value)? duplicateTask,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {
@@ -239,6 +251,7 @@ class _$_Loading implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function() duplicateTask,
     required TResult Function(String message) networkError,
   }) {
     return loading();
@@ -250,6 +263,7 @@ class _$_Loading implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? loaded,
+    TResult? Function()? duplicateTask,
     TResult? Function(String message)? networkError,
   }) {
     return loading?.call();
@@ -261,6 +275,7 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? duplicateTask,
     TResult Function(String message)? networkError,
     required TResult orElse(),
   }) {
@@ -276,6 +291,7 @@ class _$_Loading implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DuplicateTask value) duplicateTask,
     required TResult Function(_NetworkError value) networkError,
   }) {
     return loading(this);
@@ -287,6 +303,7 @@ class _$_Loading implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_DuplicateTask value)? duplicateTask,
     TResult? Function(_NetworkError value)? networkError,
   }) {
     return loading?.call(this);
@@ -298,6 +315,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DuplicateTask value)? duplicateTask,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {
@@ -351,6 +369,7 @@ class _$_Loaded implements _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function() duplicateTask,
     required TResult Function(String message) networkError,
   }) {
     return loaded();
@@ -362,6 +381,7 @@ class _$_Loaded implements _Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? loaded,
+    TResult? Function()? duplicateTask,
     TResult? Function(String message)? networkError,
   }) {
     return loaded?.call();
@@ -373,6 +393,7 @@ class _$_Loaded implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? duplicateTask,
     TResult Function(String message)? networkError,
     required TResult orElse(),
   }) {
@@ -388,6 +409,7 @@ class _$_Loaded implements _Loaded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DuplicateTask value) duplicateTask,
     required TResult Function(_NetworkError value) networkError,
   }) {
     return loaded(this);
@@ -399,6 +421,7 @@ class _$_Loaded implements _Loaded {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_DuplicateTask value)? duplicateTask,
     TResult? Function(_NetworkError value)? networkError,
   }) {
     return loaded?.call(this);
@@ -410,6 +433,7 @@ class _$_Loaded implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DuplicateTask value)? duplicateTask,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {
@@ -422,6 +446,126 @@ class _$_Loaded implements _Loaded {
 
 abstract class _Loaded implements CreateEditTaskState {
   factory _Loaded() = _$_Loaded;
+}
+
+/// @nodoc
+abstract class _$$_DuplicateTaskCopyWith<$Res> {
+  factory _$$_DuplicateTaskCopyWith(
+          _$_DuplicateTask value, $Res Function(_$_DuplicateTask) then) =
+      __$$_DuplicateTaskCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_DuplicateTaskCopyWithImpl<$Res>
+    extends _$CreateEditTaskStateCopyWithImpl<$Res, _$_DuplicateTask>
+    implements _$$_DuplicateTaskCopyWith<$Res> {
+  __$$_DuplicateTaskCopyWithImpl(
+      _$_DuplicateTask _value, $Res Function(_$_DuplicateTask) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_DuplicateTask implements _DuplicateTask {
+  _$_DuplicateTask();
+
+  @override
+  String toString() {
+    return 'CreateEditTaskState.duplicateTask()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_DuplicateTask);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() loaded,
+    required TResult Function() duplicateTask,
+    required TResult Function(String message) networkError,
+  }) {
+    return duplicateTask();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? loaded,
+    TResult? Function()? duplicateTask,
+    TResult? Function(String message)? networkError,
+  }) {
+    return duplicateTask?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loaded,
+    TResult Function()? duplicateTask,
+    TResult Function(String message)? networkError,
+    required TResult orElse(),
+  }) {
+    if (duplicateTask != null) {
+      return duplicateTask();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DuplicateTask value) duplicateTask,
+    required TResult Function(_NetworkError value) networkError,
+  }) {
+    return duplicateTask(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_DuplicateTask value)? duplicateTask,
+    TResult? Function(_NetworkError value)? networkError,
+  }) {
+    return duplicateTask?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_DuplicateTask value)? duplicateTask,
+    TResult Function(_NetworkError value)? networkError,
+    required TResult orElse(),
+  }) {
+    if (duplicateTask != null) {
+      return duplicateTask(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DuplicateTask implements CreateEditTaskState {
+  factory _DuplicateTask() = _$_DuplicateTask;
 }
 
 /// @nodoc
@@ -491,6 +635,7 @@ class _$_NetworkError implements _NetworkError {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function() duplicateTask,
     required TResult Function(String message) networkError,
   }) {
     return networkError(message);
@@ -502,6 +647,7 @@ class _$_NetworkError implements _NetworkError {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? loaded,
+    TResult? Function()? duplicateTask,
     TResult? Function(String message)? networkError,
   }) {
     return networkError?.call(message);
@@ -513,6 +659,7 @@ class _$_NetworkError implements _NetworkError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? duplicateTask,
     TResult Function(String message)? networkError,
     required TResult orElse(),
   }) {
@@ -528,6 +675,7 @@ class _$_NetworkError implements _NetworkError {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DuplicateTask value) duplicateTask,
     required TResult Function(_NetworkError value) networkError,
   }) {
     return networkError(this);
@@ -539,6 +687,7 @@ class _$_NetworkError implements _NetworkError {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_DuplicateTask value)? duplicateTask,
     TResult? Function(_NetworkError value)? networkError,
   }) {
     return networkError?.call(this);
@@ -550,6 +699,7 @@ class _$_NetworkError implements _NetworkError {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DuplicateTask value)? duplicateTask,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {

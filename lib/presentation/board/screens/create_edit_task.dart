@@ -26,7 +26,11 @@ class CreateEditTaskPage extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final state = ref.watch(createTaskNotifierProvider(projectId));
     final notifier = ref.watch(createTaskNotifierProvider(projectId).notifier);
-    if (task != null) notifier.setInitialData(task!);
+    state.maybeWhen(
+        orElse: () {},
+        initial: () {
+          if (task != null) notifier.setInitialData(task!);
+        });
     ref.listen(createTaskNotifierProvider(projectId), (previous, next) {
       if (previous == CreateEditTaskState.loading() &&
           next == CreateEditTaskState.initial()) {
@@ -55,11 +59,11 @@ class CreateEditTaskPage extends ConsumerWidget {
     });
     return WillPopScope(
       onWillPop: () {
-        ref.read(projectsNotifierProvider.notifier).getProjects();
+        ref.read(boardNotifierProvider(projectId).notifier).getData();
         return Future(() => true);
       },
       child: PageBase(
-          title: task == null? AppStrings.createTask: AppStrings.editTask,
+          title: task == null ? AppStrings.createTask : AppStrings.editTask,
           child: Form(
             key: notifier.formKey,
             child: Column(
@@ -83,6 +87,16 @@ class CreateEditTaskPage extends ConsumerWidget {
                           return null;
                         },
                       ),
+                      state.maybeWhen(
+                          orElse: () => Container(),
+                          duplicateTask: () => Padding(
+                                padding: const EdgeInsets.only(left: 12.0),
+                                child: Text(
+                                  'Task with this name already exists!',
+                                  style:
+                                      Theme.of(context).textTheme.displaySmall,
+                                ),
+                              )),
                       if (task == null)
                         SelectTaskStatus(
                             projectId: projectId,
@@ -152,22 +166,11 @@ class CreateEditTaskPage extends ConsumerWidget {
                                             ?.validate() ??
                                         false) {
                                       notifier.formKey.currentState!.save();
-                                      final status = ref.read(
-                                          selectedTaskStateNotifierProvider);
-                                      final editedTask = TaskModel(
-                                          title: notifier.title!,
-                                          status: status.toString(),
-                                          description:
-                                              notifier.description?.trim(),
-                                          completedAt: status == TaskStatus.done
-                                              ? notifier.completedAt
-                                              : null,
-                                          intervals: status ==
-                                                      TaskStatus.inProgress &&
-                                                  ref.read(
-                                                      startTimerNotifierProvider)
-                                              ? [DateTime.now()]
-                                              : []);
+                                      final editedTask = task!.copyWith(
+                                        title: notifier.title!,
+                                        description:
+                                            notifier.description?.trim(),
+                                      );
                                       notifier.notifyCreatingTask();
                                       if (await ref
                                           .read(boardNotifierProvider(projectId)
@@ -176,6 +179,8 @@ class CreateEditTaskPage extends ConsumerWidget {
                                               oldTask: task!,
                                               newTask: editedTask))) {
                                         notifier.notifyTaskCreationFinished();
+                                      } else {
+                                        notifier.notifyDuplicateTask();
                                       }
                                     }
                                   },
@@ -212,6 +217,8 @@ class CreateEditTaskPage extends ConsumerWidget {
                                         } else {
                                           notifier.notifyTaskCreationFinished();
                                         }
+                                      } else {
+                                        notifier.notifyDuplicateTask();
                                       }
                                     }
                                   },

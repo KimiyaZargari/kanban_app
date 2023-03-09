@@ -7,7 +7,7 @@ abstract class IBoardRepository {
 
   Future<Either<Exception, int>> createTask(TaskModel task);
 
-  Future<void> editTask(EditTaskModel task);
+  Future<Either<Exception, Unit>> editTask(EditTaskModel task);
 
   void deleteTask(int id);
 }

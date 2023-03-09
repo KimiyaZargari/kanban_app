@@ -50,12 +50,22 @@ class BoardRepository implements IBoardRepository {
   }
 
   @override
-  Future<void> editTask(EditTaskModel model) async {
+  Future<Either<Exception, Unit>> editTask(EditTaskModel model) async {
+    if (model.oldTask.title != model.newTask.title) {
+      if (tasksBox.values
+          .where((element) =>
+              element['title'] == model.newTask.title &&
+              element['id'] != model.newTask.id)
+          .isNotEmpty) {
+        return left(Exception('This task already exists!'));
+      }
+    }
     await tasksBox.put(model.newTask.id!, model.newTask.toJson());
     if (model.oldTask.status != model.newTask.status) {
       _updateTaskNumber(model.oldTask.status, -1);
       _updateTaskNumber(model.newTask.status, 1);
     }
+    return right(unit);
   }
 
   @override

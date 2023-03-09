@@ -53,6 +53,10 @@ class CreateTaskNotifier extends StateNotifier<CreateEditTaskState> {
     state = _Loaded();
   }
 
+  notifyDuplicateTask() {
+    state = _DuplicateTask();
+  }
+
   notifyCreateAnotherTask() {
     _clearDataForNextTask();
     state = _Initial();

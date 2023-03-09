@@ -129,7 +129,7 @@ class TaskDialog extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                         onPressed: () {
-                          context.router.push(CreateEditTaskRoute(
+                          context.router.popAndPush(CreateEditTaskRoute(
                               projectId: projectId, task: task));
                         },
                         child: const Text(AppStrings.edit)),

@@ -49,8 +49,6 @@ class BoardNotifier extends StateNotifier<BoardState> {
     await deleteTask(task.id!);
     tasks[task.status]!.remove(task);
     state = _Loaded();
-
-
   }
 
   getData() async {
@@ -93,8 +91,10 @@ class BoardNotifier extends StateNotifier<BoardState> {
     await _changeTaskStatus(
         task: task, to: TaskStatus.inProgress.toString(), at: at);
   }
-  editTask(EditTaskModel data){
 
+  Future<bool> editTask(EditTaskModel data) async {
+    EditTask editTask = EditTask(repository);
+    return (await editTask(data)).fold((l) => false, (r) => true);
   }
 
   takeTaskToDone(
@@ -126,7 +126,13 @@ class BoardNotifier extends StateNotifier<BoardState> {
 
   Future<bool> exportCsv(String name) async {
     final list = [
-      ['id', 'name', 'status', 'duration', 'completedAt']
+      [
+        'id',
+        'name',
+        'status',
+        'duration',
+        'completedAt',
+      ]
     ];
     for (List<TaskModel> tasks in tasks.values) {
       for (TaskModel task in tasks) {
@@ -139,8 +145,7 @@ class BoardNotifier extends StateNotifier<BoardState> {
     File csv = File(path);
     csv.writeAsString(res);
     await FlutterShare.shareFile(
-      title: 'Example share',
-      text: 'Example share text',
+      title: 'Project summery document',
       filePath: path,
     );
     return false;

@@ -10,12 +10,15 @@ class MockBoardsRepository extends Mock implements IBoardRepository {}
 
 class FakeTask extends Fake implements TaskModel {}
 
+class FakeEditTask extends Fake implements EditTaskModel {}
+
 void main() {
   late BoardNotifier sut;
   late MockBoardsRepository mockBoardsRepository;
   late Map<String, List<TaskModel>> boardData;
   setUpAll(() {
     registerFallbackValue(FakeTask());
+    registerFallbackValue(FakeEditTask());
   });
 
   setUp(() {
@@ -114,6 +117,28 @@ void main() {
       };
       await sut.deleteTask(toDoTask.copyWith(id: 1));
       expect(sut.tasks[TaskStatus.toDo.toString()], [toDoTask.copyWith(id: 2)]);
+    });
+  });
+  group('edit task', () {
+    setUp(() {
+      sut.tasks = boardData;
+    });
+
+    final oldTask =
+        TaskModel(id: 1, title: 'old', status: TaskStatus.toDo.toString());
+    final newTask =
+        TaskModel(id: 1, title: 'new', status: TaskStatus.toDo.toString());
+
+    void arrangeProjectsRepositoryReturnsListOfProjects() {
+      when(() => mockBoardsRepository.editTask(any()))
+          .thenAnswer((invocation) async => right(unit));
+    }
+
+    test('indicates that notifier requests repository to edit task', () async {
+      arrangeProjectsRepositoryReturnsListOfProjects();
+      final input = EditTaskModel(oldTask: oldTask, newTask: newTask);
+      await sut.editTask(input);
+      verify(() => mockBoardsRepository.editTask(input)).called(1);
     });
   });
 }
