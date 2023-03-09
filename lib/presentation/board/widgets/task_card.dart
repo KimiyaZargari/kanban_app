@@ -57,7 +57,7 @@ class TaskCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            (task.getDuration() ?? '00:00:00'),
+                            (task.getDuration() ?? '0 mins'),
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                           if (task.intervals!.length.isOdd)
