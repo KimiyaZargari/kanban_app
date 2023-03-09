@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:kanban_app/application/board/delete_task.dart';
+
 import '../../../domain/core/enums.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/cupertino.dart';
@@ -40,6 +42,15 @@ class BoardNotifier extends StateNotifier<BoardState> {
       tasks[task.status]!.add(task.copyWith(id: r));
       return true;
     });
+  }
+
+  deleteTask(TaskModel task) async {
+    DeleteTask deleteTask = DeleteTask(repository);
+    await deleteTask(task.id!);
+    tasks[task.status]!.remove(task);
+    state = _Loaded();
+
+
   }
 
   getData() async {

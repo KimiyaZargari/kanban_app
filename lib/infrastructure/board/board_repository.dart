@@ -32,7 +32,7 @@ class BoardRepository implements IBoardRepository {
     }
     final id = await tasksBox.add(task.toJson());
 
-    await tasksBox.putAt(id, task.copyWith(id: id).toJson());
+    await tasksBox.put(id, task.copyWith(id: id).toJson());
     _updateTaskNumber(task.status, 1);
     return right(id);
   }
@@ -45,9 +45,8 @@ class BoardRepository implements IBoardRepository {
   }
 
   @override
-  void deleteTask(int id) {
-    // TODO: implement deleteProject
-    throw UnimplementedError();
+  void deleteTask(int id) async {
+    await tasksBox.delete(id);
   }
 
   @override

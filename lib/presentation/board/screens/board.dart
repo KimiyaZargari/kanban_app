@@ -203,6 +203,8 @@ class ProjectBoardPage extends ConsumerWidget {
                                               notifier.tasks.length,
                                           logTime: () =>
                                               notifier.logTaskTime(task: task),
+                                          onDelete: () =>
+                                              notifier.deleteTask(task),
                                         )))
                                     .toList(),
                               )))

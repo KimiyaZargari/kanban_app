@@ -8,7 +8,7 @@ import 'package:mocktail/mocktail.dart';
 
 class MockBoardsRepository extends Mock implements IBoardRepository {}
 
-class FakeTask extends Fake implements EditTaskModel {}
+class FakeTask extends Fake implements TaskModel {}
 
 void main() {
   late BoardNotifier sut;
@@ -84,7 +84,36 @@ void main() {
     test('indicates that created task is added to board', () async {
       arrangeProjectsRepositoryReturnsListOfProjects();
       await sut.createTask(toDoTask);
-      expect(sut.tasks[TaskStatus.toDo.toString()]!.last, toDoTask);
+      expect(sut.tasks[TaskStatus.toDo.toString()]!.last,
+          toDoTask.copyWith(id: 1));
+    });
+  });
+  group('delete task', () {
+    setUp(() {
+      sut.tasks = boardData;
+    });
+
+    final toDoTask =
+        TaskModel(title: 'to do test', status: TaskStatus.toDo.toString());
+
+    void arrangeProjectsRepositoryReturnsListOfProjects() {
+      when(() => mockBoardsRepository.deleteTask(any()))
+          .thenAnswer((invocation) {});
+    }
+
+    test('indicates that notifier requests repository to delete task',
+        () async {
+      arrangeProjectsRepositoryReturnsListOfProjects();
+      await sut.deleteTask(toDoTask.copyWith(id: 1));
+      verify(() => mockBoardsRepository.deleteTask(1)).called(1);
+    });
+    test('indicates that task is removed from board after deletion', () async {
+      arrangeProjectsRepositoryReturnsListOfProjects();
+      sut.tasks = {
+        'To Do': [toDoTask.copyWith(id: 1), toDoTask.copyWith(id: 2)],
+      };
+      await sut.deleteTask(toDoTask.copyWith(id: 1));
+      expect(sut.tasks[TaskStatus.toDo.toString()], [toDoTask.copyWith(id: 2)]);
     });
   });
 }

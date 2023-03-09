@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:kanban_app/domain/board/task_model.dart';
+import 'package:kanban_app/presentation/board/widgets/delete_task_dialog.dart';
+import 'package:kanban_app/presentation/core/config/strings.dart';
 import '../../../domain/core/enums.dart';
 import '../notifiers/timer_notifier.dart';
 
 class TaskDialog extends StatelessWidget {
   final TaskModel task;
 
-  final Function() logTime;
+  final Function() logTime, onDelete;
 
-  const TaskDialog(this.task, {required this.logTime, Key? key})
+  const TaskDialog(this.task,
+      {required this.logTime, required this.onDelete, Key? key})
       : super(key: key);
 
   @override
@@ -25,14 +28,13 @@ class TaskDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only( bottom: 12),
+              padding: const EdgeInsets.only(bottom: 12),
               child: Text(
                 task.title,
                 style: Theme.of(context).textTheme.titleLarge,
                 softWrap: true,
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.only(bottom: 16),
               child: Row(
@@ -99,7 +101,35 @@ class TaskDialog extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0, bottom: 4),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                        onPressed: () async {
+                          await showDialog(
+                              context: context,
+                              builder: (_) => DeleteTaskDialog()).then((value) {
+                            if (value) {
+                              onDelete();
+                              context.router.pop();
+                            }
+                          });
+                        },
+                        child: const Text(AppStrings.delete)),
+                  ),
+                  SizedBox(
+                    width: 12,
+                  ),
+                  Expanded(
+                    child: ElevatedButton(
+                        onPressed: () {}, child: const Text(AppStrings.edit)),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),

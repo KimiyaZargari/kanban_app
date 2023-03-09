@@ -11,4 +11,7 @@ class AppStrings {
   static const description = 'Description';
   static const completedAt = 'Completed At';
   static const createAnother = 'Create another';
+  static const delete = 'Delete';
+  static const edit = 'Edit';
+  static const cancel = 'Cancel';
 }

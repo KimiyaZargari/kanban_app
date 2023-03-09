@@ -11,10 +11,13 @@ class TaskCard extends StatelessWidget {
   final TaskModel task;
 
   final double width;
-  final Function() logTime;
+  final Function() logTime, onDelete;
 
   const TaskCard(this.task,
-      {required this.logTime, required this.width, Key? key})
+      {required this.logTime,
+      required this.width,
+      required this.onDelete,
+      Key? key})
       : super(key: key);
 
   @override
@@ -26,6 +29,7 @@ class TaskCard extends StatelessWidget {
             builder: (_) => TaskDialog(
                   task,
                   logTime: logTime,
+                  onDelete: onDelete,
                 ));
       },
       child: Column(
