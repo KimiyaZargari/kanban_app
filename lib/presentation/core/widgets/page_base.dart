@@ -6,10 +6,12 @@ class PageBase extends StatelessWidget {
   final Widget child;
   final String title;
   final FloatingActionButton? floatingActionButton;
+  final Widget? extraActionButton;
 
   const PageBase(
       {required this.title,
       required this.child,
+      this.extraActionButton,
       this.floatingActionButton,
       Key? key})
       : super(key: key);
@@ -25,7 +27,7 @@ class PageBase extends StatelessWidget {
             Consumer(builder: (context, ref, _) {
               return IconButton(
                   onPressed: () {
-                    final themeNotifier = ref.read(themeProvider.notifier);final mode = ref.read(themeProvider);
+                    final themeNotifier = ref.read(themeProvider.notifier);
                     if (themeNotifier.state == ThemeMode.dark) {
                       themeNotifier.state = ThemeMode.light;
                     } else {
@@ -34,6 +36,7 @@ class PageBase extends StatelessWidget {
                   },
                   icon: const Icon(Icons.color_lens_rounded));
             }),
+            if (extraActionButton != null) extraActionButton!,
           ],
         ),
         body: child,
