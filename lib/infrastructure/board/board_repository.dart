@@ -8,6 +8,8 @@ import 'package:kanban_app/domain/board/i_board_repository.dart';
 import 'package:kanban_app/domain/board/task_model.dart';
 import 'package:kanban_app/infrastructure/core/local_database.dart';
 
+import '../../domain/core/enums.dart';
+
 final boardRepositoryProvider =
     Provider.autoDispose((ref) => BoardRepository());
 

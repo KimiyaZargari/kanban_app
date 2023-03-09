@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import '../../../domain/core/enums.dart';
 
-import '../../../domain/board/task_model.dart';
 import '../../core/config/strings.dart';
 import '../../core/widgets/text_field.dart';
 import '../notifiers/create_task.dart';

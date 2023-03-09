@@ -12,6 +12,7 @@ class TaskModel with _$TaskModel {
   factory TaskModel({
     int? id,
     required String title,
+      String? description,
     required String status,
     List<DateTime>? intervals,
     DateTime? completedAt,
@@ -81,31 +82,5 @@ class EditTaskModel with _$EditTaskModel {
   }) = _EditTaskModel;
 }
 
-enum TaskStatus {
-  toDo,
-  inProgress,
-  done;
 
-  @override
-  String toString() {
-    switch (this) {
-      case TaskStatus.toDo:
-        return 'To Do';
-      case TaskStatus.inProgress:
-        return 'In Progress';
-      case TaskStatus.done:
-        return 'Done';
-    }
-  }
 
-  IconData getIcon() {
-    switch (this) {
-      case TaskStatus.toDo:
-        return Icons.list_alt_rounded;
-      case TaskStatus.inProgress:
-        return Icons.timelapse_rounded;
-      case TaskStatus.done:
-        return Icons.done_rounded;
-    }
-  }
-}

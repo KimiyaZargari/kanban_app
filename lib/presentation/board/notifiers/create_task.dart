@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kanban_app/domain/board/task_model.dart';
 import 'package:kanban_app/infrastructure/board/board_repository.dart';
 
 import '../../../domain/board/i_board_repository.dart';
+import '../../../domain/core/enums.dart';
 
 part 'create_task.freezed.dart';
 

@@ -11,8 +11,8 @@ import 'package:kanban_app/presentation/core/config/strings.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
 import 'package:kanban_app/presentation/core/widgets/text_field.dart';
 import 'package:kanban_app/presentation/project/notifiers/projects.dart';
-import 'package:kanban_app/presentation/routes/router.gr.dart';
 import '../../../domain/board/task_model.dart';
+import '../../../domain/core/enums.dart';
 
 class CreateTaskPage extends ConsumerWidget {
   final int projectId;
@@ -145,6 +145,7 @@ class CreateTaskPage extends ConsumerWidget {
                                   final task = TaskModel(
                                       title: notifier.title!,
                                       status: status.toString(),
+                                      description: notifier.description?.trim(),
                                       completedAt: status == TaskStatus.done
                                           ? notifier.completedAt
                                           : null,

@@ -1,6 +1,5 @@
 import 'dart:io';
-import 'dart:typed_data';
-
+import '../../../domain/core/enums.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

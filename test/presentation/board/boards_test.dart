@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kanban_app/domain/board/i_board_repository.dart';
 import 'package:kanban_app/domain/board/task_model.dart';
+import 'package:kanban_app/domain/core/enums.dart';
 import 'package:kanban_app/presentation/board/notifiers/board.dart';
 import 'package:mocktail/mocktail.dart';
 

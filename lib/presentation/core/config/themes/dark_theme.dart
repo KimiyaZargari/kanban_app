@@ -24,7 +24,7 @@ TextTheme _textTheme(TextTheme base) {
 
     labelMedium: const TextStyle(
         fontSize: 16,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w300,
         color: AppColors.darkThemeTextColor),
 
     labelSmall: const TextStyle(
