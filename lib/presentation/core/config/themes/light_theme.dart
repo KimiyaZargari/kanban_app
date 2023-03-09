@@ -33,7 +33,7 @@ TextTheme _textTheme(TextTheme base) {
         color: AppColors.lightThemeTextColor),
     //error texts
     displaySmall: const TextStyle(
-        fontSize: 14, fontWeight: FontWeight.w300, color: AppColors.error),
+        fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.error),
     bodyLarge: const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w400,
@@ -84,6 +84,7 @@ ThemeData lightTheme() {
             MaterialStatePropertyAll<Color>(AppColors.lightCardColor),
       )),
       inputDecorationTheme: base.inputDecorationTheme.copyWith(
+        errorStyle: _textTheme(base.textTheme).displaySmall,
         focusedBorder: OutlineInputBorder(
           borderSide:
               const BorderSide(width: 1.5, color: AppColors.primaryColor),

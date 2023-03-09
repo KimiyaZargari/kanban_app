@@ -15,55 +15,59 @@ class ProjectCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-        confirmDismiss: (_) async {
-          return await showDialog(
-              context: context, builder: (_) => const DeleteProjectDialog());
-        },
-        onDismissed: (_) {
-          deleteProject();
-        },
-        key: Key(project.name),
-        background: Card(
-          color: Theme.of(context).colorScheme.error,
-          child: Container(
-            alignment: Alignment.centerRight,
-            padding: const EdgeInsets.all(20),
-            child: const Icon(Icons.delete),
-          ),
-        ),
-        child: InkWell(
-          onTap: () {
-            context.router.push(ProjectBoardRoute(id: project.id!));
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Dismissible(
+          confirmDismiss: (_) async {
+            return await showDialog(
+                context: context, builder: (_) => const DeleteProjectDialog());
           },
-          child: Card(
-              child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0),
-            child: Column(
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 22.0, vertical: 8),
-                  child: Text(
-                    project.name,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                ),
-                Divider(
-                  height: 40,
-                ),
-                Row(
-                  children: [
-                    _getTaskNumberColumn('To Do', project.todo, context),
-                    _getTaskNumberColumn(
-                        'In Progress', project.inProgress, context),
-                    _getTaskNumberColumn('Done', project.done, context)
-                  ],
-                )
-              ],
+          onDismissed: (_) {
+            deleteProject();
+          },
+
+          key: Key(project.name),
+          background: Card(
+            color: Theme.of(context).colorScheme.error,
+            child: Container(
+              alignment: Alignment.centerRight,
+              padding: const EdgeInsets.all(20),
+              child: const Icon(Icons.delete),
             ),
+          ),
+          child: InkWell(
+            onTap: () {
+              context.router.push(ProjectBoardRoute(id: project.id!));
+            },
+            child: Card(
+                child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12.0),
+              child: Column(
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 22.0, vertical: 8),
+                    child: Text(
+                      project.name,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                  Divider(
+                    height: 40,
+                  ),
+                  Row(
+                    children: [
+                      _getTaskNumberColumn('To Do', project.todo, context),
+                      _getTaskNumberColumn(
+                          'In Progress', project.inProgress, context),
+                      _getTaskNumberColumn('Done', project.done, context)
+                    ],
+                  )
+                ],
+              ),
+            )),
           )),
-        ));
+    );
   }
 
   Widget _getTaskNumberColumn(

@@ -29,34 +29,47 @@ class ProjectsPage extends ConsumerWidget {
             notifier.getProjects();
             return const LoadingWidget();
           },
-          loaded: () => Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(22, 30, 22, 0),
-                child: Text(
-                  notifier.projects.isNotEmpty
-                      ? 'Swipe left to delete project and right to edit!'
-                      : 'You have not created any projects yet!\nStart by clicking on the plus icon on the bottom right corner.',
-                  textAlign: TextAlign.center,
-                  style: notifier.projects.isNotEmpty
-                      ? Theme.of(context).textTheme.bodyMedium
-                      : Theme.of(context).textTheme.bodyLarge,
-                ),
-              ),
-              Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.all(22),
+          loaded: () => notifier.projects.isEmpty
+              ? Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.only(bottom: 100, right: 20, left: 20),
+                  child: Text(
+                    'You have not created any projects yet!\nStart by clicking on the plus icon on the bottom right corner.',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              : ListView(
+                  padding: const EdgeInsets.all(12),
                   children: notifier.projects
-                      .map((project) => ProjectCard(
-                            project,
-                            deleteProject: () =>
-                                notifier.deleteProject(project.id!),
+                      .asMap()
+                      .map((key, project) => MapEntry(
+                            key,
+                            Column(
+                              children: [
+                                if (key == 0)
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        22, 0, 22, 22),
+                                    child: Text(
+                                      'Swipe left to delete project and right to edit!',
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium,
+                                    ),
+                                  ),
+                                ProjectCard(
+                                  project,
+                                  deleteProject: () =>
+                                      notifier.deleteProject(project.id!),
+                                ),
+                              ],
+                            ),
                           ))
+                      .values
                       .toList(),
                 ),
-              ),
-            ],
-          ),
           orElse: () => const LoadingWidget(),
         ));
   }
