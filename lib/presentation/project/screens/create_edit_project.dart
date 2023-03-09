@@ -25,13 +25,18 @@ class CreateEditProjectPage extends ConsumerWidget {
           orElse: () {},
           created: (id) {
             ref.read(projectsNotifierProvider.notifier).getProjects();
-            context.router.popAndPush(
-                ProjectBoardRoute(id: id, projectName: notifier.projectName));
+            if (project == null) {
+              context.router.popAndPush(
+                  ProjectBoardRoute(id: id, projectName: notifier.projectName));
+            } else {
+              context.router.pop();
+            }
           });
     });
 
     return PageBase(
-      title: project == null ? AppStrings.createProject : AppStrings.editProject,
+      title:
+          project == null ? AppStrings.createProject : AppStrings.editProject,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 22.0),
         child: Column(
@@ -92,7 +97,11 @@ class CreateEditProjectPage extends ConsumerWidget {
                                 ?.validate() ??
                             false) {
                           notifier.createProjectKey.currentState!.save();
-                          notifier.createProject();
+                          if (project == null) {
+                            notifier.createProject();
+                          } else {
+                            notifier.editProject(project!);
+                          }
                         }
                       },
                       child: state.maybeWhen(

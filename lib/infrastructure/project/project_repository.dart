@@ -46,9 +46,16 @@ class ProjectRepository implements IProjectRepository {
   }
 
   @override
-  void editProject(ProjectModel projectModel) {
-    // TODO: implement editProject
-    throw UnimplementedError();
+  Future<Either<Exception, Unit>> editProject(ProjectModel projectModel) async {
+    if (projectsBox.values
+        .where((element) =>
+            element['name'] == projectModel.name &&
+            element['id'] != projectModel.id)
+        .isNotEmpty) {
+      return left(Exception('You already have a project with this name!'));
+    }
+    await projectsBox.put(projectModel.id!, projectModel.toJson());
+    return right(unit);
   }
 
   @override

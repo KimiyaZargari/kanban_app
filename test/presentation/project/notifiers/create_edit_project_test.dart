@@ -31,7 +31,8 @@ void main() {
       when(() => mockProjectsRepository.createProject(newProject))
           .thenAnswer((invocation) async => right(1));
       when(() => mockProjectsRepository.createProject(duplicateProject))
-          .thenAnswer((invocation) async=> left(Exception('project duplicate')));
+          .thenAnswer(
+              (invocation) async => left(Exception('project duplicate')));
     }
 
     test('create new project is called once from repository', () async {
@@ -56,6 +57,27 @@ void main() {
       sut.projectName = newProject.name;
       await sut.createProject();
       expect(sut.state, CreateProjectState.created(1));
+    });
+  });
+
+  group('edit project', () {
+    final project =
+        ProjectModel(id: 1, name: 'new test', inProgress: 0, todo: 0, done: 0);
+
+    void arrangeProjectsRepositoryEditProject() {
+      when(() => mockProjectsRepository.editProject(any()))
+          .thenAnswer((invocation) async {
+        return right(unit);
+      });
+    }
+
+    test('indicated that edit project is called once from repository with edited name',
+        () async {
+      arrangeProjectsRepositoryEditProject();
+      sut.projectName = 'new name';
+      await sut.editProject(project);
+      verify(() => mockProjectsRepository
+          .editProject(project.copyWith(name: sut.projectName))).called(1);
     });
   });
 }

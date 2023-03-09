@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kanban_app/application/project/create_project.dart';
+import 'package:kanban_app/application/project/edit_project.dart';
 import 'package:kanban_app/domain/project/i_project_repository.dart';
 import 'package:kanban_app/domain/project/project_model.dart';
 import 'package:kanban_app/infrastructure/project/project_repository.dart';
@@ -31,5 +32,14 @@ class CreateProjectNotifier extends StateNotifier<CreateProjectState> {
     (await createProject(
             ProjectModel(name: projectName, todo: 0, inProgress: 0, done: 0)))
         .fold((l) => state = _ProjectExists(), (r) => state = _Created(r));
+  }
+
+  editProject(ProjectModel oldProject) async {
+    final project = oldProject.copyWith(name: projectName);
+    print(project.name);
+    state = _Creating();
+    EditProject editProject = EditProject(repository);
+    (await editProject(project)).fold(
+        (l) => state = _ProjectExists(), (r) => state = _Created(project.id!));
   }
 }
