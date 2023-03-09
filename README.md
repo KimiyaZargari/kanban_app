@@ -1,6 +1,9 @@
 # kanban_app
 
-An app to create projects and track its tasks. In the first page you can view all your projects and
+An app to create projects and track its tasks.
+
+## Getting Started
+In the first page you can view all your projects and
 create new ones by clicking on the add button found in the bottom right corner of the page. You can
 delete and edit your projects by swiping on them in the projects page. By tapping on each project,
 you will be navigated to its board, consisting of tasks under three columns: 'To Do', 'In Progress',
@@ -16,5 +19,3 @@ which will also give you the option to delete and edit it. you can export and sh
 the current state of the board, by tapping on the 'download' icon on the top right corner of the
 page. Finally, you can change the app's theme by clicking on the palette icon found on the app bar (
 present in every page). Have fun tracking your tasks!
-
-## Getting Started
