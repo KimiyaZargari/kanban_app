@@ -33,7 +33,8 @@ class ProjectBoardPage extends ConsumerWidget {
         title: 'Board',
         extraActionButton: IconButton(
           onPressed: () {
-           // showDialog(context: context, builder: () =);
+            notifier.exportCsv('testing2');
+            // showDialog(context: context, builder: () =);
           },
           icon: const Icon(Icons.file_download_rounded),
         ),
@@ -49,182 +50,157 @@ class ProjectBoardPage extends ConsumerWidget {
               return const LoadingWidget();
             },
             orElse: () => const LoadingWidget(),
-            loaded: () =>
-                Column(
+            loaded: () => Column(
                   children: [
                     Expanded(
                         child: DragAndDropLists(
-                          //  disableScrolling: true,
-                          listWidth: MediaQuery
-                              .of(context)
-                              .size
-                              .width /
-                              notifier.tasks.length,
-                          listDraggingWidth: 0,
-                          listPadding: const EdgeInsets.all(0),
-                          // crossAxisAlignment: CrossAxisAlignment.stretch,
-                          axis: Axis.horizontal,
-                          onItemReorder: (int oldItemIndex, int oldListIndex,
-                              int newItemIndex, int newListIndex) async {
-                            if (newListIndex == 0) {
-                              bool? takeBack;
-                              if (newListIndex != oldListIndex) {
-                                takeBack = await showDialog<bool>(
+                      //  disableScrolling: true,
+                      listWidth: MediaQuery.of(context).size.width /
+                          notifier.tasks.length,
+                      listDraggingWidth: 0,
+                      listPadding: const EdgeInsets.all(0),
+                      // crossAxisAlignment: CrossAxisAlignment.stretch,
+                      axis: Axis.horizontal,
+                      onItemReorder: (int oldItemIndex, int oldListIndex,
+                          int newItemIndex, int newListIndex) async {
+                        if (newListIndex == 0) {
+                          bool? takeBack;
+                          if (newListIndex != oldListIndex) {
+                            takeBack = await showDialog<bool>(
                                     context: context,
                                     builder: (_) => const ToDoDialog()) ??
-                                    false;
-                              }
-                              if (takeBack ?? true)
-                                await notifier.takeTaskToToDo(
-                                    task: notifier.tasks[notifier.tasks.keys
-                                        .toList()[oldListIndex]]![oldItemIndex],
-                                    at: newItemIndex);
-                            } else if (newListIndex == 1) {
-                              bool shouldStartTimer = false;
-                              if (newListIndex != oldListIndex) {
-                                shouldStartTimer = await showDialog<bool>(
+                                false;
+                          }
+                          if (takeBack ?? true)
+                            await notifier.takeTaskToToDo(
+                                task: notifier.tasks[notifier.tasks.keys
+                                    .toList()[oldListIndex]]![oldItemIndex],
+                                at: newItemIndex);
+                        } else if (newListIndex == 1) {
+                          bool shouldStartTimer = false;
+                          if (newListIndex != oldListIndex) {
+                            shouldStartTimer = await showDialog<bool>(
                                     context: context,
                                     builder: (_) => const InProgressDialog()) ??
-                                    false;
-                              }
-                              await notifier.takeTaskToInProgress(
-                                  task: notifier.tasks[notifier.tasks.keys
-                                      .toList()[oldListIndex]]![oldItemIndex],
-                                  shouldStartTimer: shouldStartTimer,
-                                  at: newItemIndex);
-                            } else if (newListIndex == 2) {
-                              DateTime? completion = DateTime.now();
-                              setCompletion(DateTime val) {
-                                completion = val;
-                              }
+                                false;
+                          }
+                          await notifier.takeTaskToInProgress(
+                              task: notifier.tasks[notifier.tasks.keys
+                                  .toList()[oldListIndex]]![oldItemIndex],
+                              shouldStartTimer: shouldStartTimer,
+                              at: newItemIndex);
+                        } else if (newListIndex == 2) {
+                          DateTime? completion = DateTime.now();
+                          setCompletion(DateTime val) {
+                            completion = val;
+                          }
 
-                              bool? confirm;
-                              if (oldListIndex != newListIndex) {
-                                confirm = await showDialog<bool>(
-                                    context: context,
-                                    builder: (_) =>
-                                        DoneDialog((val) =>
-                                            setCompletion(val)));
-                              } else {
-                                completion = null;
-                              }
-                              if (confirm ?? oldListIndex == newListIndex) {
-                                await notifier.takeTaskToDone(
-                                    task: notifier.tasks[notifier.tasks.keys
-                                        .toList()[oldListIndex]]![oldItemIndex],
-                                    completion: completion,
-                                    at: newItemIndex);
-                              }
-                            }
-                            ref
-                                .read(projectsNotifierProvider.notifier)
-                                .getProjects();
-                          },
-                          onItemDraggingChanged: (_, dragging) {
-                            ref
-                                .read(dragTaskNotifierProvider.notifier)
-                                .state =
-                                dragging;
-                          },
-                          onListReorder: (int oldListIndex,
-                              int newListIndex) {},
-                          children: notifier.tasks
-                              .map((column, tasks) =>
-                              MapEntry(
-                                  column,
-                                  DragAndDropList(
-                                    header: Container(
-                                        color: Theme
-                                            .of(context)
-                                            .cardColor,
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 20),
-                                        alignment: Alignment.center,
-                                        child: Text(column,
-                                            textAlign: TextAlign.center)),
-                                    canDrag: false,
-                                    contentsWhenEmpty: Container(),
-                                    lastTarget:
+                          bool? confirm;
+                          if (oldListIndex != newListIndex) {
+                            confirm = await showDialog<bool>(
+                                context: context,
+                                builder: (_) =>
+                                    DoneDialog((val) => setCompletion(val)));
+                          } else {
+                            completion = null;
+                          }
+                          if (confirm ?? oldListIndex == newListIndex) {
+                            await notifier.takeTaskToDone(
+                                task: notifier.tasks[notifier.tasks.keys
+                                    .toList()[oldListIndex]]![oldItemIndex],
+                                completion: completion,
+                                at: newItemIndex);
+                          }
+                        }
+                        ref
+                            .read(projectsNotifierProvider.notifier)
+                            .getProjects();
+                      },
+                      onItemDraggingChanged: (_, dragging) {
+                        ref.read(dragTaskNotifierProvider.notifier).state =
+                            dragging;
+                      },
+                      onListReorder: (int oldListIndex, int newListIndex) {},
+                      children: notifier.tasks
+                          .map((column, tasks) => MapEntry(
+                              column,
+                              DragAndDropList(
+                                header: Container(
+                                    color: Theme.of(context).cardColor,
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 20),
+                                    alignment: Alignment.center,
+                                    child: Text(column,
+                                        textAlign: TextAlign.center)),
+                                canDrag: false,
+                                contentsWhenEmpty: Container(),
+                                lastTarget:
                                     Consumer(builder: (context, ref, _) {
-                                      final dragging =
+                                  final dragging =
                                       ref.watch(dragTaskNotifierProvider);
-                                      return Visibility(
-                                        visible: dragging,
-                                        child: DottedBorder(
-                                          borderType: BorderType.RRect,
-                                          dashPattern: [8, 8],
-                                          radius: Radius.circular(16),
-                                          color: Theme
-                                              .of(context)
-                                              .dividerColor,
-                                          borderPadding: EdgeInsets.all(2),
-                                          padding: EdgeInsets.all(4),
-                                          child: Container(
-                                            height:
-                                            MediaQuery
-                                                .of(context)
-                                                .size
-                                                .height -
+                                  return Visibility(
+                                    visible: dragging,
+                                    child: DottedBorder(
+                                      borderType: BorderType.RRect,
+                                      dashPattern: [8, 8],
+                                      radius: Radius.circular(16),
+                                      color: Theme.of(context).dividerColor,
+                                      borderPadding: EdgeInsets.all(2),
+                                      padding: EdgeInsets.all(4),
+                                      child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height -
                                                 200,
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                                    children: tasks
-                                        .map((task) =>
-                                        DragAndDropItem(
-                                            feedbackWidget: Container(
-                                              constraints: BoxConstraints(
-                                                minHeight: (MediaQuery
-                                                    .of(context)
-                                                    .size
-                                                    .width /
+                                      ),
+                                    ),
+                                  );
+                                }),
+                                children: tasks
+                                    .map((task) => DragAndDropItem(
+                                        feedbackWidget: Container(
+                                          constraints: BoxConstraints(
+                                            minHeight: (MediaQuery.of(context)
+                                                        .size
+                                                        .width /
                                                     3) /
-                                                    1.2,
-                                              ),
-                                              width: MediaQuery
-                                                  .of(context)
+                                                1.2,
+                                          ),
+                                          width: MediaQuery.of(context)
                                                   .size
                                                   .width /
-                                                  3,
-                                              child: Card(
-                                                color:
-                                                Theme
-                                                    .of(context)
-                                                    .primaryColor,
-                                                elevation: 2,
-                                                child: Padding(
-                                                  padding:
+                                              3,
+                                          child: Card(
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            elevation: 2,
+                                            child: Padding(
+                                              padding:
                                                   const EdgeInsets.all(8.0),
-                                                  child: Text(
-                                                    task.title,
-                                                    textAlign: TextAlign
-                                                        .justify,
-                                                    style: Theme
-                                                        .of(context)
-                                                        .textTheme
-                                                        .bodySmall,
-                                                    softWrap: true,
-                                                  ),
-                                                ),
+                                              child: Text(
+                                                task.title,
+                                                textAlign: TextAlign.justify,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodySmall,
+                                                softWrap: true,
                                               ),
                                             ),
-                                            child: TaskCard(
-                                              task,
-                                              width: MediaQuery
-                                                  .of(context)
+                                          ),
+                                        ),
+                                        child: TaskCard(
+                                          task,
+                                          width: MediaQuery.of(context)
                                                   .size
                                                   .width /
-                                                  notifier.tasks.length,
-                                              logTime: () =>
-                                                  notifier.logTaskTime(
-                                                      task: task),
-                                            )))
-                                        .toList(),
-                                  )))
-                              .values
-                              .toList(),
-                        )),
+                                              notifier.tasks.length,
+                                          logTime: () =>
+                                              notifier.logTaskTime(task: task),
+                                        )))
+                                    .toList(),
+                              )))
+                          .values
+                          .toList(),
+                    )),
                   ],
                 )));
   }

@@ -17,9 +17,9 @@ class TaskModel with _$TaskModel {
     DateTime? completedAt,
   }) = _TaskModel;
 
-  String? getDuration() {
+  Duration _getDuration() {
     if (intervals == null || intervals!.isEmpty) {
-      return null;
+      return Duration.zero;
     }
     var res = Duration.zero;
 
@@ -32,6 +32,11 @@ class TaskModel with _$TaskModel {
         }
       }
     }
+    return res;
+  }
+
+  String getDurationString() {
+    final res = _getDuration();
     int hours = res.inHours.remainder(24);
     int minutes = res.inMinutes.remainder(60);
     if (res.inDays != 0) {
@@ -41,6 +46,16 @@ class TaskModel with _$TaskModel {
     } else {
       return "${hours < 10 ? '0$hours' : hours}:${minutes < 10 ? '0$minutes' : minutes}";
     }
+  }
+
+  List<String> getCsvStringList() {
+    return [
+      id.toString(),
+      title,
+      status,
+      _getDuration().toString(),
+      completedAt.toString()
+    ];
   }
 
   factory TaskModel.fromJson(Map<String, dynamic> json) =>
