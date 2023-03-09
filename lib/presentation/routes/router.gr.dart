@@ -40,12 +40,20 @@ class AppRouter extends _i5.RootStackRouter {
     },
     ProjectBoardRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
+      final queryParams = routeData.queryParams;
       final args = routeData.argsAs<ProjectBoardRouteArgs>(
-          orElse: () => ProjectBoardRouteArgs(id: pathParams.getInt('id')));
+          orElse: () => ProjectBoardRouteArgs(
+                id: pathParams.getInt('id'),
+                projectName: queryParams.getString(
+                  'projectName',
+                  'Board',
+                ),
+              ));
       return _i5.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i3.ProjectBoardPage(
           id: args.id,
+          projectName: args.projectName,
           key: args.key,
         ),
       );
@@ -121,15 +129,18 @@ class CreateProjectRoute extends _i5.PageRouteInfo<void> {
 class ProjectBoardRoute extends _i5.PageRouteInfo<ProjectBoardRouteArgs> {
   ProjectBoardRoute({
     required int id,
+    String projectName = 'Board',
     _i7.Key? key,
   }) : super(
           ProjectBoardRoute.name,
           path: 'board/:id',
           args: ProjectBoardRouteArgs(
             id: id,
+            projectName: projectName,
             key: key,
           ),
           rawPathParams: {'id': id},
+          rawQueryParams: {'projectName': projectName},
         );
 
   static const String name = 'ProjectBoardRoute';
@@ -138,16 +149,19 @@ class ProjectBoardRoute extends _i5.PageRouteInfo<ProjectBoardRouteArgs> {
 class ProjectBoardRouteArgs {
   const ProjectBoardRouteArgs({
     required this.id,
+    this.projectName = 'Board',
     this.key,
   });
 
   final int id;
 
+  final String projectName;
+
   final _i7.Key? key;
 
   @override
   String toString() {
-    return 'ProjectBoardRouteArgs{id: $id, key: $key}';
+    return 'ProjectBoardRouteArgs{id: $id, projectName: $projectName, key: $key}';
   }
 }
 

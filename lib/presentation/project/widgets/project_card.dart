@@ -25,7 +25,6 @@ class ProjectCard extends StatelessWidget {
           onDismissed: (_) {
             deleteProject();
           },
-
           key: Key(project.name),
           background: Card(
             color: Theme.of(context).colorScheme.error,
@@ -37,7 +36,8 @@ class ProjectCard extends StatelessWidget {
           ),
           child: InkWell(
             onTap: () {
-              context.router.push(ProjectBoardRoute(id: project.id!));
+              context.router.push(ProjectBoardRoute(
+                  id: project.id!, projectName: project.name));
             },
             child: Card(
                 child: Padding(
@@ -45,10 +45,11 @@ class ProjectCard extends StatelessWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 22.0, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 22.0, vertical: 8),
                     child: Text(
                       project.name,
+                      textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),

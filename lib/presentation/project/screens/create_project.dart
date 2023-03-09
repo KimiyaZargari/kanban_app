@@ -22,7 +22,8 @@ class CreateProjectPage extends ConsumerWidget {
           orElse: () {},
           created: (id) {
             ref.read(projectsNotifierProvider.notifier).getProjects();
-            context.router.popAndPush(ProjectBoardRoute(id: id));
+            context.router.popAndPush(
+                ProjectBoardRoute(id: id, projectName: notifier.projectName));
           });
     });
 
@@ -49,8 +50,10 @@ class CreateProjectPage extends ConsumerWidget {
                         if (val?.trim().isEmpty ?? true) {
                           return 'Please enter the project name!';
                         }
+
                         return null;
                       },
+                      maxLength: 40,
                     ),
                   ),
                 ),

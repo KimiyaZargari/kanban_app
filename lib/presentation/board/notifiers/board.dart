@@ -79,7 +79,7 @@ class BoardNotifier extends StateNotifier<BoardState> {
         task.intervals == null ? [] : [...task.intervals!];
 
     if (shouldStartTimer) intervals.add(DateTime.now());
-    task = task.copyWith(intervals: intervals);
+    task = task.copyWith(intervals: intervals, completedAt: null);
     await _changeTaskStatus(
         task: task, to: TaskStatus.inProgress.toString(), at: at);
   }
@@ -120,9 +120,7 @@ class BoardNotifier extends StateNotifier<BoardState> {
         list.add(task.getCsvStringList());
       }
     }
-    print(list.length);
     final res = const ListToCsvConverter().convert(list);
-    print(res);
     final appDir = await getExternalStorageDirectory();
     final path = '${appDir!.absolute.path}/$name.csv';
     File csv = File(path);

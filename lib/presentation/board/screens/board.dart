@@ -16,7 +16,12 @@ import 'package:kanban_app/presentation/routes/router.gr.dart';
 import '../../core/widgets/loading_widget.dart';
 
 class ProjectBoardPage extends ConsumerWidget {
-  const ProjectBoardPage({@pathParam required int id, Key? key})
+  final String projectName;
+
+  const ProjectBoardPage(
+      {@pathParam required int id,
+      @queryParam this.projectName = 'Board',
+      Key? key})
       : super(key: key);
 
   @override
@@ -30,10 +35,13 @@ class ProjectBoardPage extends ConsumerWidget {
     final state = ref.watch(boardNotifierProvider(projectId));
     final notifier = ref.watch(boardNotifierProvider(projectId).notifier);
     return PageBase(
-        title: 'Board',
+        title: projectName,
         extraActionButton: IconButton(
           onPressed: () {
-            notifier.exportCsv('testing2');
+            final time =
+                DateTime.now().toString().substring(0, 16).replaceAll(' ', '-');
+            notifier.exportCsv("${projectName}_$time");
+
             // showDialog(context: context, builder: () =);
           },
           icon: const Icon(Icons.file_download_rounded),
