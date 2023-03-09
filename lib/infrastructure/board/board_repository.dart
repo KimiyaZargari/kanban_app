@@ -38,7 +38,9 @@ class BoardRepository implements IBoardRepository {
   }
 
   _updateTaskNumber(String status, int val) {
-    final projectID = int.parse(tasksBox.name.characters.last);
+    final projectID =
+        int.parse(tasksBox.name.substring(tasksBox.name.lastIndexOf('_') + 1));
+    print(tasksBox.name);
     var project = Hive.box<Map>(DatabaseKeys.projectKey).get(projectID);
     project![status] += val;
     Hive.box<Map>(DatabaseKeys.projectKey).put(projectID, project);
