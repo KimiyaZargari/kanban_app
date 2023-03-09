@@ -9,12 +9,13 @@ import 'package:kanban_app/presentation/board/notifiers/timer_notifier.dart';
 
 class TaskCard extends StatelessWidget {
   final TaskModel task;
-
+final int projectId;
   final double width;
   final Function() logTime, onDelete;
 
   const TaskCard(this.task,
       {required this.logTime,
+        required this.projectId,
       required this.width,
       required this.onDelete,
       Key? key})
@@ -28,6 +29,7 @@ class TaskCard extends StatelessWidget {
             context: context,
             builder: (_) => TaskDialog(
                   task,
+                  projectId: projectId,
                   logTime: logTime,
                   onDelete: onDelete,
                 ));

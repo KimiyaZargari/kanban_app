@@ -6,22 +6,33 @@ import '../../../domain/core/enums.dart';
 
 import '../../core/config/strings.dart';
 import '../../core/widgets/text_field.dart';
-import '../notifiers/create_task.dart';
+import '../notifiers/create_edit_task.dart';
 
 class SelectTaskStatus extends ConsumerWidget {
   final int projectId;
   final TextEditingController completedAtController;
-  const SelectTaskStatus({required this.projectId, required this.completedAtController ,Key? key}) : super(key: key);
+
+  const SelectTaskStatus(
+      {required this.projectId, required this.completedAtController, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, ref) {
-    final taskStatus = ref.watch(newTaskStateNotifierProvider);
+    final taskStatus = ref.watch(selectedTaskStateNotifierProvider);
     final startTimer = ref.watch(startTimerNotifierProvider);
-    final taskStatusNotifier = ref.watch(newTaskStateNotifierProvider.notifier);
+    final taskStatusNotifier =
+        ref.watch(selectedTaskStateNotifierProvider.notifier);
     final startTimerNotifier = ref.watch(startTimerNotifierProvider.notifier);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 20.0, bottom: 8, left: 8),
+          child: Text(
+            'Status:',
+            style: Theme.of(context).textTheme.labelMedium,
+          ),
+        ),
         DropdownMenu<TaskStatus>(
             initialSelection: taskStatus,
             onSelected: (val) {
@@ -71,7 +82,8 @@ class SelectTaskStatus extends ConsumerWidget {
               },
               label: AppStrings.completedAt,
               onTap: () async {
-                final createTaskNotifier = ref.read(createTaskNotifierProvider(projectId).notifier);
+                final createTaskNotifier =
+                    ref.read(createTaskNotifierProvider(projectId).notifier);
                 final time = await showDatePicker(
                     context: context,
                     initialDate: DateTime.now(),

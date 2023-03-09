@@ -15,8 +15,9 @@ import 'package:auto_route/auto_route.dart' as _i5;
 import 'package:flutter/cupertino.dart' as _i7;
 import 'package:flutter/material.dart' as _i6;
 
+import '../../domain/board/task_model.dart' as _i8;
 import '../board/screens/board.dart' as _i3;
-import '../board/screens/create_task.dart' as _i4;
+import '../board/screens/create_edit_task.dart' as _i4;
 import '../project/screens/create_project.dart' as _i2;
 import '../project/screens/projects.dart' as _i1;
 
@@ -58,15 +59,16 @@ class AppRouter extends _i5.RootStackRouter {
         ),
       );
     },
-    CreateTaskRoute.name: (routeData) {
+    CreateEditTaskRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<CreateTaskRouteArgs>(
+      final args = routeData.argsAs<CreateEditTaskRouteArgs>(
           orElse: () =>
-              CreateTaskRouteArgs(projectId: pathParams.getInt('id')));
+              CreateEditTaskRouteArgs(projectId: pathParams.getInt('id')));
       return _i5.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i4.CreateTaskPage(
+        child: _i4.CreateEditTaskPage(
           projectId: args.projectId,
+          task: args.task,
           key: args.key,
         ),
       );
@@ -94,7 +96,7 @@ class AppRouter extends _i5.RootStackRouter {
           path: 'board/:id',
         ),
         _i5.RouteConfig(
-          CreateTaskRoute.name,
+          CreateEditTaskRoute.name,
           path: 'board/:id/create_task',
         ),
       ];
@@ -166,36 +168,41 @@ class ProjectBoardRouteArgs {
 }
 
 /// generated route for
-/// [_i4.CreateTaskPage]
-class CreateTaskRoute extends _i5.PageRouteInfo<CreateTaskRouteArgs> {
-  CreateTaskRoute({
+/// [_i4.CreateEditTaskPage]
+class CreateEditTaskRoute extends _i5.PageRouteInfo<CreateEditTaskRouteArgs> {
+  CreateEditTaskRoute({
     required int projectId,
+    _i8.TaskModel? task,
     _i7.Key? key,
   }) : super(
-          CreateTaskRoute.name,
+          CreateEditTaskRoute.name,
           path: 'board/:id/create_task',
-          args: CreateTaskRouteArgs(
+          args: CreateEditTaskRouteArgs(
             projectId: projectId,
+            task: task,
             key: key,
           ),
           rawPathParams: {'id': projectId},
         );
 
-  static const String name = 'CreateTaskRoute';
+  static const String name = 'CreateEditTaskRoute';
 }
 
-class CreateTaskRouteArgs {
-  const CreateTaskRouteArgs({
+class CreateEditTaskRouteArgs {
+  const CreateEditTaskRouteArgs({
     required this.projectId,
+    this.task,
     this.key,
   });
 
   final int projectId;
 
+  final _i8.TaskModel? task;
+
   final _i7.Key? key;
 
   @override
   String toString() {
-    return 'CreateTaskRouteArgs{projectId: $projectId, key: $key}';
+    return 'CreateEditTaskRouteArgs{projectId: $projectId, task: $task, key: $key}';
   }
 }

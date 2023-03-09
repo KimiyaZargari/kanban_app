@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'create_task.dart';
+part of 'create_edit_task.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,28 +15,28 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$CreateTaskState {
+mixin _$CreateEditTaskState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() creating,
-    required TResult Function() created,
+    required TResult Function() loading,
+    required TResult Function() loaded,
     required TResult Function(String message) networkError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? creating,
-    TResult? Function()? created,
+    TResult? Function()? loading,
+    TResult? Function()? loaded,
     TResult? Function(String message)? networkError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? creating,
-    TResult Function()? created,
+    TResult Function()? loading,
+    TResult Function()? loaded,
     TResult Function(String message)? networkError,
     required TResult orElse(),
   }) =>
@@ -44,24 +44,24 @@ mixin _$CreateTaskState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Creating value) creating,
-    required TResult Function(_Created value) created,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
     required TResult Function(_NetworkError value) networkError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Creating value)? creating,
-    TResult? Function(_Created value)? created,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
     TResult? Function(_NetworkError value)? networkError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Creating value)? creating,
-    TResult Function(_Created value)? created,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) =>
@@ -69,16 +69,16 @@ mixin _$CreateTaskState {
 }
 
 /// @nodoc
-abstract class $CreateTaskStateCopyWith<$Res> {
-  factory $CreateTaskStateCopyWith(
-          CreateTaskState value, $Res Function(CreateTaskState) then) =
-      _$CreateTaskStateCopyWithImpl<$Res, CreateTaskState>;
+abstract class $CreateEditTaskStateCopyWith<$Res> {
+  factory $CreateEditTaskStateCopyWith(
+          CreateEditTaskState value, $Res Function(CreateEditTaskState) then) =
+      _$CreateEditTaskStateCopyWithImpl<$Res, CreateEditTaskState>;
 }
 
 /// @nodoc
-class _$CreateTaskStateCopyWithImpl<$Res, $Val extends CreateTaskState>
-    implements $CreateTaskStateCopyWith<$Res> {
-  _$CreateTaskStateCopyWithImpl(this._value, this._then);
+class _$CreateEditTaskStateCopyWithImpl<$Res, $Val extends CreateEditTaskState>
+    implements $CreateEditTaskStateCopyWith<$Res> {
+  _$CreateEditTaskStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -95,7 +95,7 @@ abstract class _$$_InitialCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitialCopyWithImpl<$Res>
-    extends _$CreateTaskStateCopyWithImpl<$Res, _$_Initial>
+    extends _$CreateEditTaskStateCopyWithImpl<$Res, _$_Initial>
     implements _$$_InitialCopyWith<$Res> {
   __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
       : super(_value, _then);
@@ -108,7 +108,7 @@ class _$_Initial implements _Initial {
 
   @override
   String toString() {
-    return 'CreateTaskState.initial()';
+    return 'CreateEditTaskState.initial()';
   }
 
   @override
@@ -124,8 +124,8 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() creating,
-    required TResult Function() created,
+    required TResult Function() loading,
+    required TResult Function() loaded,
     required TResult Function(String message) networkError,
   }) {
     return initial();
@@ -135,8 +135,8 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? creating,
-    TResult? Function()? created,
+    TResult? Function()? loading,
+    TResult? Function()? loaded,
     TResult? Function(String message)? networkError,
   }) {
     return initial?.call();
@@ -146,8 +146,8 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? creating,
-    TResult Function()? created,
+    TResult Function()? loading,
+    TResult Function()? loaded,
     TResult Function(String message)? networkError,
     required TResult orElse(),
   }) {
@@ -161,8 +161,8 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Creating value) creating,
-    required TResult Function(_Created value) created,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
     required TResult Function(_NetworkError value) networkError,
   }) {
     return initial(this);
@@ -172,8 +172,8 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Creating value)? creating,
-    TResult? Function(_Created value)? created,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
     TResult? Function(_NetworkError value)? networkError,
   }) {
     return initial?.call(this);
@@ -183,8 +183,8 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Creating value)? creating,
-    TResult Function(_Created value)? created,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {
@@ -195,40 +195,39 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements CreateTaskState {
+abstract class _Initial implements CreateEditTaskState {
   factory _Initial() = _$_Initial;
 }
 
 /// @nodoc
-abstract class _$$_CreatingCopyWith<$Res> {
-  factory _$$_CreatingCopyWith(
-          _$_Creating value, $Res Function(_$_Creating) then) =
-      __$$_CreatingCopyWithImpl<$Res>;
+abstract class _$$_LoadingCopyWith<$Res> {
+  factory _$$_LoadingCopyWith(
+          _$_Loading value, $Res Function(_$_Loading) then) =
+      __$$_LoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_CreatingCopyWithImpl<$Res>
-    extends _$CreateTaskStateCopyWithImpl<$Res, _$_Creating>
-    implements _$$_CreatingCopyWith<$Res> {
-  __$$_CreatingCopyWithImpl(
-      _$_Creating _value, $Res Function(_$_Creating) _then)
+class __$$_LoadingCopyWithImpl<$Res>
+    extends _$CreateEditTaskStateCopyWithImpl<$Res, _$_Loading>
+    implements _$$_LoadingCopyWith<$Res> {
+  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Creating implements _Creating {
-  _$_Creating();
+class _$_Loading implements _Loading {
+  _$_Loading();
 
   @override
   String toString() {
-    return 'CreateTaskState.creating()';
+    return 'CreateEditTaskState.loading()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Creating);
+        (other.runtimeType == runtimeType && other is _$_Loading);
   }
 
   @override
@@ -238,35 +237,35 @@ class _$_Creating implements _Creating {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() creating,
-    required TResult Function() created,
+    required TResult Function() loading,
+    required TResult Function() loaded,
     required TResult Function(String message) networkError,
   }) {
-    return creating();
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? creating,
-    TResult? Function()? created,
+    TResult? Function()? loading,
+    TResult? Function()? loaded,
     TResult? Function(String message)? networkError,
   }) {
-    return creating?.call();
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? creating,
-    TResult Function()? created,
+    TResult Function()? loading,
+    TResult Function()? loaded,
     TResult Function(String message)? networkError,
     required TResult orElse(),
   }) {
-    if (creating != null) {
-      return creating();
+    if (loading != null) {
+      return loading();
     }
     return orElse();
   }
@@ -275,73 +274,72 @@ class _$_Creating implements _Creating {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Creating value) creating,
-    required TResult Function(_Created value) created,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
     required TResult Function(_NetworkError value) networkError,
   }) {
-    return creating(this);
+    return loading(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Creating value)? creating,
-    TResult? Function(_Created value)? created,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
     TResult? Function(_NetworkError value)? networkError,
   }) {
-    return creating?.call(this);
+    return loading?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Creating value)? creating,
-    TResult Function(_Created value)? created,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {
-    if (creating != null) {
-      return creating(this);
+    if (loading != null) {
+      return loading(this);
     }
     return orElse();
   }
 }
 
-abstract class _Creating implements CreateTaskState {
-  factory _Creating() = _$_Creating;
+abstract class _Loading implements CreateEditTaskState {
+  factory _Loading() = _$_Loading;
 }
 
 /// @nodoc
-abstract class _$$_CreatedCopyWith<$Res> {
-  factory _$$_CreatedCopyWith(
-          _$_Created value, $Res Function(_$_Created) then) =
-      __$$_CreatedCopyWithImpl<$Res>;
+abstract class _$$_LoadedCopyWith<$Res> {
+  factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
+      __$$_LoadedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_CreatedCopyWithImpl<$Res>
-    extends _$CreateTaskStateCopyWithImpl<$Res, _$_Created>
-    implements _$$_CreatedCopyWith<$Res> {
-  __$$_CreatedCopyWithImpl(_$_Created _value, $Res Function(_$_Created) _then)
+class __$$_LoadedCopyWithImpl<$Res>
+    extends _$CreateEditTaskStateCopyWithImpl<$Res, _$_Loaded>
+    implements _$$_LoadedCopyWith<$Res> {
+  __$$_LoadedCopyWithImpl(_$_Loaded _value, $Res Function(_$_Loaded) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Created implements _Created {
-  _$_Created();
+class _$_Loaded implements _Loaded {
+  _$_Loaded();
 
   @override
   String toString() {
-    return 'CreateTaskState.created()';
+    return 'CreateEditTaskState.loaded()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Created);
+        (other.runtimeType == runtimeType && other is _$_Loaded);
   }
 
   @override
@@ -351,35 +349,35 @@ class _$_Created implements _Created {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() creating,
-    required TResult Function() created,
+    required TResult Function() loading,
+    required TResult Function() loaded,
     required TResult Function(String message) networkError,
   }) {
-    return created();
+    return loaded();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? creating,
-    TResult? Function()? created,
+    TResult? Function()? loading,
+    TResult? Function()? loaded,
     TResult? Function(String message)? networkError,
   }) {
-    return created?.call();
+    return loaded?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? creating,
-    TResult Function()? created,
+    TResult Function()? loading,
+    TResult Function()? loaded,
     TResult Function(String message)? networkError,
     required TResult orElse(),
   }) {
-    if (created != null) {
-      return created();
+    if (loaded != null) {
+      return loaded();
     }
     return orElse();
   }
@@ -388,42 +386,42 @@ class _$_Created implements _Created {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Creating value) creating,
-    required TResult Function(_Created value) created,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
     required TResult Function(_NetworkError value) networkError,
   }) {
-    return created(this);
+    return loaded(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Creating value)? creating,
-    TResult? Function(_Created value)? created,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
     TResult? Function(_NetworkError value)? networkError,
   }) {
-    return created?.call(this);
+    return loaded?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Creating value)? creating,
-    TResult Function(_Created value)? created,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {
-    if (created != null) {
-      return created(this);
+    if (loaded != null) {
+      return loaded(this);
     }
     return orElse();
   }
 }
 
-abstract class _Created implements CreateTaskState {
-  factory _Created() = _$_Created;
+abstract class _Loaded implements CreateEditTaskState {
+  factory _Loaded() = _$_Loaded;
 }
 
 /// @nodoc
@@ -437,7 +435,7 @@ abstract class _$$_NetworkErrorCopyWith<$Res> {
 
 /// @nodoc
 class __$$_NetworkErrorCopyWithImpl<$Res>
-    extends _$CreateTaskStateCopyWithImpl<$Res, _$_NetworkError>
+    extends _$CreateEditTaskStateCopyWithImpl<$Res, _$_NetworkError>
     implements _$$_NetworkErrorCopyWith<$Res> {
   __$$_NetworkErrorCopyWithImpl(
       _$_NetworkError _value, $Res Function(_$_NetworkError) _then)
@@ -467,7 +465,7 @@ class _$_NetworkError implements _NetworkError {
 
   @override
   String toString() {
-    return 'CreateTaskState.networkError(message: $message)';
+    return 'CreateEditTaskState.networkError(message: $message)';
   }
 
   @override
@@ -491,8 +489,8 @@ class _$_NetworkError implements _NetworkError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() creating,
-    required TResult Function() created,
+    required TResult Function() loading,
+    required TResult Function() loaded,
     required TResult Function(String message) networkError,
   }) {
     return networkError(message);
@@ -502,8 +500,8 @@ class _$_NetworkError implements _NetworkError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? creating,
-    TResult? Function()? created,
+    TResult? Function()? loading,
+    TResult? Function()? loaded,
     TResult? Function(String message)? networkError,
   }) {
     return networkError?.call(message);
@@ -513,8 +511,8 @@ class _$_NetworkError implements _NetworkError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? creating,
-    TResult Function()? created,
+    TResult Function()? loading,
+    TResult Function()? loaded,
     TResult Function(String message)? networkError,
     required TResult orElse(),
   }) {
@@ -528,8 +526,8 @@ class _$_NetworkError implements _NetworkError {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Creating value) creating,
-    required TResult Function(_Created value) created,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
     required TResult Function(_NetworkError value) networkError,
   }) {
     return networkError(this);
@@ -539,8 +537,8 @@ class _$_NetworkError implements _NetworkError {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Creating value)? creating,
-    TResult? Function(_Created value)? created,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
     TResult? Function(_NetworkError value)? networkError,
   }) {
     return networkError?.call(this);
@@ -550,8 +548,8 @@ class _$_NetworkError implements _NetworkError {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Creating value)? creating,
-    TResult Function(_Created value)? created,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
     TResult Function(_NetworkError value)? networkError,
     required TResult orElse(),
   }) {
@@ -562,7 +560,7 @@ class _$_NetworkError implements _NetworkError {
   }
 }
 
-abstract class _NetworkError implements CreateTaskState {
+abstract class _NetworkError implements CreateEditTaskState {
   factory _NetworkError(final String message) = _$_NetworkError;
 
   String get message;

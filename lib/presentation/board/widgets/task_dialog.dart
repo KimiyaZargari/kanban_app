@@ -5,16 +5,21 @@ import 'package:intl/intl.dart';
 import 'package:kanban_app/domain/board/task_model.dart';
 import 'package:kanban_app/presentation/board/widgets/delete_task_dialog.dart';
 import 'package:kanban_app/presentation/core/config/strings.dart';
+import 'package:kanban_app/presentation/routes/router.gr.dart';
 import '../../../domain/core/enums.dart';
 import '../notifiers/timer_notifier.dart';
 
 class TaskDialog extends StatelessWidget {
   final TaskModel task;
+  final int projectId;
 
   final Function() logTime, onDelete;
 
   const TaskDialog(this.task,
-      {required this.logTime, required this.onDelete, Key? key})
+      {required this.logTime,
+      required this.projectId,
+      required this.onDelete,
+      Key? key})
       : super(key: key);
 
   @override
@@ -120,12 +125,14 @@ class TaskDialog extends StatelessWidget {
                         },
                         child: const Text(AppStrings.delete)),
                   ),
-                  SizedBox(
-                    width: 12,
-                  ),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: ElevatedButton(
-                        onPressed: () {}, child: const Text(AppStrings.edit)),
+                        onPressed: () {
+                          context.router.push(CreateEditTaskRoute(
+                              projectId: projectId, task: task));
+                        },
+                        child: const Text(AppStrings.edit)),
                   ),
                 ],
               ),

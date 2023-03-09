@@ -48,7 +48,7 @@ class ProjectBoardPage extends ConsumerWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.router.push(CreateTaskRoute(projectId: projectId));
+            context.router.push(CreateEditTaskRoute(projectId: projectId));
           },
           child: const Icon(Icons.add_rounded),
         ),
@@ -197,6 +197,7 @@ class ProjectBoardPage extends ConsumerWidget {
                                         ),
                                         child: TaskCard(
                                           task,
+                                          projectId: projectId,
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width /

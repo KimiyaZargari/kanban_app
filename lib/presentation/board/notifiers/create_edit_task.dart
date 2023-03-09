@@ -1,27 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kanban_app/domain/board/task_model.dart';
 import 'package:kanban_app/infrastructure/board/board_repository.dart';
 
 import '../../../domain/board/i_board_repository.dart';
 import '../../../domain/core/enums.dart';
 
-part 'create_task.freezed.dart';
+part 'create_edit_task.freezed.dart';
 
-part 'create_task_state.dart';
+part 'create_edit_task_state.dart';
 
 final createTaskNotifierProvider = StateNotifierProvider.autoDispose
-    .family<CreateTaskNotifier, CreateTaskState, int>((ref, projectId) =>
+    .family<CreateTaskNotifier, CreateEditTaskState, int>((ref, projectId) =>
         CreateTaskNotifier(
             repository: ref.watch(boardRepositoryProvider),
             projectId: projectId));
 
-final newTaskStateNotifierProvider =
+final selectedTaskStateNotifierProvider =
     StateProvider<TaskStatus>((ref) => TaskStatus.toDo);
 final startTimerNotifierProvider = StateProvider<bool>((ref) => false);
 final createAnotherTaskNotifierProvider = StateProvider<bool>((ref) => false);
 
-class CreateTaskNotifier extends StateNotifier<CreateTaskState> {
+class CreateTaskNotifier extends StateNotifier<CreateEditTaskState> {
   final int projectId;
   IBoardRepository repository;
   final TextEditingController completedAtController = TextEditingController();
@@ -39,16 +40,21 @@ class CreateTaskNotifier extends StateNotifier<CreateTaskState> {
     descriptionController.clear();
   }
 
+  setInitialData(TaskModel task) {
+    titleController.text = task.title;
+    descriptionController.text = task.description ?? '';
+  }
+
   notifyCreatingTask() {
-    state = CreateTaskState.creating();
+    state = _Loading();
   }
 
   notifyTaskCreationFinished() {
-    state = CreateTaskState.created();
+    state = _Loaded();
   }
 
   notifyCreateAnotherTask() {
     _clearDataForNextTask();
-    state = CreateTaskState.initial();
+    state = _Initial();
   }
 }

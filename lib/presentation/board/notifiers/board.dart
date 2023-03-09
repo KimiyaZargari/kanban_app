@@ -93,6 +93,9 @@ class BoardNotifier extends StateNotifier<BoardState> {
     await _changeTaskStatus(
         task: task, to: TaskStatus.inProgress.toString(), at: at);
   }
+  editTask(EditTaskModel data){
+
+  }
 
   takeTaskToDone(
       {required TaskModel task, required DateTime? completion, int? at}) async {
