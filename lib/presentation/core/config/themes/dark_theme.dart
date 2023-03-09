@@ -68,7 +68,7 @@ ThemeData darkTheme() {
       scaffoldBackgroundColor: AppColors.darkBackground,
       textTheme: _textTheme(base.textTheme),
       primaryTextTheme: _primaryTextTheme(base.textTheme),
-      primaryColorDark: Colors.deepPurple,
+
       primaryColor: AppColors.primaryColor,
       colorScheme: base.colorScheme.copyWith(
         primary: AppColors.primaryColor,

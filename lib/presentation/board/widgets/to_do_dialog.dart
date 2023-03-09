@@ -15,10 +15,7 @@ class ToDoDialog extends StatelessWidget {
           children: [
             Text(
               "Take Task Back?",
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(color: Theme.of(context).colorScheme.error),
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             const Padding(
               padding: EdgeInsets.only(top: 8.0, bottom: 16),
@@ -30,11 +27,15 @@ class ToDoDialog extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                    child: OutlinedButton(
+                    child: FilledButton(
                   child: const Text('Yes!'),
                   onPressed: () {
                     context.router.pop(true);
                   },
+                  style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                      elevation: MaterialStatePropertyAll(0),
+                      backgroundColor: MaterialStatePropertyAll(
+                          Theme.of(context).colorScheme.error)),
                 )),
                 const SizedBox(
                   width: 10,
