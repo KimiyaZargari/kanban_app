@@ -72,7 +72,7 @@ final int projectId;
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              (task.getDurationString() ?? '0 mins'),
+                              (task.getDurationString()),
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                             if (task.intervals!.length.isOdd)

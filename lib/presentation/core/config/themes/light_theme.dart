@@ -72,8 +72,8 @@ ThemeData lightTheme() {
       colorScheme: base.colorScheme.copyWith(
         primary: AppColors.primaryColor,
         error: AppColors.error,
-        tertiary: AppColors.green,
-        secondary: AppColors.primaryColor2,
+        tertiary: AppColors.error,
+        secondary: AppColors.secondaryColor,
       ),
       cardColor: AppColors.lightCardColor,
       menuTheme: const MenuThemeData(
@@ -93,7 +93,7 @@ ThemeData lightTheme() {
         ),
         enabledBorder: OutlineInputBorder(
           borderSide:
-              const BorderSide(width: 1.5, color: AppColors.lightCardColor),
+              const BorderSide(width: 1.5, color: AppColors.darkBackground),
           borderRadius: BorderRadius.circular(10),
         ),
         focusedErrorBorder: OutlineInputBorder(
@@ -122,7 +122,7 @@ ThemeData lightTheme() {
           style: ElevatedButton.styleFrom(
         textStyle: _textTheme(base.textTheme).labelLarge,
         backgroundColor: AppColors.primaryColor,
-        foregroundColor: AppColors.lightThemeTextColor,
+        foregroundColor: AppColors.lightBackground,
         elevation: 10,
         disabledBackgroundColor: Colors.grey,
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -147,7 +147,7 @@ ThemeData lightTheme() {
       floatingActionButtonTheme: base.floatingActionButtonTheme.copyWith(
           backgroundColor: AppColors.primaryColor,
           elevation: 10,
-          foregroundColor: AppColors.lightThemeTextColor),
+          foregroundColor: AppColors.lightBackground),
       appBarTheme: base.appBarTheme.copyWith(
           color: AppColors.lightBackground,
           centerTitle: true,

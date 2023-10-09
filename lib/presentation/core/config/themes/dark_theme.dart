@@ -72,8 +72,8 @@ ThemeData darkTheme() {
       colorScheme: base.colorScheme.copyWith(
         primary: AppColors.primaryColor,
         error: AppColors.error,
-        tertiary: AppColors.green,
-        secondary: AppColors.primaryColor2,
+        tertiary: AppColors.error,
+        secondary: AppColors.secondaryColor,
       ),
       cardColor: AppColors.darkCardColor,
       menuTheme: const MenuThemeData(
@@ -91,7 +91,7 @@ ThemeData darkTheme() {
           borderRadius: BorderRadius.circular(10),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(width: 1.5, color: Colors.grey),
+          borderSide: const BorderSide(width: 1.5, color: AppColors.lightBackground),
           borderRadius: BorderRadius.circular(10),
         ),
         focusedErrorBorder: OutlineInputBorder(
@@ -120,7 +120,7 @@ ThemeData darkTheme() {
           style: ElevatedButton.styleFrom(
         textStyle: _textTheme(base.textTheme).labelLarge,
         backgroundColor: AppColors.primaryColor,
-        foregroundColor: AppColors.darkCardColor,
+        foregroundColor: AppColors.darkBackground,
         elevation: 10,
         disabledBackgroundColor: Colors.grey,
         padding: const EdgeInsets.symmetric(vertical: 10),

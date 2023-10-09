@@ -9,6 +9,7 @@ import 'package:kanban_app/presentation/board/widgets/done_dialog.dart';
 import 'package:kanban_app/presentation/board/widgets/in_progress_dialog.dart';
 import 'package:kanban_app/presentation/board/widgets/task_card.dart';
 import 'package:kanban_app/presentation/board/widgets/to_do_dialog.dart';
+import 'package:kanban_app/presentation/core/config/colors.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
 import 'package:kanban_app/presentation/project/notifiers/projects.dart';
 import 'package:kanban_app/presentation/routes/router.gr.dart';
@@ -79,11 +80,12 @@ class ProjectBoardPage extends ConsumerWidget {
                                     builder: (_) => const ToDoDialog()) ??
                                 false;
                           }
-                          if (takeBack ?? true)
+                          if (takeBack ?? true) {
                             await notifier.takeTaskToToDo(
                                 task: notifier.tasks[notifier.tasks.keys
                                     .toList()[oldListIndex]]![oldItemIndex],
                                 at: newItemIndex);
+                          }
                         } else if (newListIndex == 1) {
                           bool shouldStartTimer = false;
                           if (newListIndex != oldListIndex) {
@@ -179,7 +181,7 @@ class ProjectBoardPage extends ConsumerWidget {
                                               3,
                                           child: Card(
                                             color:
-                                                Theme.of(context).primaryColor,
+                                               AppColors.secondaryColor,
                                             elevation: 2,
                                             child: Padding(
                                               padding:

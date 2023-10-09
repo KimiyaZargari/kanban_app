@@ -69,9 +69,18 @@ class LoginPage extends ConsumerWidget {
                       if (state.authFailureOrSuccessOption != null)
                         state.authFailureOrSuccessOption!.fold(
                             (l) => Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 8.0, horizontal: 4),
-                                  child: Text(l.message),
+                                  padding: const EdgeInsets.fromLTRB(
+                                    10, 20, 10,0),
+                                  child: Text(
+                                    l.message,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall!
+                                        .copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .error),
+                                  ),
                                 ),
                             (r) => Container()),
                     ],
