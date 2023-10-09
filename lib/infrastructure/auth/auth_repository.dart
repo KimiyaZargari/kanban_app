@@ -1,9 +1,16 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kanban_app/domain/auth/auth_failure.dart';
 import 'package:kanban_app/domain/auth/credentials.dart';
 import 'package:kanban_app/domain/auth/i_auth_repository.dart';
+
+final firebaseAuthProvider =
+    Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
+final googleSignInProvider = Provider<GoogleSignIn>((ref) => GoogleSignIn());
+final authRepositoryProvider = Provider<AuthRepository>((ref) => AuthRepository(
+    ref.watch(firebaseAuthProvider), ref.watch(googleSignInProvider)));
 
 class AuthRepository implements IAuthRepository {
   final FirebaseAuth _firebaseAuth;

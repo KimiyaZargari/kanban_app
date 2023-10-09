@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 class AppTextField extends StatelessWidget {
   final Function(String?)? onSaved;
+  final Function(String)?  onChanged;
   final Function()? onTap;
   final TextInputType textInputType;
   final TextEditingController? controller;
@@ -17,6 +18,7 @@ class AppTextField extends StatelessWidget {
     this.controller,
     this.maxLines,
     this.maxLength,
+    this.onChanged,
     this.onTap,
     this.readOnly = false,
     this.label,
@@ -45,6 +47,7 @@ class AppTextField extends StatelessWidget {
 initialValue: initialValue,
           readOnly: readOnly,
           onSaved: onSaved,
+          onChanged: onChanged,
           controller: controller,
           maxLines: maxLines ?? 1,
           keyboardType: textInputType,

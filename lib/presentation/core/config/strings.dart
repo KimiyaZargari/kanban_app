@@ -17,4 +17,9 @@ class AppStrings {
   static const edit = 'Edit';
   static const cancel = 'Cancel';
   static const save = 'Save';
+
+  //
+  static const invalidEmailError = 'Please enter a valid email address!';
+  static const invalidPasswordError =
+      'Password should be minimum of 8 characters.';
 }

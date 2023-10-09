@@ -107,8 +107,8 @@ class __$$CancelledByUserCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CancelledByUser implements CancelledByUser {
-  const _$CancelledByUser();
+class _$CancelledByUser extends CancelledByUser {
+  const _$CancelledByUser() : super._();
 
   @override
   String toString() {
@@ -202,8 +202,9 @@ class _$CancelledByUser implements CancelledByUser {
   }
 }
 
-abstract class CancelledByUser implements AuthFailure {
+abstract class CancelledByUser extends AuthFailure {
   const factory CancelledByUser() = _$CancelledByUser;
+  const CancelledByUser._() : super._();
 }
 
 /// @nodoc
@@ -224,8 +225,8 @@ class __$$ServerErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ServerError implements ServerError {
-  const _$ServerError();
+class _$ServerError extends ServerError {
+  const _$ServerError() : super._();
 
   @override
   String toString() {
@@ -319,8 +320,9 @@ class _$ServerError implements ServerError {
   }
 }
 
-abstract class ServerError implements AuthFailure {
+abstract class ServerError extends AuthFailure {
   const factory ServerError() = _$ServerError;
+  const ServerError._() : super._();
 }
 
 /// @nodoc
@@ -341,8 +343,8 @@ class __$$EmailAlreadyInUseCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$EmailAlreadyInUse implements EmailAlreadyInUse {
-  const _$EmailAlreadyInUse();
+class _$EmailAlreadyInUse extends EmailAlreadyInUse {
+  const _$EmailAlreadyInUse() : super._();
 
   @override
   String toString() {
@@ -436,8 +438,9 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
   }
 }
 
-abstract class EmailAlreadyInUse implements AuthFailure {
+abstract class EmailAlreadyInUse extends AuthFailure {
   const factory EmailAlreadyInUse() = _$EmailAlreadyInUse;
+  const EmailAlreadyInUse._() : super._();
 }
 
 /// @nodoc
@@ -462,8 +465,8 @@ class __$$InvalidEmailAndPasswordCombinationCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InvalidEmailAndPasswordCombination
-    implements InvalidEmailAndPasswordCombination {
-  const _$InvalidEmailAndPasswordCombination();
+    extends InvalidEmailAndPasswordCombination {
+  const _$InvalidEmailAndPasswordCombination() : super._();
 
   @override
   String toString() {
@@ -558,7 +561,8 @@ class _$InvalidEmailAndPasswordCombination
   }
 }
 
-abstract class InvalidEmailAndPasswordCombination implements AuthFailure {
+abstract class InvalidEmailAndPasswordCombination extends AuthFailure {
   const factory InvalidEmailAndPasswordCombination() =
       _$InvalidEmailAndPasswordCombination;
+  const InvalidEmailAndPasswordCombination._() : super._();
 }
