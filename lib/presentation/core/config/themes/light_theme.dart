@@ -120,7 +120,7 @@ ThemeData lightTheme() {
               borderRadius: BorderRadius.all(Radius.circular(12)))),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-        textStyle: _textTheme(base.textTheme).labelLarge,
+        textStyle: _textTheme(base.textTheme).titleSmall,
         backgroundColor: AppColors.primaryColor,
         foregroundColor: AppColors.lightBackground,
         elevation: 10,
@@ -135,7 +135,7 @@ ThemeData lightTheme() {
         elevation: 0,
         foregroundColor: AppColors.lightThemeTextColor,
         disabledBackgroundColor: Colors.grey,
-        textStyle: _textTheme(base.textTheme).labelLarge,
+        textStyle: _textTheme(base.textTheme).titleSmall,
         padding: const EdgeInsets.symmetric(vertical: 10),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(12)),

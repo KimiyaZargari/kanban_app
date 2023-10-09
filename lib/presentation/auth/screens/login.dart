@@ -19,15 +19,15 @@ class LoginPage extends ConsumerWidget {
     ref.listen(loginNotifierProvider, (previous, next) {
       if (previous?.authFailureOrSuccessOption == null &&
           (next.authFailureOrSuccessOption?.isRight() ?? false)) {
-        context.router.push(const ProjectsRoute());
+        context.router.replace(const ProjectsRoute());
       }
     });
     return PageBase(
-        title: 'Login',
+        title: state.isNewUser ? 'Create Account' : 'Login',
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Form(
@@ -69,13 +69,13 @@ class LoginPage extends ConsumerWidget {
                       if (state.authFailureOrSuccessOption != null)
                         state.authFailureOrSuccessOption!.fold(
                             (l) => Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                    10, 20, 10,0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(6, 20, 6, 0),
                                   child: Text(
                                     l.message,
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodySmall!
+                                        .displaySmall!
                                         .copyWith(
                                             color: Theme.of(context)
                                                 .colorScheme
@@ -83,20 +83,61 @@ class LoginPage extends ConsumerWidget {
                                   ),
                                 ),
                             (r) => Container()),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 30.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (notifier.formKey.currentState!.validate()) {
+                              if (state.isNewUser) {
+                                notifier.registerWithEmailAndPassword();
+                              } else {
+                                notifier.signInWithEmailAndPassword();
+                              }
+                            } else if (state.showValidationMessages == false) {
+                              notifier.turnOnAutoValidation();
+                            }
+                          },
+                          child: state.isSubmitting
+                              ?  LoadingWidget(color: Theme.of(context).scaffoldBackgroundColor,)
+                              : Text(
+                                  state.isNewUser ? 'Create Account' : 'Login'),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(state.isNewUser
+                              ? 'Already have an account?'
+                              : 'Don\'t have an account?'),
+                          TextButton(
+                              onPressed: () {
+                                notifier.switchLoginType();
+                              },
+                              child:
+                                  Text(state.isNewUser ? 'Login' : 'Register'))
+                        ],
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 34.0),
+                        child: Row(
+                          children: [
+                            Expanded(child: Divider(thickness: 2)),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text('or'),
+                            ),
+                            Expanded(child: Divider(thickness: 2))
+                          ],
+                        ),
+                      ),
                     ],
                   )),
-              ElevatedButton(
-                onPressed: () {
-                  if (notifier.formKey.currentState!.validate()) {
-                    notifier.registerWithEmailAndPassword();
-                  } else if (state.showValidationMessages == false) {
-                    notifier.turnOnAutoValidation();
-                  }
-                },
-                child: state.isSubmitting
-                    ? const LoadingWidget()
-                    : const Text('Create Account'),
-              )
+              FilledButton(
+                onPressed: () {},
+                child: Row(
+                  children: [],
+                ),
+              ),
             ],
           ),
         ));

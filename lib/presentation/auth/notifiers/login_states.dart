@@ -7,6 +7,7 @@ class LoginState with _$LoginState {
     required String password,
     required bool showValidationMessages,
     required bool isSubmitting,
+    required bool isNewUser,
     required Either<AuthFailure, Unit>? authFailureOrSuccessOption,
   }) = _LoginState;
 
@@ -15,6 +16,7 @@ class LoginState with _$LoginState {
       password: '',
       showValidationMessages: false,
       isSubmitting: false,
+      isNewUser: false,
       authFailureOrSuccessOption: null);
 //
 // factory LoginState.authenticating() = _Authenticating;

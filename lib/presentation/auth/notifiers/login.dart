@@ -8,6 +8,7 @@ import 'package:kanban_app/domain/auth/i_auth_repository.dart';
 import 'package:kanban_app/infrastructure/auth/auth_repository.dart';
 
 import '../../../application/auth/register_user.dart';
+import '../../../application/auth/sign_in.dart';
 
 part 'login.freezed.dart';
 
@@ -30,7 +31,8 @@ class LoginNotifier extends StateNotifier<LoginState> {
   }
 
   onPasswordChanged(String password) {
-    state = state.copyWith(password: password, authFailureOrSuccessOption: null);
+    state =
+        state.copyWith(password: password, authFailureOrSuccessOption: null);
   }
 
   registerWithEmailAndPassword() async {
@@ -40,9 +42,22 @@ class LoginNotifier extends StateNotifier<LoginState> {
 
     Either<AuthFailure, Unit> failureOrSuccess = await registerUser(
         Credentials(email: state.email, password: state.password));
-    state =  state.copyWith(authFailureOrSuccessOption: failureOrSuccess, isSubmitting: false);
+    state = state.copyWith(
+        authFailureOrSuccessOption: failureOrSuccess, isSubmitting: false);
+  }
+
+  signInWithEmailAndPassword() async {
+    SignIn signIn = SignIn(repository);
+    state =
+        state.copyWith(isSubmitting: true, authFailureOrSuccessOption: null);
+    Either<AuthFailure, Unit> failureOrSuccess =
+        await signIn(Credentials(email: state.email, password: state.password));
+    state = state.copyWith(
+        authFailureOrSuccessOption: failureOrSuccess, isSubmitting: false);
   }
 
   turnOnAutoValidation() =>
       state = state.copyWith(showValidationMessages: true, isSubmitting: false);
+
+  switchLoginType() => state = state.copyWith(isNewUser: !state.isNewUser);
 }

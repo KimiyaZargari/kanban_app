@@ -45,7 +45,7 @@ class AuthRepository implements IAuthRepository {
           email: credentials.email, password: credentials.password);
       return right(unit);
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'wrong-password' || e.code == 'user-not-found') {
+      if (e.code == 'INVALID_LOGIN_CREDENTIALS' ) {
         return left(const AuthFailure.invalidEmailAndPasswordCombination());
       } else {
         return left(const AuthFailure.serverError());

@@ -118,7 +118,7 @@ ThemeData darkTheme() {
               borderRadius: BorderRadius.all(Radius.circular(12)))),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-        textStyle: _textTheme(base.textTheme).labelLarge,
+        textStyle: _textTheme(base.textTheme).titleSmall,
         backgroundColor: AppColors.primaryColor,
         foregroundColor: AppColors.darkBackground,
         elevation: 10,
@@ -133,7 +133,7 @@ ThemeData darkTheme() {
         elevation: 10,
         foregroundColor: AppColors.error,
         disabledBackgroundColor: Colors.grey,
-        textStyle: _textTheme(base.textTheme).labelLarge,
+        textStyle: _textTheme(base.textTheme).titleSmall,
         padding: const EdgeInsets.symmetric(vertical: 10),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(12)),
