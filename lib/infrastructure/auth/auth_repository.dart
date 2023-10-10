@@ -22,6 +22,9 @@ class AuthRepository implements IAuthRepository {
   );
 
   @override
+  Future<String?> getSignedInUser() async => _firebaseAuth.currentUser?.uid;
+
+  @override
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
       Credentials credentials) async {
     try {
@@ -45,7 +48,7 @@ class AuthRepository implements IAuthRepository {
           email: credentials.email, password: credentials.password);
       return right(unit);
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'INVALID_LOGIN_CREDENTIALS' ) {
+      if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
         return left(const AuthFailure.invalidEmailAndPasswordCombination());
       } else {
         return left(const AuthFailure.serverError());

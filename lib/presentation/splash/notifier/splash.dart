@@ -1,5 +1,7 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kanban_app/application/auth/get_user.dart';
 import 'package:kanban_app/domain/auth/i_auth_repository.dart';
 import 'package:kanban_app/infrastructure/auth/auth_repository.dart';
 
@@ -14,8 +16,20 @@ final splashNotifierProvider =
 class SplashNotifier extends StateNotifier<SplashState> {
   IAuthRepository repository;
 
-  SplashNotifier(this.repository) : super(_Initial(0)) {
+  SplashNotifier(this.repository) : super(_Initial(0));
+
+  getUser() async {
+    await Future.delayed(const Duration(milliseconds: 300));
+
     _turn();
+    await Future.delayed(const Duration(seconds: 4));
+    GetUser getUser = GetUser(repository);
+    final userId = await getUser(unit);
+    if (userId == null) {
+      state = _UserSignedOut();
+    } else {
+      state = _UserSignedIn();
+    }
   }
 
   _turn() {

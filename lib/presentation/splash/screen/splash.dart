@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kanban_app/presentation/core/config/colors.dart';
+import 'package:kanban_app/presentation/routes/router.gr.dart';
 import 'package:lottie/lottie.dart';
 
 import '../notifier/splash.dart';
@@ -13,6 +15,15 @@ class SplashPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(splashNotifierProvider.notifier);
     final state = ref.watch(splashNotifierProvider);
+    if (state == SplashState.initial(0)) {
+      notifier.getUser();
+     // notifier.turn();
+    }
+    ref.listen(splashNotifierProvider, (previous, next) {
+      next.mapOrNull(
+          userSignedIn: (_) => context.router.replace(const ProjectsRoute()),
+          userSignedOut: (_) => context.router.replace(const LoginRoute()));
+    });
     return Scaffold(
         body: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -28,6 +39,9 @@ class SplashPage extends ConsumerWidget {
               width: 80,
               child: AnimatedRotation(
                 duration: const Duration(milliseconds: 300),
+                onEnd: () {
+                //  notifier.turn();
+                },
                 turns:
                     state.maybeWhen(orElse: () => 0, initial: (turns) => turns),
                 child: Image.asset('assets/logo.png'),
