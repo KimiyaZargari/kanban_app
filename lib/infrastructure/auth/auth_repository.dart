@@ -77,4 +77,10 @@ class AuthRepository implements IAuthRepository {
       return left(const AuthFailure.serverError());
     }
   }
+
+  @override
+  Future<Unit> logout() {
+    return Future.wait([_firebaseAuth.signOut(), _googleSignIn.signOut()])
+        .then((value) => unit);
+  }
 }

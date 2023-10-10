@@ -11,4 +11,5 @@ abstract class IAuthRepository {
 
   Future<Either<AuthFailure, Unit>> signInWithGoogle();
   Future< String?> getSignedInUser();
+  Future< Unit> logout();
 }

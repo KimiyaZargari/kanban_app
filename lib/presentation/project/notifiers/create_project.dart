@@ -7,9 +7,6 @@ import 'package:kanban_app/domain/project/i_project_repository.dart';
 import 'package:kanban_app/domain/project/project_model.dart';
 import 'package:kanban_app/infrastructure/project/project_repository.dart';
 
-import '../../../domain/core/no_param.dart';
-import '../../../domain/project/project_model.dart';
-
 part 'create_project.freezed.dart';
 
 part 'create_project_state.dart';
