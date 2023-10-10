@@ -7,6 +7,7 @@ class LoginState with _$LoginState {
     required String password,
     required bool showValidationMessages,
     required bool isSubmitting,
+    required bool waitingForGoogle,
     required bool isNewUser,
     required Either<AuthFailure, Unit>? authFailureOrSuccessOption,
   }) = _LoginState;
@@ -16,12 +17,7 @@ class LoginState with _$LoginState {
       password: '',
       showValidationMessages: false,
       isSubmitting: false,
+      waitingForGoogle: false,
       isNewUser: false,
       authFailureOrSuccessOption: null);
-//
-// factory LoginState.authenticating() = _Authenticating;
-// factory LoginState.authenticated() = _Authenticated;
-//
-//
-// factory LoginState.networkError(AuthFailure authFailure) = _NetworkError;
 }

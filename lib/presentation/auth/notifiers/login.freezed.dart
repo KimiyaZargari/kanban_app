@@ -20,6 +20,7 @@ mixin _$LoginState {
   String get password => throw _privateConstructorUsedError;
   bool get showValidationMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
+  bool get waitingForGoogle => throw _privateConstructorUsedError;
   bool get isNewUser => throw _privateConstructorUsedError;
   Either<AuthFailure, Unit>? get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
@@ -40,6 +41,7 @@ abstract class $LoginStateCopyWith<$Res> {
       String password,
       bool showValidationMessages,
       bool isSubmitting,
+      bool waitingForGoogle,
       bool isNewUser,
       Either<AuthFailure, Unit>? authFailureOrSuccessOption});
 }
@@ -61,6 +63,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
     Object? password = null,
     Object? showValidationMessages = null,
     Object? isSubmitting = null,
+    Object? waitingForGoogle = null,
     Object? isNewUser = null,
     Object? authFailureOrSuccessOption = freezed,
   }) {
@@ -80,6 +83,10 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
+              as bool,
+      waitingForGoogle: null == waitingForGoogle
+          ? _value.waitingForGoogle
+          : waitingForGoogle // ignore: cast_nullable_to_non_nullable
               as bool,
       isNewUser: null == isNewUser
           ? _value.isNewUser
@@ -106,6 +113,7 @@ abstract class _$$_LoginStateCopyWith<$Res>
       String password,
       bool showValidationMessages,
       bool isSubmitting,
+      bool waitingForGoogle,
       bool isNewUser,
       Either<AuthFailure, Unit>? authFailureOrSuccessOption});
 }
@@ -125,6 +133,7 @@ class __$$_LoginStateCopyWithImpl<$Res>
     Object? password = null,
     Object? showValidationMessages = null,
     Object? isSubmitting = null,
+    Object? waitingForGoogle = null,
     Object? isNewUser = null,
     Object? authFailureOrSuccessOption = freezed,
   }) {
@@ -144,6 +153,10 @@ class __$$_LoginStateCopyWithImpl<$Res>
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
+              as bool,
+      waitingForGoogle: null == waitingForGoogle
+          ? _value.waitingForGoogle
+          : waitingForGoogle // ignore: cast_nullable_to_non_nullable
               as bool,
       isNewUser: null == isNewUser
           ? _value.isNewUser
@@ -165,6 +178,7 @@ class _$_LoginState implements _LoginState {
       required this.password,
       required this.showValidationMessages,
       required this.isSubmitting,
+      required this.waitingForGoogle,
       required this.isNewUser,
       required this.authFailureOrSuccessOption});
 
@@ -177,13 +191,15 @@ class _$_LoginState implements _LoginState {
   @override
   final bool isSubmitting;
   @override
+  final bool waitingForGoogle;
+  @override
   final bool isNewUser;
   @override
   final Either<AuthFailure, Unit>? authFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'LoginState(email: $email, password: $password, showValidationMessages: $showValidationMessages, isSubmitting: $isSubmitting, isNewUser: $isNewUser, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'LoginState(email: $email, password: $password, showValidationMessages: $showValidationMessages, isSubmitting: $isSubmitting, waitingForGoogle: $waitingForGoogle, isNewUser: $isNewUser, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -198,6 +214,8 @@ class _$_LoginState implements _LoginState {
                 other.showValidationMessages == showValidationMessages) &&
             (identical(other.isSubmitting, isSubmitting) ||
                 other.isSubmitting == isSubmitting) &&
+            (identical(other.waitingForGoogle, waitingForGoogle) ||
+                other.waitingForGoogle == waitingForGoogle) &&
             (identical(other.isNewUser, isNewUser) ||
                 other.isNewUser == isNewUser) &&
             (identical(other.authFailureOrSuccessOption,
@@ -213,6 +231,7 @@ class _$_LoginState implements _LoginState {
       password,
       showValidationMessages,
       isSubmitting,
+      waitingForGoogle,
       isNewUser,
       authFailureOrSuccessOption);
 
@@ -229,6 +248,7 @@ abstract class _LoginState implements LoginState {
       required final String password,
       required final bool showValidationMessages,
       required final bool isSubmitting,
+      required final bool waitingForGoogle,
       required final bool isNewUser,
       required final Either<AuthFailure, Unit>?
           authFailureOrSuccessOption}) = _$_LoginState;
@@ -241,6 +261,8 @@ abstract class _LoginState implements LoginState {
   bool get showValidationMessages;
   @override
   bool get isSubmitting;
+  @override
+  bool get waitingForGoogle;
   @override
   bool get isNewUser;
   @override

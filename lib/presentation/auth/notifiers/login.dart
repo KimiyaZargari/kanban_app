@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kanban_app/application/auth/google_login.dart';
 import 'package:kanban_app/domain/auth/auth_failure.dart';
 import 'package:kanban_app/domain/auth/credentials.dart';
 import 'package:kanban_app/domain/auth/i_auth_repository.dart';
@@ -54,6 +55,16 @@ class LoginNotifier extends StateNotifier<LoginState> {
         await signIn(Credentials(email: state.email, password: state.password));
     state = state.copyWith(
         authFailureOrSuccessOption: failureOrSuccess, isSubmitting: false);
+  }
+
+  googleLogin() async {
+    GoogleLogin googleLogin = GoogleLogin(repository);
+    state =
+        state.copyWith(waitingForGoogle: true, authFailureOrSuccessOption: null);
+    Either<AuthFailure, Unit> failureOrSuccess =
+        await googleLogin(unit);
+    state = state.copyWith(
+        authFailureOrSuccessOption: failureOrSuccess, waitingForGoogle: false);
   }
 
   turnOnAutoValidation() =>
