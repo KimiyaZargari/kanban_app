@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hive/hive.dart';
 import 'package:kanban_app/domain/auth/auth_failure.dart';
 import 'package:kanban_app/domain/auth/credentials.dart';
 import 'package:kanban_app/domain/auth/i_auth_repository.dart';
@@ -80,7 +81,8 @@ class AuthRepository implements IAuthRepository {
 
   @override
   Future<Unit> logout() {
-    return Future.wait([_firebaseAuth.signOut(), _googleSignIn.signOut()])
+    return Future.wait(
+            [Hive.close(), _firebaseAuth.signOut(), _googleSignIn.signOut()])
         .then((value) => unit);
   }
 }
