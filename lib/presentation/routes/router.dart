@@ -5,11 +5,13 @@ import 'package:kanban_app/presentation/board/screens/create_edit_task.dart';
 import 'package:kanban_app/presentation/project/screens/create_edit_project.dart';
 import 'package:kanban_app/presentation/project/screens/projects.dart';
 import 'package:kanban_app/presentation/board/screens/board.dart';
+import 'package:kanban_app/presentation/splash/screen/splash.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: [
-    AutoRoute(path: '/auth', page: LoginPage, initial: true),
+    AutoRoute(path: '/splash', page: SplashPage, initial: true),
+    AutoRoute(path: '/login', page: LoginPage),
     AutoRoute(path: '/projects', page: ProjectsPage),
     AutoRoute(path: '/create_projects', page: CreateEditProjectPage),
     AutoRoute(path: 'board/:id', page: ProjectBoardPage),
