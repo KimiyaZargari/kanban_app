@@ -6,7 +6,7 @@ import 'package:hive/hive.dart';
 import 'package:kanban_app/domain/board/i_board_repository.dart';
 import 'package:kanban_app/domain/board/task_model.dart';
 import '../../domain/core/enums.dart';
-import '../core/databases.dart';
+import '../core/local_database.dart';
 
 final boardRepositoryProvider =
     Provider.autoDispose((ref) => BoardRepository());

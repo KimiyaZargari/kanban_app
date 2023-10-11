@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -28,7 +29,7 @@ class ProjectsNotifier extends StateNotifier<ProjectsState> {
 
   getProjects() async {
     GetProjects getProjects = GetProjects(repository);
-    projects = await getProjects(NoParam());
+    projects = await getProjects(unit);
     state = _Loaded();
   }
 

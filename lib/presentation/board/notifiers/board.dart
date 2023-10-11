@@ -15,7 +15,7 @@ import 'package:kanban_app/domain/board/task_model.dart';
 import 'package:kanban_app/infrastructure/board/board_repository.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../../domain/board/i_board_repository.dart';
-import '../../../infrastructure/core/databases.dart';
+import '../../../infrastructure/core/local_database.dart';
 
 part 'board.freezed.dart';
 
