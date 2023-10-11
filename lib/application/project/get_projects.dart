@@ -4,13 +4,12 @@ import 'package:kanban_app/domain/project/i_project_repository.dart';
 
 import '../../domain/project/project_model.dart';
 
-class GetProjects implements UseCase<NoParam, List<ProjectModel>> {
+class GetProjects {
   IProjectRepository repository;
 
   GetProjects(this.repository);
 
-  @override
-  Future<List<ProjectModel>> call(_) async {
-    return repository.getProjects();
+  Stream<List<ProjectModel>> call(_) async* {
+    yield* repository.getProjects();
   }
 }

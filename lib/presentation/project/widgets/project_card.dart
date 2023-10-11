@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kanban_app/domain/project/project_model.dart';
-
+import 'package:kanban_app/presentation/core/config/colors.dart';
 import '../../routes/router.gr.dart';
 import 'delete_project_dialog.dart';
 
@@ -24,7 +24,7 @@ class ProjectCard extends StatelessWidget {
                   context: context,
                   builder: (_) => const DeleteProjectDialog());
             } else {
-              context.router.push( CreateEditProjectRoute(project: project));
+              context.router.push(CreateEditProjectRoute(project: project));
               return false;
             }
           },
@@ -56,11 +56,16 @@ class ProjectCard extends StatelessWidget {
                   id: project.id!, projectName: project.name));
             },
             child: Card(
-                child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12.0),
-              child: Column(
-                children: [
-                  Padding(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  padding: EdgeInsets.only(top: 12, bottom: 12),
+                  decoration: BoxDecoration(
+                      color: AppColors.secondaryColor,
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(12))),
+                  child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 22.0, vertical: 8),
                     child: Text(
@@ -69,19 +74,20 @@ class ProjectCard extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
-                  Divider(
-                    height: 40,
-                  ),
-                  Row(
+                ),
+                Divider(height: 0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  child: Row(
                     children: [
                       _getTaskNumberColumn('To Do', project.todo, context),
                       _getTaskNumberColumn(
                           'In Progress', project.inProgress, context),
                       _getTaskNumberColumn('Done', project.done, context)
                     ],
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             )),
           )),
     );

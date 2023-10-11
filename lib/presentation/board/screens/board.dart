@@ -136,7 +136,9 @@ class ProjectBoardPage extends ConsumerWidget {
                               column,
                               DragAndDropList(
                                 header: Container(
-                                    color: Theme.of(context).cardColor,
+                                    margin: EdgeInsets.only(bottom: 8),
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 20),
                                     alignment: Alignment.center,
@@ -179,20 +181,24 @@ class ProjectBoardPage extends ConsumerWidget {
                                                   .size
                                                   .width /
                                               3,
-                                          child: Card(
-                                            color:
-                                               AppColors.secondaryColor,
-                                            elevation: 2,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                task.title,
-                                                textAlign: TextAlign.justify,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodySmall,
-                                                softWrap: true,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(10)),
+                                            child: Card(
+                                              color: AppColors.secondaryColor,
+                                              elevation: 2,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text(
+                                                  task.title,
+                                                  textAlign: TextAlign.justify,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodySmall,
+                                                  softWrap: true,
+                                                ),
                                               ),
                                             ),
                                           ),

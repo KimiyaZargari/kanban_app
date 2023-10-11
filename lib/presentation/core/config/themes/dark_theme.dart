@@ -16,7 +16,10 @@ TextTheme _textTheme(TextTheme base) {
         fontSize: 16,
         fontWeight: FontWeight.w500,
         color: AppColors.darkThemeTextColor),
-
+    displayMedium: const TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+        color: AppColors.darkThemeTextColor),
     labelLarge: const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w500,
@@ -72,7 +75,7 @@ ThemeData darkTheme() {
       colorScheme: base.colorScheme.copyWith(
         primary: AppColors.primaryColor,
         error: AppColors.error,
-        tertiary: AppColors.error,
+        tertiary: AppColors.purple,
         secondary: AppColors.secondaryColor,
       ),
       cardColor: AppColors.darkCardColor,
@@ -113,6 +116,7 @@ ThemeData darkTheme() {
       //  focusColor: Colors.deepPurpleAccent,
       cardTheme: base.cardTheme.copyWith(
           elevation: 10,
+          margin: EdgeInsets.zero,
           color: AppColors.darkCardColor,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12)))),

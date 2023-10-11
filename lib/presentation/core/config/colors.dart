@@ -6,8 +6,9 @@ class AppColors {
   static const darkBackground = Color(0xff121212); // Slightly darker background
   static const darkCardColor = Color(0xff1E1E1E); // Dark card color
   static const primaryColor = Color(0xff00abaa); // Primary accent color
-
   static const secondaryColor =  Color(0x8800abaa); // Secondary accent color
+  static const purple =  Colors.deepPurple; // Secondary accent color
+  static const lightPurple =  Color(0xffdcbfeb); // Secondary accent color
   static const error = Colors.orange; // Error color
   static const darkThemeTextColor =
       Color(0xfff6f4eb); // Text color for dark theme

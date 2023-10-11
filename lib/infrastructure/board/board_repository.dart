@@ -1,14 +1,12 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:kanban_app/domain/board/i_board_repository.dart';
 import 'package:kanban_app/domain/board/task_model.dart';
-import 'package:kanban_app/infrastructure/core/local_database.dart';
-
 import '../../domain/core/enums.dart';
+import '../core/databases.dart';
 
 final boardRepositoryProvider =
     Provider.autoDispose((ref) => BoardRepository());
