@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kanban_app/presentation/auth/widgets/dialog_logout.dart';
 import 'package:kanban_app/presentation/core/config/strings.dart';
 import 'package:kanban_app/presentation/core/widgets/loading_widget.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
@@ -26,12 +25,6 @@ class ProjectsPage extends ConsumerWidget {
           child: const Icon(Icons.add_rounded),
         ),
 
-        leadingButton: IconButton(
-          onPressed: ()  {
-             showDialog(context: context, builder: (_) => const LogoutDialog());
-         },
-          icon: const Icon(Icons.logout),
-        ),
         child: state.maybeWhen(
           initial: () {
             notifier.getProjects();

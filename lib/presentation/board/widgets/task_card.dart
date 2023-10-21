@@ -53,7 +53,7 @@ final int projectId;
                     children: [
                       Text(
                         task.title,
-                        textAlign: TextAlign.justify,
+                        //textAlign: TextAlign.justify,
                         style: Theme.of(context).textTheme.bodySmall,
                         softWrap: true,
                       ),

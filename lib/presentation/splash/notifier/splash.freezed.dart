@@ -19,44 +19,38 @@ mixin _$SplashState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double turn) initial,
-    required TResult Function() userSignedIn,
-    required TResult Function() userSignedOut,
+    required TResult Function() splashCompleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double turn)? initial,
-    TResult? Function()? userSignedIn,
-    TResult? Function()? userSignedOut,
+    TResult? Function()? splashCompleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double turn)? initial,
-    TResult Function()? userSignedIn,
-    TResult Function()? userSignedOut,
+    TResult Function()? splashCompleted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_UserSignedIn value) userSignedIn,
-    required TResult Function(_UserSignedOut value) userSignedOut,
+    required TResult Function(_SplashCompleted value) splashCompleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_UserSignedIn value)? userSignedIn,
-    TResult? Function(_UserSignedOut value)? userSignedOut,
+    TResult? Function(_SplashCompleted value)? splashCompleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_UserSignedIn value)? userSignedIn,
-    TResult Function(_UserSignedOut value)? userSignedOut,
+    TResult Function(_SplashCompleted value)? splashCompleted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -144,8 +138,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double turn) initial,
-    required TResult Function() userSignedIn,
-    required TResult Function() userSignedOut,
+    required TResult Function() splashCompleted,
   }) {
     return initial(turn);
   }
@@ -154,8 +147,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double turn)? initial,
-    TResult? Function()? userSignedIn,
-    TResult? Function()? userSignedOut,
+    TResult? Function()? splashCompleted,
   }) {
     return initial?.call(turn);
   }
@@ -164,8 +156,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double turn)? initial,
-    TResult Function()? userSignedIn,
-    TResult Function()? userSignedOut,
+    TResult Function()? splashCompleted,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -178,8 +169,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_UserSignedIn value) userSignedIn,
-    required TResult Function(_UserSignedOut value) userSignedOut,
+    required TResult Function(_SplashCompleted value) splashCompleted,
   }) {
     return initial(this);
   }
@@ -188,8 +178,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_UserSignedIn value)? userSignedIn,
-    TResult? Function(_UserSignedOut value)? userSignedOut,
+    TResult? Function(_SplashCompleted value)? splashCompleted,
   }) {
     return initial?.call(this);
   }
@@ -198,8 +187,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_UserSignedIn value)? userSignedIn,
-    TResult Function(_UserSignedOut value)? userSignedOut,
+    TResult Function(_SplashCompleted value)? splashCompleted,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -219,35 +207,35 @@ abstract class _Initial implements SplashState {
 }
 
 /// @nodoc
-abstract class _$$_UserSignedInCopyWith<$Res> {
-  factory _$$_UserSignedInCopyWith(
-          _$_UserSignedIn value, $Res Function(_$_UserSignedIn) then) =
-      __$$_UserSignedInCopyWithImpl<$Res>;
+abstract class _$$_SplashCompletedCopyWith<$Res> {
+  factory _$$_SplashCompletedCopyWith(
+          _$_SplashCompleted value, $Res Function(_$_SplashCompleted) then) =
+      __$$_SplashCompletedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_UserSignedInCopyWithImpl<$Res>
-    extends _$SplashStateCopyWithImpl<$Res, _$_UserSignedIn>
-    implements _$$_UserSignedInCopyWith<$Res> {
-  __$$_UserSignedInCopyWithImpl(
-      _$_UserSignedIn _value, $Res Function(_$_UserSignedIn) _then)
+class __$$_SplashCompletedCopyWithImpl<$Res>
+    extends _$SplashStateCopyWithImpl<$Res, _$_SplashCompleted>
+    implements _$$_SplashCompletedCopyWith<$Res> {
+  __$$_SplashCompletedCopyWithImpl(
+      _$_SplashCompleted _value, $Res Function(_$_SplashCompleted) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_UserSignedIn implements _UserSignedIn {
-  _$_UserSignedIn();
+class _$_SplashCompleted implements _SplashCompleted {
+  _$_SplashCompleted();
 
   @override
   String toString() {
-    return 'SplashState.userSignedIn()';
+    return 'SplashState.splashCompleted()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_UserSignedIn);
+        (other.runtimeType == runtimeType && other is _$_SplashCompleted);
   }
 
   @override
@@ -257,32 +245,29 @@ class _$_UserSignedIn implements _UserSignedIn {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double turn) initial,
-    required TResult Function() userSignedIn,
-    required TResult Function() userSignedOut,
+    required TResult Function() splashCompleted,
   }) {
-    return userSignedIn();
+    return splashCompleted();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double turn)? initial,
-    TResult? Function()? userSignedIn,
-    TResult? Function()? userSignedOut,
+    TResult? Function()? splashCompleted,
   }) {
-    return userSignedIn?.call();
+    return splashCompleted?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double turn)? initial,
-    TResult Function()? userSignedIn,
-    TResult Function()? userSignedOut,
+    TResult Function()? splashCompleted,
     required TResult orElse(),
   }) {
-    if (userSignedIn != null) {
-      return userSignedIn();
+    if (splashCompleted != null) {
+      return splashCompleted();
     }
     return orElse();
   }
@@ -291,145 +276,34 @@ class _$_UserSignedIn implements _UserSignedIn {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_UserSignedIn value) userSignedIn,
-    required TResult Function(_UserSignedOut value) userSignedOut,
+    required TResult Function(_SplashCompleted value) splashCompleted,
   }) {
-    return userSignedIn(this);
+    return splashCompleted(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_UserSignedIn value)? userSignedIn,
-    TResult? Function(_UserSignedOut value)? userSignedOut,
+    TResult? Function(_SplashCompleted value)? splashCompleted,
   }) {
-    return userSignedIn?.call(this);
+    return splashCompleted?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_UserSignedIn value)? userSignedIn,
-    TResult Function(_UserSignedOut value)? userSignedOut,
+    TResult Function(_SplashCompleted value)? splashCompleted,
     required TResult orElse(),
   }) {
-    if (userSignedIn != null) {
-      return userSignedIn(this);
+    if (splashCompleted != null) {
+      return splashCompleted(this);
     }
     return orElse();
   }
 }
 
-abstract class _UserSignedIn implements SplashState {
-  factory _UserSignedIn() = _$_UserSignedIn;
-}
-
-/// @nodoc
-abstract class _$$_UserSignedOutCopyWith<$Res> {
-  factory _$$_UserSignedOutCopyWith(
-          _$_UserSignedOut value, $Res Function(_$_UserSignedOut) then) =
-      __$$_UserSignedOutCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_UserSignedOutCopyWithImpl<$Res>
-    extends _$SplashStateCopyWithImpl<$Res, _$_UserSignedOut>
-    implements _$$_UserSignedOutCopyWith<$Res> {
-  __$$_UserSignedOutCopyWithImpl(
-      _$_UserSignedOut _value, $Res Function(_$_UserSignedOut) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_UserSignedOut implements _UserSignedOut {
-  _$_UserSignedOut();
-
-  @override
-  String toString() {
-    return 'SplashState.userSignedOut()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_UserSignedOut);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(double turn) initial,
-    required TResult Function() userSignedIn,
-    required TResult Function() userSignedOut,
-  }) {
-    return userSignedOut();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(double turn)? initial,
-    TResult? Function()? userSignedIn,
-    TResult? Function()? userSignedOut,
-  }) {
-    return userSignedOut?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(double turn)? initial,
-    TResult Function()? userSignedIn,
-    TResult Function()? userSignedOut,
-    required TResult orElse(),
-  }) {
-    if (userSignedOut != null) {
-      return userSignedOut();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_UserSignedIn value) userSignedIn,
-    required TResult Function(_UserSignedOut value) userSignedOut,
-  }) {
-    return userSignedOut(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_UserSignedIn value)? userSignedIn,
-    TResult? Function(_UserSignedOut value)? userSignedOut,
-  }) {
-    return userSignedOut?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_UserSignedIn value)? userSignedIn,
-    TResult Function(_UserSignedOut value)? userSignedOut,
-    required TResult orElse(),
-  }) {
-    if (userSignedOut != null) {
-      return userSignedOut(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UserSignedOut implements SplashState {
-  factory _UserSignedOut() = _$_UserSignedOut;
+abstract class _SplashCompleted implements SplashState {
+  factory _SplashCompleted() = _$_SplashCompleted;
 }

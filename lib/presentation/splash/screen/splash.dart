@@ -21,8 +21,7 @@ class SplashPage extends ConsumerWidget {
     }
     ref.listen(splashNotifierProvider, (previous, next) {
       next.mapOrNull(
-          userSignedIn: (_) => context.router.replace(const ProjectsRoute()),
-          userSignedOut: (_) => context.router.replace(const LoginRoute()));
+          splashCompleted: (_) => context.router.replace(const ProjectsRoute()));
     });
     return Scaffold(
         body: Column(

@@ -11,48 +11,42 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i7;
-import 'package:flutter/material.dart' as _i8;
+import 'package:auto_route/auto_route.dart' as _i6;
+import 'package:flutter/cupertino.dart' as _i9;
+import 'package:flutter/material.dart' as _i7;
 
 import '../../domain/board/task_model.dart' as _i10;
-import '../../domain/project/project_model.dart' as _i9;
-import '../auth/screens/login.dart' as _i2;
-import '../board/screens/board.dart' as _i5;
-import '../board/screens/create_edit_task.dart' as _i6;
-import '../project/screens/create_edit_project.dart' as _i4;
-import '../project/screens/projects.dart' as _i3;
+import '../../domain/project/project_model.dart' as _i8;
+import '../board/screens/board.dart' as _i4;
+import '../board/screens/create_edit_task.dart' as _i5;
+import '../project/screens/create_edit_project.dart' as _i3;
+import '../project/screens/projects.dart' as _i2;
 import '../splash/screen/splash.dart' as _i1;
 
-class AppRouter extends _i7.RootStackRouter {
-  AppRouter([_i8.GlobalKey<_i8.NavigatorState>? navigatorKey])
+class AppRouter extends _i6.RootStackRouter {
+  AppRouter([_i7.GlobalKey<_i7.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i7.PageFactory> pagesMap = {
+  final Map<String, _i6.PageFactory> pagesMap = {
     SplashRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
+      return _i6.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.SplashPage(),
       );
     },
-    LoginRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i2.LoginPage(),
-      );
-    },
     ProjectsRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
+      return _i6.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i3.ProjectsPage(),
+        child: const _i2.ProjectsPage(),
       );
     },
     CreateEditProjectRoute.name: (routeData) {
       final args = routeData.argsAs<CreateEditProjectRouteArgs>(
           orElse: () => const CreateEditProjectRouteArgs());
-      return _i7.MaterialPageX<dynamic>(
+      return _i6.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i4.CreateEditProjectPage(
+        child: _i3.CreateEditProjectPage(
           project: args.project,
           key: args.key,
         ),
@@ -69,9 +63,9 @@ class AppRouter extends _i7.RootStackRouter {
                   'Board',
                 ),
               ));
-      return _i7.MaterialPageX<dynamic>(
+      return _i6.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i5.ProjectBoardPage(
+        child: _i4.ProjectBoardPage(
           id: args.id,
           projectName: args.projectName,
           key: args.key,
@@ -83,9 +77,9 @@ class AppRouter extends _i7.RootStackRouter {
       final args = routeData.argsAs<CreateEditTaskRouteArgs>(
           orElse: () =>
               CreateEditTaskRouteArgs(projectId: pathParams.getInt('id')));
-      return _i7.MaterialPageX<dynamic>(
+      return _i6.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i6.CreateEditTaskPage(
+        child: _i5.CreateEditTaskPage(
           projectId: args.projectId,
           task: args.task,
           key: args.key,
@@ -95,34 +89,30 @@ class AppRouter extends _i7.RootStackRouter {
   };
 
   @override
-  List<_i7.RouteConfig> get routes => [
-        _i7.RouteConfig(
+  List<_i6.RouteConfig> get routes => [
+        _i6.RouteConfig(
           '/#redirect',
           path: '/',
           redirectTo: '/splash',
           fullMatch: true,
         ),
-        _i7.RouteConfig(
+        _i6.RouteConfig(
           SplashRoute.name,
           path: '/splash',
         ),
-        _i7.RouteConfig(
-          LoginRoute.name,
-          path: '/login',
-        ),
-        _i7.RouteConfig(
+        _i6.RouteConfig(
           ProjectsRoute.name,
           path: '/projects',
         ),
-        _i7.RouteConfig(
+        _i6.RouteConfig(
           CreateEditProjectRoute.name,
           path: '/create_projects',
         ),
-        _i7.RouteConfig(
+        _i6.RouteConfig(
           ProjectBoardRoute.name,
           path: 'board/:id',
         ),
-        _i7.RouteConfig(
+        _i6.RouteConfig(
           CreateEditTaskRoute.name,
           path: 'board/:id/create_task',
         ),
@@ -131,7 +121,7 @@ class AppRouter extends _i7.RootStackRouter {
 
 /// generated route for
 /// [_i1.SplashPage]
-class SplashRoute extends _i7.PageRouteInfo<void> {
+class SplashRoute extends _i6.PageRouteInfo<void> {
   const SplashRoute()
       : super(
           SplashRoute.name,
@@ -142,20 +132,8 @@ class SplashRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.LoginPage]
-class LoginRoute extends _i7.PageRouteInfo<void> {
-  const LoginRoute()
-      : super(
-          LoginRoute.name,
-          path: '/login',
-        );
-
-  static const String name = 'LoginRoute';
-}
-
-/// generated route for
-/// [_i3.ProjectsPage]
-class ProjectsRoute extends _i7.PageRouteInfo<void> {
+/// [_i2.ProjectsPage]
+class ProjectsRoute extends _i6.PageRouteInfo<void> {
   const ProjectsRoute()
       : super(
           ProjectsRoute.name,
@@ -166,12 +144,12 @@ class ProjectsRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.CreateEditProjectPage]
+/// [_i3.CreateEditProjectPage]
 class CreateEditProjectRoute
-    extends _i7.PageRouteInfo<CreateEditProjectRouteArgs> {
+    extends _i6.PageRouteInfo<CreateEditProjectRouteArgs> {
   CreateEditProjectRoute({
-    _i9.ProjectModel? project,
-    _i8.Key? key,
+    _i8.ProjectModel? project,
+    _i9.Key? key,
   }) : super(
           CreateEditProjectRoute.name,
           path: '/create_projects',
@@ -190,9 +168,9 @@ class CreateEditProjectRouteArgs {
     this.key,
   });
 
-  final _i9.ProjectModel? project;
+  final _i8.ProjectModel? project;
 
-  final _i8.Key? key;
+  final _i9.Key? key;
 
   @override
   String toString() {
@@ -201,12 +179,12 @@ class CreateEditProjectRouteArgs {
 }
 
 /// generated route for
-/// [_i5.ProjectBoardPage]
-class ProjectBoardRoute extends _i7.PageRouteInfo<ProjectBoardRouteArgs> {
+/// [_i4.ProjectBoardPage]
+class ProjectBoardRoute extends _i6.PageRouteInfo<ProjectBoardRouteArgs> {
   ProjectBoardRoute({
     required int id,
     String projectName = 'Board',
-    _i8.Key? key,
+    _i9.Key? key,
   }) : super(
           ProjectBoardRoute.name,
           path: 'board/:id',
@@ -233,7 +211,7 @@ class ProjectBoardRouteArgs {
 
   final String projectName;
 
-  final _i8.Key? key;
+  final _i9.Key? key;
 
   @override
   String toString() {
@@ -242,12 +220,12 @@ class ProjectBoardRouteArgs {
 }
 
 /// generated route for
-/// [_i6.CreateEditTaskPage]
-class CreateEditTaskRoute extends _i7.PageRouteInfo<CreateEditTaskRouteArgs> {
+/// [_i5.CreateEditTaskPage]
+class CreateEditTaskRoute extends _i6.PageRouteInfo<CreateEditTaskRouteArgs> {
   CreateEditTaskRoute({
     required int projectId,
     _i10.TaskModel? task,
-    _i8.Key? key,
+    _i9.Key? key,
   }) : super(
           CreateEditTaskRoute.name,
           path: 'board/:id/create_task',
@@ -273,7 +251,7 @@ class CreateEditTaskRouteArgs {
 
   final _i10.TaskModel? task;
 
-  final _i8.Key? key;
+  final _i9.Key? key;
 
   @override
   String toString() {

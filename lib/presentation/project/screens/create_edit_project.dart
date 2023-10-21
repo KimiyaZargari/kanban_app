@@ -50,7 +50,7 @@ class CreateEditProjectPage extends ConsumerWidget {
                   child: Form(
                     key: notifier.createProjectKey,
                     child: AppTextField(
-                      label: 'Project Name:',
+                      label: 'Project Name',
                       initialValue: project?.name,
                       onSaved: (val) {
                         notifier.projectName = val!;

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kanban_app/presentation/core/config/themes/provider.dart';
 
-import '../../auth/widgets/dialog_logout.dart';
 
 class PageBase extends StatelessWidget {
   final Widget child;

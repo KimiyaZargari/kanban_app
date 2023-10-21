@@ -1,6 +1,5 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:kanban_app/presentation/auth/screens/login.dart';
 import 'package:kanban_app/presentation/board/screens/create_edit_task.dart';
 import 'package:kanban_app/presentation/project/screens/create_edit_project.dart';
 import 'package:kanban_app/presentation/project/screens/projects.dart';
@@ -11,7 +10,6 @@ import 'package:kanban_app/presentation/splash/screen/splash.dart';
   replaceInRouteName: 'Page,Route',
   routes: [
     AutoRoute(path: '/splash', page: SplashPage, initial: true),
-    AutoRoute(path: '/login', page: LoginPage),
     AutoRoute(path: '/projects', page: ProjectsPage),
     AutoRoute(path: '/create_projects', page: CreateEditProjectPage),
     AutoRoute(path: 'board/:id', page: ProjectBoardPage),
