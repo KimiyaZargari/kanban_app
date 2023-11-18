@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:kanban_app/domain/board/task_model.dart';
+import 'package:kanban_app/domain/board/task_entity.dart';
 import 'package:kanban_app/presentation/board/widgets/delete_task_dialog.dart';
 import 'package:kanban_app/presentation/core/config/strings.dart';
 import 'package:kanban_app/presentation/routes/router.gr.dart';
@@ -10,7 +10,7 @@ import '../../../domain/core/enums.dart';
 import '../notifiers/timer_notifier.dart';
 
 class TaskDialog extends StatelessWidget {
-  final TaskModel task;
+  final TaskEntity task;
   final int projectId;
 
   final Function() logTime, onDelete;
@@ -19,13 +19,12 @@ class TaskDialog extends StatelessWidget {
       {required this.logTime,
       required this.projectId,
       required this.onDelete,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding: EdgeInsets.all(22),
+      insetPadding: const EdgeInsets.all(22),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 22),
         child: Column(

@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'task_model.dart';
+part of 'task_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TaskModelImpl _$$TaskModelImplFromJson(Map<String, dynamic> json) =>
-    _$TaskModelImpl(
+_$TaskDtoImpl _$$TaskDtoImplFromJson(Map<String, dynamic> json) =>
+    _$TaskDtoImpl(
       id: json['id'] as int?,
       title: json['title'] as String,
       description: json['description'] as String?,
@@ -20,7 +20,7 @@ _$TaskModelImpl _$$TaskModelImplFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['completedAt'] as String),
     );
 
-Map<String, dynamic> _$$TaskModelImplToJson(_$TaskModelImpl instance) =>
+Map<String, dynamic> _$$TaskDtoImplToJson(_$TaskDtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

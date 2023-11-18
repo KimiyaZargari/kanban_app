@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:kanban_app/domain/board/task_model.dart';
+import 'package:kanban_app/domain/board/task_entity.dart';
 import 'package:kanban_app/presentation/board/widgets/task_dialog.dart';
 import '../../../domain/core/enums.dart';
 import 'package:kanban_app/presentation/board/notifiers/timer_notifier.dart';
 
 class TaskCard extends StatelessWidget {
-  final TaskModel task;
+  final TaskEntity task;
 final int projectId;
   final double width;
   final Function() logTime, onDelete;
@@ -18,8 +18,7 @@ final int projectId;
         required this.projectId,
       required this.width,
       required this.onDelete,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   @override
   Widget build(BuildContext context) {

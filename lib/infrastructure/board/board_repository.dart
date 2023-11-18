@@ -4,15 +4,14 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:kanban_app/domain/board/i_board_repository.dart';
-import 'package:kanban_app/domain/board/task_model.dart';
+import 'package:kanban_app/infrastructure/board/task_dto.dart';
+
 import '../../domain/core/enums.dart';
 import '../core/local_database.dart';
 
-final boardRepositoryProvider =
-    Provider((ref) => BoardRepository());
+final boardRepositoryProvider = Provider((ref) => BoardRepository());
 
 class BoardRepository implements IBoardRepository {
-
   late final Box tasksBox;
 
   Future<void> _openBox(int projectId) async {
@@ -21,7 +20,7 @@ class BoardRepository implements IBoardRepository {
   }
 
   @override
-  Future<Either<Exception, int>> createTask(TaskModel task) async {
+  Future<Either<Exception, int>> createTask(TaskDto task) async {
     if (tasksBox.values
         .where((element) => element['title'] == task.title)
         .isNotEmpty) {
@@ -48,35 +47,35 @@ class BoardRepository implements IBoardRepository {
   }
 
   @override
-  Future<Either<Exception, Unit>> editTask(EditTaskModel model) async {
-    if (model.oldTask.title != model.newTask.title) {
+  Future<Either<Exception, Unit>> editTask(
+      {required TaskDto oldTask, required TaskDto newTask}) async {
+    if (oldTask.title != newTask.title) {
       if (tasksBox.values
           .where((element) =>
-              element['title'] == model.newTask.title &&
-              element['id'] != model.newTask.id)
+              element['title'] == newTask.title && element['id'] != newTask.id)
           .isNotEmpty) {
         return left(Exception('This task already exists!'));
       }
     }
-    await tasksBox.put(model.newTask.id!, model.newTask.toJson());
-    if (model.oldTask.status != model.newTask.status) {
-      _updateTaskNumber(model.oldTask.status, -1);
-      _updateTaskNumber(model.newTask.status, 1);
+    await tasksBox.put(newTask.id!, newTask.toJson());
+    if (oldTask.status != newTask.status) {
+      _updateTaskNumber(oldTask.status, -1);
+      _updateTaskNumber(newTask.status, 1);
     }
     return right(unit);
   }
 
   @override
-  Future<Map<String, List<TaskModel>>> getBoardData(int projectId) async {
+  Future<Map<String, List<TaskDto>>> getBoardData(int projectId) async {
     await _openBox(projectId);
-    Map<String, List<TaskModel>> tasks = {
+    Map<String, List<TaskDto>> tasks = {
       TaskStatus.toDo.toString(): [],
       TaskStatus.inProgress.toString(): [],
       TaskStatus.done.toString(): [],
     };
 
     for (var element in tasksBox.values) {
-      final task = TaskModel.fromJson(jsonDecode(jsonEncode(element)));
+      final task = TaskDto.fromJson(jsonDecode(jsonEncode(element)));
       tasks[task.status]!.add(task);
     }
     return tasks;

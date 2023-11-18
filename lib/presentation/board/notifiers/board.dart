@@ -9,7 +9,7 @@ import 'package:kanban_app/application/board/create_task.dart';
 import 'package:kanban_app/application/board/delete_task.dart';
 import 'package:kanban_app/application/board/edit_task.dart';
 import 'package:kanban_app/application/board/get_board_data.dart';
-import 'package:kanban_app/domain/board/task_model.dart';
+import 'package:kanban_app/domain/board/task_entity.dart';
 import 'package:kanban_app/infrastructure/board/board_repository.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -18,10 +18,12 @@ import '../../../domain/core/enums.dart';
 import '../../../infrastructure/core/local_database.dart';
 
 part 'board.freezed.dart';
+
 part 'board_state.dart';
 
 final boardNotifierProvider = StateNotifierProvider.autoDispose
-    .family<BoardNotifier, BoardState, int>((ref, projectId) => BoardNotifier(
+    .family<BoardNotifier, BoardState, int>((ref, projectId) =>
+    BoardNotifier(
         repository: ref.watch(boardRepositoryProvider), projectId: projectId));
 final dragTaskNotifierProvider = StateProvider<bool>((ref) => false);
 
@@ -31,19 +33,11 @@ class BoardNotifier extends StateNotifier<BoardState> {
 
   BoardNotifier({required this.repository, required this.projectId})
       : super(_Initial());
-  late Map<String, List<TaskModel>> tasks;
+  late Map<String, List<TaskEntity>> tasks;
 
-  Future<bool> createTask(TaskModel task) async {
-    CreateTask createTask = CreateTask(repository);
-    return (await createTask(task)).fold((l) {
-      return false;
-    }, (r) {
-      tasks[task.status]!.add(task.copyWith(id: r));
-      return true;
-    });
-  }
 
-  deleteTask(TaskModel task) async {
+
+  deleteTask(TaskEntity task) async {
     DeleteTask deleteTask = DeleteTask(repository);
     await deleteTask(task.id!);
     tasks[task.status]!.remove(task);
@@ -56,70 +50,80 @@ class BoardNotifier extends StateNotifier<BoardState> {
     state = _Loaded();
   }
 
-  takeTaskToToDo({required TaskModel task, int? at}) async {
+  takeTaskToToDo({required TaskEntity task, int? at}) async {
     tasks[task.status]?.remove(task);
     List<DateTime> intervals = [];
-    task = task.copyWith(intervals: intervals, completedAt: null);
-    await _changeTaskStatus(task: task, to: TaskStatus.toDo.toString(), at: at);
+    task.intervals = intervals;
+    task.completedAt = null;
+    await _changeTaskStatus(
+        task: task, toStatus: TaskStatus.toDo.toString(), at: at);
   }
 
-  logTaskTime({required TaskModel task}) async {
+  logTaskTime({required TaskEntity task}) async {
     List<DateTime> intervals =
-        task.intervals == null ? [] : [...task.intervals!];
+    task.intervals == null ? [] : [...task.intervals!];
     intervals.add(DateTime.now());
 
     EditTask editTask = EditTask(repository);
-    await editTask(EditTaskModel(
-        oldTask: task, newTask: task.copyWith(intervals: intervals)));
+    final newTask = TaskEntity(
+        title: task.title,
+        status: task.status,
+        id: task.id,
+        description: task.description,
+        intervals: intervals,
+        completedAt: task.completedAt);
+    await editTask(EditTaskEntity(oldTask: task, newTask: newTask));
     final index = tasks[task.status]!.indexOf(task);
-    tasks[task.status]!
-        .replaceRange(index, index + 1, [task.copyWith(intervals: intervals)]);
+    tasks[task.status]!.replaceRange(index, index + 1, [newTask]);
     state = BoardState.loaded();
   }
 
-  takeTaskToInProgress(
-      {required TaskModel task,
-      required bool shouldStartTimer,
-      int? at}) async {
+  takeTaskToInProgress({required TaskEntity task,
+    required bool shouldStartTimer,
+    int? at}) async {
     tasks[task.status]?.remove(task);
     List<DateTime> intervals =
-        task.intervals == null ? [] : [...task.intervals!];
+    task.intervals == null ? [] : [...task.intervals!];
 
     if (shouldStartTimer) intervals.add(DateTime.now());
-    task = task.copyWith(intervals: intervals, completedAt: null);
+    task.intervals = intervals;
+    task.completedAt = null;
     await _changeTaskStatus(
-        task: task, to: TaskStatus.inProgress.toString(), at: at);
+        task: task, toStatus: TaskStatus.inProgress.toString(), at: at);
   }
 
-  Future<bool> editTask(EditTaskModel data) async {
-    EditTask editTask = EditTask(repository);
-    return (await editTask(data)).fold((l) => false, (r) => true);
-  }
 
-  takeTaskToDone(
-      {required TaskModel task, required DateTime? completion, int? at}) async {
+  takeTaskToDone({required TaskEntity task,
+    required DateTime? completion,
+    int? at}) async {
     tasks[task.status]?.remove(task);
     List<DateTime> intervals =
-        task.intervals == null ? [] : [...task.intervals!];
+    task.intervals == null ? [] : [...task.intervals!];
 
     if (intervals.length.isOdd) intervals.add(DateTime.now());
-    task = task.copyWith(
-      intervals: intervals,
-    );
-    if (completion != null) task = task.copyWith(completedAt: completion);
-    await _changeTaskStatus(task: task, to: TaskStatus.done.toString(), at: at);
+    task.intervals = intervals;
+    if (completion != null) task.completedAt = completion;
+    await _changeTaskStatus(
+        task: task, toStatus: TaskStatus.done.toString(), at: at);
   }
 
   _changeTaskStatus(
-      {required TaskModel task, required String to, int? at}) async {
-    final newTask = task.copyWith(status: to);
-    if (at == null || at > tasks[to]!.length) {
-      tasks[to]?.add(newTask);
+      {required TaskEntity task, required String toStatus, int? at}) async {
+    final newTask = TaskEntity(
+      status: toStatus,
+      id: task.id,
+      description: task.description,
+      intervals: task.intervals,
+      completedAt: task.completedAt,
+      title: task.title,
+    );
+    if (at == null || at > tasks[toStatus]!.length) {
+      tasks[toStatus]?.add(newTask);
     } else {
-      tasks[to]?.insert(at, newTask);
+      tasks[toStatus]?.insert(at, newTask);
     }
     EditTask editTask = EditTask(repository);
-    await editTask(EditTaskModel(oldTask: task, newTask: newTask));
+    await editTask(EditTaskEntity(oldTask: task, newTask: newTask));
     state = _Loaded();
   }
 
@@ -133,8 +137,8 @@ class BoardNotifier extends StateNotifier<BoardState> {
         'completedAt',
       ]
     ];
-    for (List<TaskModel> tasks in tasks.values) {
-      for (TaskModel task in tasks) {
+    for (List<TaskEntity> tasks in tasks.values) {
+      for (TaskEntity task in tasks) {
         list.add(task.getCsvStringList());
       }
     }

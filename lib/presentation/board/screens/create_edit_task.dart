@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kanban_app/domain/board/task_entity.dart';
 
 import 'package:kanban_app/presentation/board/notifiers/board.dart';
 import 'package:kanban_app/presentation/board/notifiers/create_edit_task.dart';
@@ -11,13 +12,12 @@ import 'package:kanban_app/presentation/core/config/strings.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
 import 'package:kanban_app/presentation/core/widgets/text_field.dart';
 import 'package:kanban_app/presentation/project/notifiers/projects.dart';
-import '../../../domain/board/task_model.dart';
 import '../../../domain/core/enums.dart';
 
 @RoutePage()
 class CreateEditTaskPage extends ConsumerWidget {
   final int projectId;
-  final TaskModel? task;
+  final TaskEntity? task;
 
   const CreateEditTaskPage(
       {@PathParam('id') required this.projectId, this.task, super.key});
@@ -174,23 +174,11 @@ class CreateEditTaskPage extends ConsumerWidget {
                                               ?.validate() ??
                                           false) {
                                         notifier.formKey.currentState!.save();
-                                        final editedTask = task!.copyWith(
-                                          title: notifier.title!,
-                                          description:
-                                              notifier.description?.trim(),
-                                        );
-                                        notifier.notifyCreatingTask();
-                                        if (await ref
-                                            .read(
-                                                boardNotifierProvider(projectId)
-                                                    .notifier)
-                                            .editTask(EditTaskModel(
-                                                oldTask: task!,
-                                                newTask: editedTask))) {
-                                          notifier.notifyTaskCreationFinished();
-                                        } else {
-                                          notifier.notifyDuplicateTask();
-                                        }
+
+                                        notifier.editTask(
+                                            task!,
+                                            notifier.title!,
+                                            notifier.description);
                                       }
                                     },
                                     child: const Text(AppStrings.save))
@@ -202,7 +190,8 @@ class CreateEditTaskPage extends ConsumerWidget {
                                         notifier.formKey.currentState!.save();
                                         final status = ref.read(
                                             selectedTaskStateNotifierProvider);
-                                        final task = TaskModel(
+                                        final task = TaskEntity(
+                                            id: null,
                                             title: notifier.title!,
                                             status: status.toString(),
                                             description:
@@ -217,21 +206,8 @@ class CreateEditTaskPage extends ConsumerWidget {
                                                         startTimerNotifierProvider)
                                                 ? [DateTime.now()]
                                                 : []);
-                                        notifier.notifyCreatingTask();
-                                        if (await ref
-                                            .read(
-                                                boardNotifierProvider(projectId)
-                                                    .notifier)
-                                            .createTask(task)) {
-                                          if (createAnother) {
-                                            notifier.notifyCreateAnotherTask();
-                                          } else {
-                                            notifier
-                                                .notifyTaskCreationFinished();
-                                          }
-                                        } else {
-                                          notifier.notifyDuplicateTask();
-                                        }
+                                        notifier.createTask(
+                                            task, createAnother);
                                       }
                                     },
                                     child: const Text(AppStrings.create)),

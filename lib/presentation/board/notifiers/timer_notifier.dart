@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../domain/board/task_model.dart';
 
 final timerProvider = ChangeNotifierProvider.autoDispose
     .family<TimerNotifier, int>((ref, id) => TimerNotifier(id));

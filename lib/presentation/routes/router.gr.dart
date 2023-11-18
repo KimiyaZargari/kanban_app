@@ -11,7 +11,7 @@
 import 'package:auto_route/auto_route.dart' as _i6;
 import 'package:flutter/cupertino.dart' as _i10;
 import 'package:flutter/material.dart' as _i8;
-import 'package:kanban_app/domain/board/task_model.dart' as _i9;
+import 'package:kanban_app/domain/board/task_entity.dart' as _i9;
 import 'package:kanban_app/domain/project/project_entity.dart' as _i7;
 import 'package:kanban_app/presentation/board/screens/board.dart' as _i3;
 import 'package:kanban_app/presentation/board/screens/create_edit_task.dart'
@@ -130,7 +130,7 @@ class CreateEditProjectRouteArgs {
 class CreateEditTaskRoute extends _i6.PageRouteInfo<CreateEditTaskRouteArgs> {
   CreateEditTaskRoute({
     required int projectId,
-    _i9.TaskModel? task,
+    _i9.TaskEntity? task,
     _i10.Key? key,
     List<_i6.PageRouteInfo>? children,
   }) : super(
@@ -159,7 +159,7 @@ class CreateEditTaskRouteArgs {
 
   final int projectId;
 
-  final _i9.TaskModel? task;
+  final _i9.TaskEntity? task;
 
   final _i10.Key? key;
 

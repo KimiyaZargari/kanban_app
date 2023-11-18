@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class InProgressDialog extends StatelessWidget {
-  const InProgressDialog({Key? key}) : super(key: key);
+  const InProgressDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +13,8 @@ class InProgressDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Would you like to start the timer on this task?'),
-            SizedBox(
+            const Text('Would you like to start the timer on this task?'),
+            const SizedBox(
               height: 20,
             ),
             Row(

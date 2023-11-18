@@ -1,22 +1,21 @@
-import 'package:flutter/material.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'dart:core';
 
-part 'task_model.freezed.dart';
+class TaskEntity {
+  int? id;
+  String title;
+  String? description;
+  String status;
+  List<DateTime>? intervals;
+  DateTime? completedAt;
 
-part 'task_model.g.dart';
-
-@freezed
-class TaskModel with _$TaskModel {
-  TaskModel._();
-
-  factory TaskModel({
-    int? id,
-    required String title,
-      String? description,
-    required String status,
-    List<DateTime>? intervals,
-    DateTime? completedAt,
-  }) = _TaskModel;
+  TaskEntity({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.status,
+    required this.intervals,
+    required this.completedAt,
+  });
 
   Duration _getDuration() {
     if (intervals == null || intervals!.isEmpty) {
@@ -59,28 +58,18 @@ class TaskModel with _$TaskModel {
     ];
   }
 
-  factory TaskModel.fromJson(Map<String, dynamic> json) =>
-      _$TaskModelFromJson(json);
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is TaskModel && other.id == id && other.title == title;
+    return other is TaskEntity && other.id == id && other.title == title;
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, id, title);
 }
 
-@freezed
-class EditTaskModel with _$EditTaskModel {
-  EditTaskModel._();
+class EditTaskEntity {
+  final TaskEntity oldTask, newTask;
 
-  factory EditTaskModel({
-    required TaskModel oldTask,
-    required TaskModel newTask,
-  }) = _EditTaskModel;
+  EditTaskEntity({required this.newTask, required this.oldTask});
 }
-
-
-
