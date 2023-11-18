@@ -16,7 +16,7 @@ class SplashPage extends ConsumerWidget {
     final notifier = ref.watch(splashNotifierProvider.notifier);
     final state = ref.watch(splashNotifierProvider);
     if (state == SplashState.initial(0)) {
-      notifier.getUser();
+      notifier.openBox();
      // notifier.turn();
     }
     ref.listen(splashNotifierProvider, (previous, next) {

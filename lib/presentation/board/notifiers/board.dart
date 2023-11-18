@@ -1,24 +1,23 @@
 import 'dart:io';
-import 'package:kanban_app/application/board/delete_task.dart';
 
-import '../../../domain/core/enums.dart';
 import 'package:csv/csv.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:kanban_app/application/board/create_task.dart';
+import 'package:kanban_app/application/board/delete_task.dart';
 import 'package:kanban_app/application/board/edit_task.dart';
 import 'package:kanban_app/application/board/get_board_data.dart';
 import 'package:kanban_app/domain/board/task_model.dart';
 import 'package:kanban_app/infrastructure/board/board_repository.dart';
 import 'package:path_provider/path_provider.dart';
+
 import '../../../domain/board/i_board_repository.dart';
+import '../../../domain/core/enums.dart';
 import '../../../infrastructure/core/local_database.dart';
 
 part 'board.freezed.dart';
-
 part 'board_state.dart';
 
 final boardNotifierProvider = StateNotifierProvider.autoDispose

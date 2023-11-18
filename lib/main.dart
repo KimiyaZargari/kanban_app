@@ -8,24 +8,33 @@ import 'package:kanban_app/presentation/core/config/themes/provider.dart';
 import 'package:kanban_app/presentation/routes/router.gr.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'infrastructure/core/local_database.dart';
+import 'infrastructure/project/project_repository.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   final appDocumentDirectory = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
+  final projectsBox = await Hive.openBox<Map>(DatabaseKeys.projectKey);
 
-  runApp(MyApp());
+  runApp(MyApp(projectsBox: projectsBox,));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  MyApp({required this.projectsBox, super.key});
 
+  final Box<Map> projectsBox;
   final _appRouter = AppRouter();
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
+      overrides: [
+        projectRepositoryProvider
+            .overrideWithValue(ProjectRepository(projectsBox))
+      ],
       child: Consumer(builder: (context, ref, _) {
         final themeMode = ref.watch(themeProvider);
         return MaterialApp.router(

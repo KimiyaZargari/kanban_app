@@ -7,22 +7,14 @@ import 'package:kanban_app/domain/project/project_model.dart';
 import 'package:kanban_app/infrastructure/core/local_database.dart';
 
 final projectRepositoryProvider =
-    Provider.autoDispose((ref) => ProjectRepository());
+    Provider<ProjectRepository>((ref) => throw UnimplementedError());
 
 class ProjectRepository implements IProjectRepository {
   late final Box<Map> projectsBox;
 
-  ProjectRepository();
+  ProjectRepository(this.projectsBox);
 
-  @override
-  Future<void> _openBox() async {
-    if (!Hive.isBoxOpen(DatabaseKeys.projectKey)) {
-      projectsBox = await Hive.openBox(DatabaseKeys.projectKey);
-    }
-    //projectsBox.clear();
-  }
 
-  @override
   Future<void> closeBox() async {
     await projectsBox.close();
   }
@@ -60,7 +52,6 @@ class ProjectRepository implements IProjectRepository {
 
   @override
   Future<List<ProjectModel>> getProjects() async {
-    await _openBox();
     return List<ProjectModel>.from(projectsBox.values
         .map((e) => ProjectModel.fromJson(jsonDecode(jsonEncode(e)))));
   }
