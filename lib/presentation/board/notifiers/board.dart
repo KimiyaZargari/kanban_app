@@ -22,8 +22,7 @@ part 'board.freezed.dart';
 part 'board_state.dart';
 
 final boardNotifierProvider = StateNotifierProvider.autoDispose
-    .family<BoardNotifier, BoardState, int>((ref, projectId) =>
-    BoardNotifier(
+    .family<BoardNotifier, BoardState, int>((ref, projectId) => BoardNotifier(
         repository: ref.watch(boardRepositoryProvider), projectId: projectId));
 final dragTaskNotifierProvider = StateProvider<bool>((ref) => false);
 
@@ -34,8 +33,6 @@ class BoardNotifier extends StateNotifier<BoardState> {
   BoardNotifier({required this.repository, required this.projectId})
       : super(_Initial());
   late Map<String, List<TaskEntity>> tasks;
-
-
 
   deleteTask(TaskEntity task) async {
     DeleteTask deleteTask = DeleteTask(repository);
@@ -49,19 +46,12 @@ class BoardNotifier extends StateNotifier<BoardState> {
     tasks = await getBoardData(projectId);
     state = _Loaded();
   }
-
-  takeTaskToToDo({required TaskEntity task, int? at}) async {
-    tasks[task.status]?.remove(task);
-    List<DateTime> intervals = [];
-    task.intervals = intervals;
-    task.completedAt = null;
-    await _changeTaskStatus(
-        task: task, toStatus: TaskStatus.toDo.toString(), at: at);
-  }
-
+///called when play or pause is pressed on task that is in progress
   logTaskTime({required TaskEntity task}) async {
+    ///initiate intervals
     List<DateTime> intervals =
-    task.intervals == null ? [] : [...task.intervals!];
+        task.intervals == null ? [] : [...task.intervals!];
+    ///log current time
     intervals.add(DateTime.now());
 
     EditTask editTask = EditTask(repository);
@@ -78,35 +68,57 @@ class BoardNotifier extends StateNotifier<BoardState> {
     state = BoardState.loaded();
   }
 
-  takeTaskToInProgress({required TaskEntity task,
-    required bool shouldStartTimer,
-    int? at}) async {
+  takeTaskToToDo({required TaskEntity task, int? at}) async {
     tasks[task.status]?.remove(task);
-    List<DateTime> intervals =
-    task.intervals == null ? [] : [...task.intervals!];
+    List<DateTime> intervals = [];
+    task.intervals = intervals;
+    task.completedAt = null;
+    await _changeTaskStatus(
+        task: task, toStatus: TaskStatus.toDo.toString(), at: at);
+  }
 
+  takeTaskToInProgress(
+      {required TaskEntity task,
+      required bool shouldStartTimer,
+      int? at}) async {
+    ///remove task from current column
+    tasks[task.status]?.remove(task);
+    ///update intervals that reflect time spent on task
+    ///task that is being moved to the inProgress task either has empty intervals(moved from to do )
+    ///or an even number of data in it's interval lists (moved from done)
+    List<DateTime> intervals =
+        task.intervals == null ? [] : [...task.intervals!];
     if (shouldStartTimer) intervals.add(DateTime.now());
     task.intervals = intervals;
+    ///make sure completion date does not exist
     task.completedAt = null;
     await _changeTaskStatus(
         task: task, toStatus: TaskStatus.inProgress.toString(), at: at);
   }
 
-
-  takeTaskToDone({required TaskEntity task,
-    required DateTime? completion,
-    int? at}) async {
+  takeTaskToDone(
+      {required TaskEntity task,
+      required DateTime? completion,
+      int? at}) async {
+    ///remove task from current column
     tasks[task.status]?.remove(task);
-    List<DateTime> intervals =
-    task.intervals == null ? [] : [...task.intervals!];
 
+    ///update intervals that reflect time spent on task
+    /// timer is on if intervals length is odd,
+    /// thus stop time needs to be added to interval
+    List<DateTime> intervals =
+        task.intervals == null ? [] : [...task.intervals!];
     if (intervals.length.isOdd) intervals.add(DateTime.now());
     task.intervals = intervals;
+
+    ///add completion date
     if (completion != null) task.completedAt = completion;
+
     await _changeTaskStatus(
         task: task, toStatus: TaskStatus.done.toString(), at: at);
   }
 
+  ///leads to editing task in local database such that the state of the task is changed to the desired state
   _changeTaskStatus(
       {required TaskEntity task, required String toStatus, int? at}) async {
     final newTask = TaskEntity(

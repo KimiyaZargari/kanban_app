@@ -60,6 +60,7 @@ class CreateEditTaskPage extends ConsumerWidget {
     });
     return WillPopScope(
       onWillPop: () {
+        ///refresh board and projects page to correctly reflect new data
         ref.read(boardNotifierProvider(projectId).notifier).getData();
         ref.read(projectsNotifierProvider.notifier).getProjects();
         return Future(() => true);

@@ -14,6 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final appDocumentDirectory = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
+  ///open projects box
   final projectsBox = await Hive.openBox<Map>(DatabaseKeys.projectKey);
 
   runApp(MyApp(projectsBox: projectsBox,));
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderScope(
       overrides: [
+        ///override projects repository to hold new object of hive box
         projectRepositoryProvider
             .overrideWithValue(ProjectRepository(projectsBox))
       ],
