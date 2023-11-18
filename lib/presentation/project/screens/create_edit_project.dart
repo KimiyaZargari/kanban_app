@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kanban_app/domain/project/project_model.dart';
+import 'package:kanban_app/domain/project/project_entity.dart';
 import 'package:kanban_app/presentation/core/widgets/loading_widget.dart';
 import 'package:kanban_app/presentation/core/widgets/page_base.dart';
 import 'package:kanban_app/presentation/core/widgets/text_field.dart';
@@ -13,7 +13,7 @@ import '../../core/config/strings.dart';
 
 @RoutePage()
 class CreateEditProjectPage extends ConsumerWidget {
-  final ProjectModel? project;
+  final ProjectEntity? project;
 
   const CreateEditProjectPage({this.project, super.key});
 

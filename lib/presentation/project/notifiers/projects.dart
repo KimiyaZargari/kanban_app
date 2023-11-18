@@ -6,10 +6,8 @@ import 'package:kanban_app/application/project/create_project.dart';
 import 'package:kanban_app/application/project/delete_project.dart';
 import 'package:kanban_app/application/project/get_projects.dart';
 import 'package:kanban_app/domain/project/i_project_repository.dart';
+import 'package:kanban_app/domain/project/project_entity.dart';
 import 'package:kanban_app/infrastructure/project/project_repository.dart';
-
-import '../../../domain/core/no_param.dart';
-import '../../../domain/project/project_model.dart';
 
 part 'projects.freezed.dart';
 
@@ -21,7 +19,7 @@ final projectsNotifierProvider =
 
 class ProjectsNotifier extends StateNotifier<ProjectsState> {
   IProjectRepository repository;
-  late List<ProjectModel> projects;
+  late List<ProjectEntity> projects;
   final createProjectTextController = TextEditingController();
   final createProjectKey = GlobalKey<FormState>();
 

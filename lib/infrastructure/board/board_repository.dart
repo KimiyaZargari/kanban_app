@@ -9,12 +9,11 @@ import '../../domain/core/enums.dart';
 import '../core/local_database.dart';
 
 final boardRepositoryProvider =
-    Provider.autoDispose((ref) => BoardRepository());
+    Provider((ref) => BoardRepository());
 
 class BoardRepository implements IBoardRepository {
-  late final Box tasksBox;
 
-  BoardRepository();
+  late final Box tasksBox;
 
   Future<void> _openBox(int projectId) async {
     final boxName = "${DatabaseKeys.boardKey}_$projectId";

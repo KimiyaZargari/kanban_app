@@ -1,17 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kanban_app/domain/project/project_model.dart';
+import 'package:kanban_app/domain/project/project_entity.dart';
 import 'package:kanban_app/presentation/core/config/colors.dart';
 import '../../routes/router.gr.dart';
 import 'delete_project_dialog.dart';
 
 class ProjectCard extends StatelessWidget {
   final Function() deleteProject;
-  final ProjectModel project;
+  final ProjectEntity project;
 
-  const ProjectCard(this.project, {required this.deleteProject, Key? key})
-      : super(key: key);
+  const ProjectCard(this.project, {required this.deleteProject, super.key});
 
   @override
   Widget build(BuildContext context) {

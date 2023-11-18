@@ -3,8 +3,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:kanban_app/domain/project/i_project_repository.dart';
-import 'package:kanban_app/domain/project/project_model.dart';
 import 'package:kanban_app/infrastructure/core/local_database.dart';
+import 'package:kanban_app/infrastructure/project/project_dto.dart';
 
 final projectRepositoryProvider =
     Provider<ProjectRepository>((ref) => throw UnimplementedError());
@@ -20,7 +20,7 @@ class ProjectRepository implements IProjectRepository {
   }
 
   @override
-  Future<Either<Exception, int>> createProject(ProjectModel project) async {
+  Future<Either<Exception, int>> createProject(ProjectDto project) async {
     if (projectsBox.values
         .where((element) => element['name'] == project.name)
         .isNotEmpty) {
@@ -38,7 +38,7 @@ class ProjectRepository implements IProjectRepository {
   }
 
   @override
-  Future<Either<Exception, Unit>> editProject(ProjectModel projectModel) async {
+  Future<Either<Exception, Unit>> editProject(ProjectDto projectModel) async {
     if (projectsBox.values
         .where((element) =>
             element['name'] == projectModel.name &&
@@ -51,8 +51,8 @@ class ProjectRepository implements IProjectRepository {
   }
 
   @override
-  Future<List<ProjectModel>> getProjects() async {
-    return List<ProjectModel>.from(projectsBox.values
-        .map((e) => ProjectModel.fromJson(jsonDecode(jsonEncode(e)))));
+  Future<List<ProjectDto>> getProjects() async {
+    return List<ProjectDto>.from(projectsBox.values
+        .map((e) => ProjectDto.fromJson(jsonDecode(jsonEncode(e)))));
   }
 }

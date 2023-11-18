@@ -12,7 +12,7 @@ import 'package:auto_route/auto_route.dart' as _i6;
 import 'package:flutter/cupertino.dart' as _i10;
 import 'package:flutter/material.dart' as _i8;
 import 'package:kanban_app/domain/board/task_model.dart' as _i9;
-import 'package:kanban_app/domain/project/project_model.dart' as _i7;
+import 'package:kanban_app/domain/project/project_entity.dart' as _i7;
 import 'package:kanban_app/presentation/board/screens/board.dart' as _i3;
 import 'package:kanban_app/presentation/board/screens/create_edit_task.dart'
     as _i2;
@@ -91,7 +91,7 @@ abstract class $AppRouter extends _i6.RootStackRouter {
 class CreateEditProjectRoute
     extends _i6.PageRouteInfo<CreateEditProjectRouteArgs> {
   CreateEditProjectRoute({
-    _i7.ProjectModel? project,
+    _i7.ProjectEntity? project,
     _i8.Key? key,
     List<_i6.PageRouteInfo>? children,
   }) : super(
@@ -115,7 +115,7 @@ class CreateEditProjectRouteArgs {
     this.key,
   });
 
-  final _i7.ProjectModel? project;
+  final _i7.ProjectEntity? project;
 
   final _i8.Key? key;
 

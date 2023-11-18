@@ -1,13 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kanban_app/domain/project/i_project_repository.dart';
-import 'package:kanban_app/domain/project/project_model.dart';
+import 'package:kanban_app/domain/project/project_entity.dart';
+import 'package:kanban_app/infrastructure/project/project_dto.dart';
 import 'package:kanban_app/presentation/project/notifiers/create_project.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockProjectsRepository extends Mock implements IProjectRepository {}
 
-class FakeProject extends Fake implements ProjectModel {}
+class FakeProject extends Fake implements ProjectDto {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -24,9 +25,9 @@ void main() {
 
   group('create new project', () {
     final newProject =
-        ProjectModel(name: 'new test', inProgress: 0, todo: 0, done: 0);
+        ProjectDto(name: 'new test', inProgress: 0, todo: 0, done: 0);
     final duplicateProject =
-        ProjectModel(name: 'duplicate test', inProgress: 0, todo: 0, done: 0);
+        ProjectDto(name: 'duplicate test', inProgress: 0, todo: 0, done: 0);
     void arrangeProjectsRepositoryCreateProject() {
       when(() => mockProjectsRepository.createProject(newProject))
           .thenAnswer((invocation) async => right(1));
@@ -62,7 +63,7 @@ void main() {
 
   group('edit project', () {
     final project =
-        ProjectModel(id: 1, name: 'new test', inProgress: 0, todo: 0, done: 0);
+        ProjectEntity(id: 1, name: 'new test', inProgress: 0, todo: 0, done: 0);
 
     void arrangeProjectsRepositoryEditProject() {
       when(() => mockProjectsRepository.editProject(any()))
@@ -71,13 +72,14 @@ void main() {
       });
     }
 
-    test('indicated that edit project is called once from repository with edited name',
+    test(
+        'indicates that edit project is called once from repository with edited name',
         () async {
       arrangeProjectsRepositoryEditProject();
       sut.projectName = 'new name';
       await sut.editProject(project);
       verify(() => mockProjectsRepository
-          .editProject(project.copyWith(name: sut.projectName))).called(1);
+          .editProject(ProjectDto.fromEntity(project))).called(1);
     });
   });
 }

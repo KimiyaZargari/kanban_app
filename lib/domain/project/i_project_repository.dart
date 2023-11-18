@@ -1,13 +1,12 @@
 import 'package:dartz/dartz.dart';
-import 'package:kanban_app/domain/project/project_model.dart';
+import 'package:kanban_app/infrastructure/project/project_dto.dart';
 
 abstract class IProjectRepository {
+  Future<List<ProjectDto>> getProjects();
 
-  Future<List<ProjectModel>> getProjects();
-
-  Future<Either<Exception, int>> createProject(ProjectModel project);
+  Future<Either<Exception, int>> createProject(ProjectDto project);
 
   void deleteProject(int projectId);
 
-  Future<Either<Exception, Unit>> editProject(ProjectModel projectModel);
+  Future<Either<Exception, Unit>> editProject(ProjectDto projectModel);
 }
