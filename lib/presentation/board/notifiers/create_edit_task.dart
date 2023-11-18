@@ -56,6 +56,7 @@ class CreateTaskNotifier extends StateNotifier<CreateEditTaskState> {
   }
 
   createTask(TaskEntity task, bool createAnother) async {
+    state = _Loading();
     CreateTask createTask = CreateTask(repository);
     return (await createTask(task)).fold((l) {
       state = _DuplicateTask();

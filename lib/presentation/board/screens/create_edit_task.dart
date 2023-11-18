@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kanban_app/domain/board/task_entity.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kanban_app/presentation/board/notifiers/board.dart';
 import 'package:kanban_app/presentation/board/notifiers/create_edit_task.dart';
 import 'package:kanban_app/presentation/board/widgets/select_task_status.dart';
@@ -31,31 +31,32 @@ class CreateEditTaskPage extends ConsumerWidget {
         initial: () {
           if (task != null) notifier.setInitialData(task!);
         });
-    ref.listen(createTaskNotifierProvider(projectId), (previous, next) {
-      if (previous == CreateEditTaskState.loading() &&
-          next == CreateEditTaskState.initial()) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          elevation: 10,
-          content: Container(
-            margin: const EdgeInsets.all(10),
-            child: Text(
-              'Task Created Successfully',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ),
-          duration: const Duration(seconds: 3),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-              side: BorderSide(color: Theme.of(context).cardColor)),
-          backgroundColor: Theme.of(context).primaryColor,
-        ));
-        // Fluttertoast.showToast(
-        //     msg: 'Task Successfully Created',
-        //     backgroundColor: Theme.of(context).primaryColor,
-        //     textColor: Theme.of(context).textTheme.bodyMedium!.color);
-      } else if (next == CreateEditTaskState.loaded()) {
+    ref.listen(createTaskNotifierProvider(projectId),
+        (CreateEditTaskState? previous, CreateEditTaskState next) {
+      next.mapOrNull(loaded: (_) {
+        Fluttertoast.showToast(
+            msg: 'Task Created Successfully',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Theme.of(context).cardColor,
+            textColor: Theme.of(context).textTheme.bodyMedium!.color,
+            fontSize: 16.0
+        );
         context.router.pop();
-      }
+      }, initial: (_) {
+        previous?.mapOrNull(loading: (_) {
+          Fluttertoast.showToast(
+              msg: 'Task Created Successfully',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Theme.of(context).cardColor,
+              textColor: Theme.of(context).textTheme.bodyMedium!.color,
+              fontSize: 16.0
+          );
+        });
+      });
     });
     return WillPopScope(
       onWillPop: () {
