@@ -9,7 +9,7 @@ import 'package:kanban_app/infrastructure/board/task_dto.dart';
 import '../../domain/core/enums.dart';
 import '../core/local_database.dart';
 
-final boardRepositoryProvider = Provider((ref) => BoardRepository());
+final boardRepositoryProvider = Provider.autoDispose((ref) => BoardRepository());
 
 class BoardRepository implements IBoardRepository {
   late final Box tasksBox;
