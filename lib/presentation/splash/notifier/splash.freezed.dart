@@ -75,19 +75,20 @@ class _$SplashStateCopyWithImpl<$Res, $Val extends SplashState>
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
   @useResult
   $Res call({double turn});
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$SplashStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$SplashStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -95,7 +96,7 @@ class __$$_InitialCopyWithImpl<$Res>
   $Res call({
     Object? turn = null,
   }) {
-    return _then(_$_Initial(
+    return _then(_$InitialImpl(
       null == turn
           ? _value.turn
           : turn // ignore: cast_nullable_to_non_nullable
@@ -106,8 +107,8 @@ class __$$_InitialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  _$_Initial(this.turn);
+class _$InitialImpl implements _Initial {
+  _$InitialImpl(this.turn);
 
   @override
   final double turn;
@@ -121,7 +122,7 @@ class _$_Initial implements _Initial {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initial &&
+            other is _$InitialImpl &&
             (identical(other.turn, turn) || other.turn == turn));
   }
 
@@ -131,8 +132,8 @@ class _$_Initial implements _Initial {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitialCopyWith<_$_Initial> get copyWith =>
-      __$$_InitialCopyWithImpl<_$_Initial>(this, _$identity);
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
+      __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -198,34 +199,34 @@ class _$_Initial implements _Initial {
 }
 
 abstract class _Initial implements SplashState {
-  factory _Initial(final double turn) = _$_Initial;
+  factory _Initial(final double turn) = _$InitialImpl;
 
   double get turn;
   @JsonKey(ignore: true)
-  _$$_InitialCopyWith<_$_Initial> get copyWith =>
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SplashCompletedCopyWith<$Res> {
-  factory _$$_SplashCompletedCopyWith(
-          _$_SplashCompleted value, $Res Function(_$_SplashCompleted) then) =
-      __$$_SplashCompletedCopyWithImpl<$Res>;
+abstract class _$$SplashCompletedImplCopyWith<$Res> {
+  factory _$$SplashCompletedImplCopyWith(_$SplashCompletedImpl value,
+          $Res Function(_$SplashCompletedImpl) then) =
+      __$$SplashCompletedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SplashCompletedCopyWithImpl<$Res>
-    extends _$SplashStateCopyWithImpl<$Res, _$_SplashCompleted>
-    implements _$$_SplashCompletedCopyWith<$Res> {
-  __$$_SplashCompletedCopyWithImpl(
-      _$_SplashCompleted _value, $Res Function(_$_SplashCompleted) _then)
+class __$$SplashCompletedImplCopyWithImpl<$Res>
+    extends _$SplashStateCopyWithImpl<$Res, _$SplashCompletedImpl>
+    implements _$$SplashCompletedImplCopyWith<$Res> {
+  __$$SplashCompletedImplCopyWithImpl(
+      _$SplashCompletedImpl _value, $Res Function(_$SplashCompletedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_SplashCompleted implements _SplashCompleted {
-  _$_SplashCompleted();
+class _$SplashCompletedImpl implements _SplashCompleted {
+  _$SplashCompletedImpl();
 
   @override
   String toString() {
@@ -235,7 +236,7 @@ class _$_SplashCompleted implements _SplashCompleted {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_SplashCompleted);
+        (other.runtimeType == runtimeType && other is _$SplashCompletedImpl);
   }
 
   @override
@@ -305,5 +306,5 @@ class _$_SplashCompleted implements _SplashCompleted {
 }
 
 abstract class _SplashCompleted implements SplashState {
-  factory _SplashCompleted() = _$_SplashCompleted;
+  factory _SplashCompleted() = _$SplashCompletedImpl;
 }

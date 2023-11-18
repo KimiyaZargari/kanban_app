@@ -11,10 +11,11 @@ import 'package:kanban_app/presentation/routes/router.gr.dart';
 
 import '../../core/config/strings.dart';
 
+@RoutePage()
 class CreateEditProjectPage extends ConsumerWidget {
   final ProjectModel? project;
 
-  const CreateEditProjectPage({this.project, Key? key}) : super(key: key);
+  const CreateEditProjectPage({this.project, super.key});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -39,83 +40,85 @@ class CreateEditProjectPage extends ConsumerWidget {
           project == null ? AppStrings.createProject : AppStrings.editProject,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 22.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
-                  child: Form(
-                    key: notifier.createProjectKey,
-                    child: AppTextField(
-                      label: 'Project Name',
-                      initialValue: project?.name,
-                      onSaved: (val) {
-                        notifier.projectName = val!;
-                      },
-                      validator: (val) {
-                        if (val?.trim().isEmpty ?? true) {
-                          return 'Please enter the project name!';
-                        }
-                        return null;
-                      },
-                      maxLength: 40,
-                    ),
-                  ),
-                ),
-                state.maybeWhen(
-                    orElse: () => Container(),
-                    projectExists: () => Padding(
-                          padding: const EdgeInsets.only(left: 12.0),
-                          child: Text(
-                            'This project already exits!',
-                            style: Theme.of(context).textTheme.displaySmall,
-                          ),
-                        )),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () {
-                      context.router.pop();
-                    },
-                    child: const Text(AppStrings.cancel),
-                  ),
-                ),
-                const SizedBox(
-                  width: 6,
-                ),
-                Consumer(builder: (context, ref, _) {
-                  return Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (notifier.createProjectKey.currentState
-                                ?.validate() ??
-                            false) {
-                          notifier.createProjectKey.currentState!.save();
-                          if (project == null) {
-                            notifier.createProject();
-                          } else {
-                            notifier.editProject(project!);
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    child: Form(
+                      key: notifier.createProjectKey,
+                      child: AppTextField(
+                        label: 'Project Name',
+                        initialValue: project?.name,
+                        onSaved: (val) {
+                          notifier.projectName = val!;
+                        },
+                        validator: (val) {
+                          if (val?.trim().isEmpty ?? true) {
+                            return 'Please enter the project name!';
                           }
-                        }
-                      },
-                      child: state.maybeWhen(
-                        creating: () => const LoadingWidget(),
-                        orElse: () => Text(project == null
-                            ? AppStrings.create
-                            : AppStrings.save),
+                          return null;
+                        },
+                        maxLength: 40,
                       ),
                     ),
-                  );
-                }),
-              ],
-            )
-          ],
+                  ),
+                  state.maybeWhen(
+                      orElse: () => Container(),
+                      projectExists: () => Padding(
+                            padding: const EdgeInsets.only(left: 12.0),
+                            child: Text(
+                              'This project already exits!',
+                              style: Theme.of(context).textTheme.displaySmall,
+                            ),
+                          )),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {
+                        context.router.pop();
+                      },
+                      child: const Text(AppStrings.cancel),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 6,
+                  ),
+                  Consumer(builder: (context, ref, _) {
+                    return Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (notifier.createProjectKey.currentState
+                                  ?.validate() ??
+                              false) {
+                            notifier.createProjectKey.currentState!.save();
+                            if (project == null) {
+                              notifier.createProject();
+                            } else {
+                              notifier.editProject(project!);
+                            }
+                          }
+                        },
+                        child: state.maybeWhen(
+                          creating: () => const LoadingWidget(),
+                          orElse: () => Text(project == null
+                              ? AppStrings.create
+                              : AppStrings.save),
+                        ),
+                      ),
+                    );
+                  }),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

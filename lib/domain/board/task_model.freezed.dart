@@ -97,10 +97,11 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
 }
 
 /// @nodoc
-abstract class _$$_TaskModelCopyWith<$Res> implements $TaskModelCopyWith<$Res> {
-  factory _$$_TaskModelCopyWith(
-          _$_TaskModel value, $Res Function(_$_TaskModel) then) =
-      __$$_TaskModelCopyWithImpl<$Res>;
+abstract class _$$TaskModelImplCopyWith<$Res>
+    implements $TaskModelCopyWith<$Res> {
+  factory _$$TaskModelImplCopyWith(
+          _$TaskModelImpl value, $Res Function(_$TaskModelImpl) then) =
+      __$$TaskModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -113,11 +114,11 @@ abstract class _$$_TaskModelCopyWith<$Res> implements $TaskModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TaskModelCopyWithImpl<$Res>
-    extends _$TaskModelCopyWithImpl<$Res, _$_TaskModel>
-    implements _$$_TaskModelCopyWith<$Res> {
-  __$$_TaskModelCopyWithImpl(
-      _$_TaskModel _value, $Res Function(_$_TaskModel) _then)
+class __$$TaskModelImplCopyWithImpl<$Res>
+    extends _$TaskModelCopyWithImpl<$Res, _$TaskModelImpl>
+    implements _$$TaskModelImplCopyWith<$Res> {
+  __$$TaskModelImplCopyWithImpl(
+      _$TaskModelImpl _value, $Res Function(_$TaskModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -130,7 +131,7 @@ class __$$_TaskModelCopyWithImpl<$Res>
     Object? intervals = freezed,
     Object? completedAt = freezed,
   }) {
-    return _then(_$_TaskModel(
+    return _then(_$TaskModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -161,8 +162,8 @@ class __$$_TaskModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TaskModel extends _TaskModel {
-  _$_TaskModel(
+class _$TaskModelImpl extends _TaskModel {
+  _$TaskModelImpl(
       {this.id,
       required this.title,
       this.description,
@@ -172,8 +173,8 @@ class _$_TaskModel extends _TaskModel {
       : _intervals = intervals,
         super._();
 
-  factory _$_TaskModel.fromJson(Map<String, dynamic> json) =>
-      _$$_TaskModelFromJson(json);
+  factory _$TaskModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TaskModelImplFromJson(json);
 
   @override
   final int? id;
@@ -204,12 +205,12 @@ class _$_TaskModel extends _TaskModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TaskModelCopyWith<_$_TaskModel> get copyWith =>
-      __$$_TaskModelCopyWithImpl<_$_TaskModel>(this, _$identity);
+  _$$TaskModelImplCopyWith<_$TaskModelImpl> get copyWith =>
+      __$$TaskModelImplCopyWithImpl<_$TaskModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TaskModelToJson(
+    return _$$TaskModelImplToJson(
       this,
     );
   }
@@ -222,11 +223,11 @@ abstract class _TaskModel extends TaskModel {
       final String? description,
       required final String status,
       final List<DateTime>? intervals,
-      final DateTime? completedAt}) = _$_TaskModel;
+      final DateTime? completedAt}) = _$TaskModelImpl;
   _TaskModel._() : super._();
 
   factory _TaskModel.fromJson(Map<String, dynamic> json) =
-      _$_TaskModel.fromJson;
+      _$TaskModelImpl.fromJson;
 
   @override
   int? get id;
@@ -242,7 +243,7 @@ abstract class _TaskModel extends TaskModel {
   DateTime? get completedAt;
   @override
   @JsonKey(ignore: true)
-  _$$_TaskModelCopyWith<_$_TaskModel> get copyWith =>
+  _$$TaskModelImplCopyWith<_$TaskModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -314,11 +315,11 @@ class _$EditTaskModelCopyWithImpl<$Res, $Val extends EditTaskModel>
 }
 
 /// @nodoc
-abstract class _$$_EditTaskModelCopyWith<$Res>
+abstract class _$$EditTaskModelImplCopyWith<$Res>
     implements $EditTaskModelCopyWith<$Res> {
-  factory _$$_EditTaskModelCopyWith(
-          _$_EditTaskModel value, $Res Function(_$_EditTaskModel) then) =
-      __$$_EditTaskModelCopyWithImpl<$Res>;
+  factory _$$EditTaskModelImplCopyWith(
+          _$EditTaskModelImpl value, $Res Function(_$EditTaskModelImpl) then) =
+      __$$EditTaskModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({TaskModel oldTask, TaskModel newTask});
@@ -330,11 +331,11 @@ abstract class _$$_EditTaskModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_EditTaskModelCopyWithImpl<$Res>
-    extends _$EditTaskModelCopyWithImpl<$Res, _$_EditTaskModel>
-    implements _$$_EditTaskModelCopyWith<$Res> {
-  __$$_EditTaskModelCopyWithImpl(
-      _$_EditTaskModel _value, $Res Function(_$_EditTaskModel) _then)
+class __$$EditTaskModelImplCopyWithImpl<$Res>
+    extends _$EditTaskModelCopyWithImpl<$Res, _$EditTaskModelImpl>
+    implements _$$EditTaskModelImplCopyWith<$Res> {
+  __$$EditTaskModelImplCopyWithImpl(
+      _$EditTaskModelImpl _value, $Res Function(_$EditTaskModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -343,7 +344,7 @@ class __$$_EditTaskModelCopyWithImpl<$Res>
     Object? oldTask = null,
     Object? newTask = null,
   }) {
-    return _then(_$_EditTaskModel(
+    return _then(_$EditTaskModelImpl(
       oldTask: null == oldTask
           ? _value.oldTask
           : oldTask // ignore: cast_nullable_to_non_nullable
@@ -358,8 +359,9 @@ class __$$_EditTaskModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_EditTaskModel extends _EditTaskModel {
-  _$_EditTaskModel({required this.oldTask, required this.newTask}) : super._();
+class _$EditTaskModelImpl extends _EditTaskModel {
+  _$EditTaskModelImpl({required this.oldTask, required this.newTask})
+      : super._();
 
   @override
   final TaskModel oldTask;
@@ -375,7 +377,7 @@ class _$_EditTaskModel extends _EditTaskModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EditTaskModel &&
+            other is _$EditTaskModelImpl &&
             (identical(other.oldTask, oldTask) || other.oldTask == oldTask) &&
             (identical(other.newTask, newTask) || other.newTask == newTask));
   }
@@ -386,14 +388,14 @@ class _$_EditTaskModel extends _EditTaskModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EditTaskModelCopyWith<_$_EditTaskModel> get copyWith =>
-      __$$_EditTaskModelCopyWithImpl<_$_EditTaskModel>(this, _$identity);
+  _$$EditTaskModelImplCopyWith<_$EditTaskModelImpl> get copyWith =>
+      __$$EditTaskModelImplCopyWithImpl<_$EditTaskModelImpl>(this, _$identity);
 }
 
 abstract class _EditTaskModel extends EditTaskModel {
   factory _EditTaskModel(
       {required final TaskModel oldTask,
-      required final TaskModel newTask}) = _$_EditTaskModel;
+      required final TaskModel newTask}) = _$EditTaskModelImpl;
   _EditTaskModel._() : super._();
 
   @override
@@ -402,6 +404,6 @@ abstract class _EditTaskModel extends EditTaskModel {
   TaskModel get newTask;
   @override
   @JsonKey(ignore: true)
-  _$$_EditTaskModelCopyWith<_$_EditTaskModel> get copyWith =>
+  _$$EditTaskModelImplCopyWith<_$EditTaskModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -94,11 +94,11 @@ class _$ProjectModelCopyWithImpl<$Res, $Val extends ProjectModel>
 }
 
 /// @nodoc
-abstract class _$$_ProjectModelCopyWith<$Res>
+abstract class _$$ProjectModelImplCopyWith<$Res>
     implements $ProjectModelCopyWith<$Res> {
-  factory _$$_ProjectModelCopyWith(
-          _$_ProjectModel value, $Res Function(_$_ProjectModel) then) =
-      __$$_ProjectModelCopyWithImpl<$Res>;
+  factory _$$ProjectModelImplCopyWith(
+          _$ProjectModelImpl value, $Res Function(_$ProjectModelImpl) then) =
+      __$$ProjectModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -110,11 +110,11 @@ abstract class _$$_ProjectModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProjectModelCopyWithImpl<$Res>
-    extends _$ProjectModelCopyWithImpl<$Res, _$_ProjectModel>
-    implements _$$_ProjectModelCopyWith<$Res> {
-  __$$_ProjectModelCopyWithImpl(
-      _$_ProjectModel _value, $Res Function(_$_ProjectModel) _then)
+class __$$ProjectModelImplCopyWithImpl<$Res>
+    extends _$ProjectModelCopyWithImpl<$Res, _$ProjectModelImpl>
+    implements _$$ProjectModelImplCopyWith<$Res> {
+  __$$ProjectModelImplCopyWithImpl(
+      _$ProjectModelImpl _value, $Res Function(_$ProjectModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -126,7 +126,7 @@ class __$$_ProjectModelCopyWithImpl<$Res>
     Object? done = null,
     Object? inProgress = null,
   }) {
-    return _then(_$_ProjectModel(
+    return _then(_$ProjectModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -153,8 +153,8 @@ class __$$_ProjectModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProjectModel extends _ProjectModel {
-  _$_ProjectModel(
+class _$ProjectModelImpl extends _ProjectModel {
+  _$ProjectModelImpl(
       {this.id,
       required this.name,
       @JsonKey(name: 'To Do') required this.todo,
@@ -162,8 +162,8 @@ class _$_ProjectModel extends _ProjectModel {
       @JsonKey(name: 'In Progress') required this.inProgress})
       : super._();
 
-  factory _$_ProjectModel.fromJson(Map<String, dynamic> json) =>
-      _$$_ProjectModelFromJson(json);
+  factory _$ProjectModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProjectModelImplFromJson(json);
 
   @override
   final int? id;
@@ -187,12 +187,12 @@ class _$_ProjectModel extends _ProjectModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProjectModelCopyWith<_$_ProjectModel> get copyWith =>
-      __$$_ProjectModelCopyWithImpl<_$_ProjectModel>(this, _$identity);
+  _$$ProjectModelImplCopyWith<_$ProjectModelImpl> get copyWith =>
+      __$$ProjectModelImplCopyWithImpl<_$ProjectModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProjectModelToJson(
+    return _$$ProjectModelImplToJson(
       this,
     );
   }
@@ -205,11 +205,11 @@ abstract class _ProjectModel extends ProjectModel {
           @JsonKey(name: 'To Do') required final int todo,
           @JsonKey(name: 'Done') required final int done,
           @JsonKey(name: 'In Progress') required final int inProgress}) =
-      _$_ProjectModel;
+      _$ProjectModelImpl;
   _ProjectModel._() : super._();
 
   factory _ProjectModel.fromJson(Map<String, dynamic> json) =
-      _$_ProjectModel.fromJson;
+      _$ProjectModelImpl.fromJson;
 
   @override
   int? get id;
@@ -226,6 +226,6 @@ abstract class _ProjectModel extends ProjectModel {
   int get inProgress;
   @override
   @JsonKey(ignore: true)
-  _$$_ProjectModelCopyWith<_$_ProjectModel> get copyWith =>
+  _$$ProjectModelImplCopyWith<_$ProjectModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

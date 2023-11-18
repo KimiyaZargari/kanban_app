@@ -1,53 +1,52 @@
-// **************************************************************************
-// AutoRouteGenerator
-// **************************************************************************
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// AutoRouteGenerator
+// AutoRouterGenerator
 // **************************************************************************
-//
+
 // ignore_for_file: type=lint
+// coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i6;
-import 'package:flutter/cupertino.dart' as _i9;
-import 'package:flutter/material.dart' as _i7;
+import 'package:flutter/cupertino.dart' as _i10;
+import 'package:flutter/material.dart' as _i8;
+import 'package:kanban_app/domain/board/task_model.dart' as _i9;
+import 'package:kanban_app/domain/project/project_model.dart' as _i7;
+import 'package:kanban_app/presentation/board/screens/board.dart' as _i3;
+import 'package:kanban_app/presentation/board/screens/create_edit_task.dart'
+    as _i2;
+import 'package:kanban_app/presentation/project/screens/create_edit_project.dart'
+    as _i1;
+import 'package:kanban_app/presentation/project/screens/projects.dart' as _i4;
+import 'package:kanban_app/presentation/splash/screen/splash.dart' as _i5;
 
-import '../../domain/board/task_model.dart' as _i10;
-import '../../domain/project/project_model.dart' as _i8;
-import '../board/screens/board.dart' as _i4;
-import '../board/screens/create_edit_task.dart' as _i5;
-import '../project/screens/create_edit_project.dart' as _i3;
-import '../project/screens/projects.dart' as _i2;
-import '../splash/screen/splash.dart' as _i1;
-
-class AppRouter extends _i6.RootStackRouter {
-  AppRouter([_i7.GlobalKey<_i7.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+abstract class $AppRouter extends _i6.RootStackRouter {
+  $AppRouter({super.navigatorKey});
 
   @override
   final Map<String, _i6.PageFactory> pagesMap = {
-    SplashRoute.name: (routeData) {
-      return _i6.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i1.SplashPage(),
-      );
-    },
-    ProjectsRoute.name: (routeData) {
-      return _i6.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i2.ProjectsPage(),
-      );
-    },
     CreateEditProjectRoute.name: (routeData) {
       final args = routeData.argsAs<CreateEditProjectRouteArgs>(
           orElse: () => const CreateEditProjectRouteArgs());
-      return _i6.MaterialPageX<dynamic>(
+      return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i3.CreateEditProjectPage(
+        child: _i1.CreateEditProjectPage(
           project: args.project,
+          key: args.key,
+        ),
+      );
+    },
+    CreateEditTaskRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<CreateEditTaskRouteArgs>(
+          orElse: () =>
+              CreateEditTaskRouteArgs(projectId: pathParams.getInt('id')));
+      return _i6.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i2.CreateEditTaskPage(
+          projectId: args.projectId,
+          task: args.task,
           key: args.key,
         ),
       );
@@ -63,103 +62,51 @@ class AppRouter extends _i6.RootStackRouter {
                   'Board',
                 ),
               ));
-      return _i6.MaterialPageX<dynamic>(
+      return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i4.ProjectBoardPage(
+        child: _i3.ProjectBoardPage(
           id: args.id,
           projectName: args.projectName,
           key: args.key,
         ),
       );
     },
-    CreateEditTaskRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<CreateEditTaskRouteArgs>(
-          orElse: () =>
-              CreateEditTaskRouteArgs(projectId: pathParams.getInt('id')));
-      return _i6.MaterialPageX<dynamic>(
+    ProjectsRoute.name: (routeData) {
+      return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i5.CreateEditTaskPage(
-          projectId: args.projectId,
-          task: args.task,
-          key: args.key,
-        ),
+        child: const _i4.ProjectsPage(),
+      );
+    },
+    SplashRoute.name: (routeData) {
+      return _i6.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i5.SplashPage(),
       );
     },
   };
-
-  @override
-  List<_i6.RouteConfig> get routes => [
-        _i6.RouteConfig(
-          '/#redirect',
-          path: '/',
-          redirectTo: '/splash',
-          fullMatch: true,
-        ),
-        _i6.RouteConfig(
-          SplashRoute.name,
-          path: '/splash',
-        ),
-        _i6.RouteConfig(
-          ProjectsRoute.name,
-          path: '/projects',
-        ),
-        _i6.RouteConfig(
-          CreateEditProjectRoute.name,
-          path: '/create_projects',
-        ),
-        _i6.RouteConfig(
-          ProjectBoardRoute.name,
-          path: 'board/:id',
-        ),
-        _i6.RouteConfig(
-          CreateEditTaskRoute.name,
-          path: 'board/:id/create_task',
-        ),
-      ];
 }
 
 /// generated route for
-/// [_i1.SplashPage]
-class SplashRoute extends _i6.PageRouteInfo<void> {
-  const SplashRoute()
-      : super(
-          SplashRoute.name,
-          path: '/splash',
-        );
-
-  static const String name = 'SplashRoute';
-}
-
-/// generated route for
-/// [_i2.ProjectsPage]
-class ProjectsRoute extends _i6.PageRouteInfo<void> {
-  const ProjectsRoute()
-      : super(
-          ProjectsRoute.name,
-          path: '/projects',
-        );
-
-  static const String name = 'ProjectsRoute';
-}
-
-/// generated route for
-/// [_i3.CreateEditProjectPage]
+/// [_i1.CreateEditProjectPage]
 class CreateEditProjectRoute
     extends _i6.PageRouteInfo<CreateEditProjectRouteArgs> {
   CreateEditProjectRoute({
-    _i8.ProjectModel? project,
-    _i9.Key? key,
+    _i7.ProjectModel? project,
+    _i8.Key? key,
+    List<_i6.PageRouteInfo>? children,
   }) : super(
           CreateEditProjectRoute.name,
-          path: '/create_projects',
           args: CreateEditProjectRouteArgs(
             project: project,
             key: key,
           ),
+          initialChildren: children,
         );
 
   static const String name = 'CreateEditProjectRoute';
+
+  static const _i6.PageInfo<CreateEditProjectRouteArgs> page =
+      _i6.PageInfo<CreateEditProjectRouteArgs>(name);
 }
 
 class CreateEditProjectRouteArgs {
@@ -168,9 +115,9 @@ class CreateEditProjectRouteArgs {
     this.key,
   });
 
-  final _i8.ProjectModel? project;
+  final _i7.ProjectModel? project;
 
-  final _i9.Key? key;
+  final _i8.Key? key;
 
   @override
   String toString() {
@@ -179,15 +126,59 @@ class CreateEditProjectRouteArgs {
 }
 
 /// generated route for
-/// [_i4.ProjectBoardPage]
+/// [_i2.CreateEditTaskPage]
+class CreateEditTaskRoute extends _i6.PageRouteInfo<CreateEditTaskRouteArgs> {
+  CreateEditTaskRoute({
+    required int projectId,
+    _i9.TaskModel? task,
+    _i10.Key? key,
+    List<_i6.PageRouteInfo>? children,
+  }) : super(
+          CreateEditTaskRoute.name,
+          args: CreateEditTaskRouteArgs(
+            projectId: projectId,
+            task: task,
+            key: key,
+          ),
+          rawPathParams: {'id': projectId},
+          initialChildren: children,
+        );
+
+  static const String name = 'CreateEditTaskRoute';
+
+  static const _i6.PageInfo<CreateEditTaskRouteArgs> page =
+      _i6.PageInfo<CreateEditTaskRouteArgs>(name);
+}
+
+class CreateEditTaskRouteArgs {
+  const CreateEditTaskRouteArgs({
+    required this.projectId,
+    this.task,
+    this.key,
+  });
+
+  final int projectId;
+
+  final _i9.TaskModel? task;
+
+  final _i10.Key? key;
+
+  @override
+  String toString() {
+    return 'CreateEditTaskRouteArgs{projectId: $projectId, task: $task, key: $key}';
+  }
+}
+
+/// generated route for
+/// [_i3.ProjectBoardPage]
 class ProjectBoardRoute extends _i6.PageRouteInfo<ProjectBoardRouteArgs> {
   ProjectBoardRoute({
     required int id,
     String projectName = 'Board',
-    _i9.Key? key,
+    _i8.Key? key,
+    List<_i6.PageRouteInfo>? children,
   }) : super(
           ProjectBoardRoute.name,
-          path: 'board/:id',
           args: ProjectBoardRouteArgs(
             id: id,
             projectName: projectName,
@@ -195,9 +186,13 @@ class ProjectBoardRoute extends _i6.PageRouteInfo<ProjectBoardRouteArgs> {
           ),
           rawPathParams: {'id': id},
           rawQueryParams: {'projectName': projectName},
+          initialChildren: children,
         );
 
   static const String name = 'ProjectBoardRoute';
+
+  static const _i6.PageInfo<ProjectBoardRouteArgs> page =
+      _i6.PageInfo<ProjectBoardRouteArgs>(name);
 }
 
 class ProjectBoardRouteArgs {
@@ -211,7 +206,7 @@ class ProjectBoardRouteArgs {
 
   final String projectName;
 
-  final _i9.Key? key;
+  final _i8.Key? key;
 
   @override
   String toString() {
@@ -220,41 +215,29 @@ class ProjectBoardRouteArgs {
 }
 
 /// generated route for
-/// [_i5.CreateEditTaskPage]
-class CreateEditTaskRoute extends _i6.PageRouteInfo<CreateEditTaskRouteArgs> {
-  CreateEditTaskRoute({
-    required int projectId,
-    _i10.TaskModel? task,
-    _i9.Key? key,
-  }) : super(
-          CreateEditTaskRoute.name,
-          path: 'board/:id/create_task',
-          args: CreateEditTaskRouteArgs(
-            projectId: projectId,
-            task: task,
-            key: key,
-          ),
-          rawPathParams: {'id': projectId},
+/// [_i4.ProjectsPage]
+class ProjectsRoute extends _i6.PageRouteInfo<void> {
+  const ProjectsRoute({List<_i6.PageRouteInfo>? children})
+      : super(
+          ProjectsRoute.name,
+          initialChildren: children,
         );
 
-  static const String name = 'CreateEditTaskRoute';
+  static const String name = 'ProjectsRoute';
+
+  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
 }
 
-class CreateEditTaskRouteArgs {
-  const CreateEditTaskRouteArgs({
-    required this.projectId,
-    this.task,
-    this.key,
-  });
+/// generated route for
+/// [_i5.SplashPage]
+class SplashRoute extends _i6.PageRouteInfo<void> {
+  const SplashRoute({List<_i6.PageRouteInfo>? children})
+      : super(
+          SplashRoute.name,
+          initialChildren: children,
+        );
 
-  final int projectId;
+  static const String name = 'SplashRoute';
 
-  final _i10.TaskModel? task;
-
-  final _i9.Key? key;
-
-  @override
-  String toString() {
-    return 'CreateEditTaskRouteArgs{projectId: $projectId, task: $task, key: $key}';
-  }
+  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
 }

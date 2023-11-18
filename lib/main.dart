@@ -1,11 +1,10 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:kanban_app/presentation/core/config/themes/dark_theme.dart';
 import 'package:kanban_app/presentation/core/config/themes/light_theme.dart';
 import 'package:kanban_app/presentation/core/config/themes/provider.dart';
-import 'package:kanban_app/presentation/routes/router.gr.dart';
+import 'package:kanban_app/presentation/routes/router.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'infrastructure/core/local_database.dart';
@@ -13,7 +12,6 @@ import 'infrastructure/project/project_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
   final appDocumentDirectory = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
   final projectsBox = await Hive.openBox<Map>(DatabaseKeys.projectKey);

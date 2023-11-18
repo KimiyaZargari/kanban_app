@@ -14,13 +14,14 @@ import 'package:kanban_app/presentation/project/notifiers/projects.dart';
 import '../../../domain/board/task_model.dart';
 import '../../../domain/core/enums.dart';
 
+
+@RoutePage()
 class CreateEditTaskPage extends ConsumerWidget {
   final int projectId;
   final TaskModel? task;
 
   const CreateEditTaskPage(
-      {@PathParam('id') required this.projectId, this.task, Key? key})
-      : super(key: key);
+      {@PathParam('id') required this.projectId, this.task, super.key});
 
   @override
   Widget build(BuildContext context, ref) {

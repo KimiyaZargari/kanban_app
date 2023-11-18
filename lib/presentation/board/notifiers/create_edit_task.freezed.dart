@@ -93,24 +93,25 @@ class _$CreateEditTaskStateCopyWithImpl<$Res, $Val extends CreateEditTaskState>
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$CreateEditTaskStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$CreateEditTaskStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  _$_Initial();
+class _$InitialImpl implements _Initial {
+  _$InitialImpl();
 
   @override
   String toString() {
@@ -120,7 +121,7 @@ class _$_Initial implements _Initial {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -208,28 +209,29 @@ class _$_Initial implements _Initial {
 }
 
 abstract class _Initial implements CreateEditTaskState {
-  factory _Initial() = _$_Initial;
+  factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$_LoadingCopyWith<$Res> {
-  factory _$$_LoadingCopyWith(
-          _$_Loading value, $Res Function(_$_Loading) then) =
-      __$$_LoadingCopyWithImpl<$Res>;
+abstract class _$$LoadingImplCopyWith<$Res> {
+  factory _$$LoadingImplCopyWith(
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadingCopyWithImpl<$Res>
-    extends _$CreateEditTaskStateCopyWithImpl<$Res, _$_Loading>
-    implements _$$_LoadingCopyWith<$Res> {
-  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
+class __$$LoadingImplCopyWithImpl<$Res>
+    extends _$CreateEditTaskStateCopyWithImpl<$Res, _$LoadingImpl>
+    implements _$$LoadingImplCopyWith<$Res> {
+  __$$LoadingImplCopyWithImpl(
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Loading implements _Loading {
-  _$_Loading();
+class _$LoadingImpl implements _Loading {
+  _$LoadingImpl();
 
   @override
   String toString() {
@@ -239,7 +241,7 @@ class _$_Loading implements _Loading {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loading);
+        (other.runtimeType == runtimeType && other is _$LoadingImpl);
   }
 
   @override
@@ -327,27 +329,29 @@ class _$_Loading implements _Loading {
 }
 
 abstract class _Loading implements CreateEditTaskState {
-  factory _Loading() = _$_Loading;
+  factory _Loading() = _$LoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$_LoadedCopyWith<$Res> {
-  factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
-      __$$_LoadedCopyWithImpl<$Res>;
+abstract class _$$LoadedImplCopyWith<$Res> {
+  factory _$$LoadedImplCopyWith(
+          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
+      __$$LoadedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadedCopyWithImpl<$Res>
-    extends _$CreateEditTaskStateCopyWithImpl<$Res, _$_Loaded>
-    implements _$$_LoadedCopyWith<$Res> {
-  __$$_LoadedCopyWithImpl(_$_Loaded _value, $Res Function(_$_Loaded) _then)
+class __$$LoadedImplCopyWithImpl<$Res>
+    extends _$CreateEditTaskStateCopyWithImpl<$Res, _$LoadedImpl>
+    implements _$$LoadedImplCopyWith<$Res> {
+  __$$LoadedImplCopyWithImpl(
+      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Loaded implements _Loaded {
-  _$_Loaded();
+class _$LoadedImpl implements _Loaded {
+  _$LoadedImpl();
 
   @override
   String toString() {
@@ -357,7 +361,7 @@ class _$_Loaded implements _Loaded {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loaded);
+        (other.runtimeType == runtimeType && other is _$LoadedImpl);
   }
 
   @override
@@ -445,29 +449,29 @@ class _$_Loaded implements _Loaded {
 }
 
 abstract class _Loaded implements CreateEditTaskState {
-  factory _Loaded() = _$_Loaded;
+  factory _Loaded() = _$LoadedImpl;
 }
 
 /// @nodoc
-abstract class _$$_DuplicateTaskCopyWith<$Res> {
-  factory _$$_DuplicateTaskCopyWith(
-          _$_DuplicateTask value, $Res Function(_$_DuplicateTask) then) =
-      __$$_DuplicateTaskCopyWithImpl<$Res>;
+abstract class _$$DuplicateTaskImplCopyWith<$Res> {
+  factory _$$DuplicateTaskImplCopyWith(
+          _$DuplicateTaskImpl value, $Res Function(_$DuplicateTaskImpl) then) =
+      __$$DuplicateTaskImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_DuplicateTaskCopyWithImpl<$Res>
-    extends _$CreateEditTaskStateCopyWithImpl<$Res, _$_DuplicateTask>
-    implements _$$_DuplicateTaskCopyWith<$Res> {
-  __$$_DuplicateTaskCopyWithImpl(
-      _$_DuplicateTask _value, $Res Function(_$_DuplicateTask) _then)
+class __$$DuplicateTaskImplCopyWithImpl<$Res>
+    extends _$CreateEditTaskStateCopyWithImpl<$Res, _$DuplicateTaskImpl>
+    implements _$$DuplicateTaskImplCopyWith<$Res> {
+  __$$DuplicateTaskImplCopyWithImpl(
+      _$DuplicateTaskImpl _value, $Res Function(_$DuplicateTaskImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_DuplicateTask implements _DuplicateTask {
-  _$_DuplicateTask();
+class _$DuplicateTaskImpl implements _DuplicateTask {
+  _$DuplicateTaskImpl();
 
   @override
   String toString() {
@@ -477,7 +481,7 @@ class _$_DuplicateTask implements _DuplicateTask {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_DuplicateTask);
+        (other.runtimeType == runtimeType && other is _$DuplicateTaskImpl);
   }
 
   @override
@@ -565,24 +569,24 @@ class _$_DuplicateTask implements _DuplicateTask {
 }
 
 abstract class _DuplicateTask implements CreateEditTaskState {
-  factory _DuplicateTask() = _$_DuplicateTask;
+  factory _DuplicateTask() = _$DuplicateTaskImpl;
 }
 
 /// @nodoc
-abstract class _$$_NetworkErrorCopyWith<$Res> {
-  factory _$$_NetworkErrorCopyWith(
-          _$_NetworkError value, $Res Function(_$_NetworkError) then) =
-      __$$_NetworkErrorCopyWithImpl<$Res>;
+abstract class _$$NetworkErrorImplCopyWith<$Res> {
+  factory _$$NetworkErrorImplCopyWith(
+          _$NetworkErrorImpl value, $Res Function(_$NetworkErrorImpl) then) =
+      __$$NetworkErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$_NetworkErrorCopyWithImpl<$Res>
-    extends _$CreateEditTaskStateCopyWithImpl<$Res, _$_NetworkError>
-    implements _$$_NetworkErrorCopyWith<$Res> {
-  __$$_NetworkErrorCopyWithImpl(
-      _$_NetworkError _value, $Res Function(_$_NetworkError) _then)
+class __$$NetworkErrorImplCopyWithImpl<$Res>
+    extends _$CreateEditTaskStateCopyWithImpl<$Res, _$NetworkErrorImpl>
+    implements _$$NetworkErrorImplCopyWith<$Res> {
+  __$$NetworkErrorImplCopyWithImpl(
+      _$NetworkErrorImpl _value, $Res Function(_$NetworkErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -590,7 +594,7 @@ class __$$_NetworkErrorCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$_NetworkError(
+    return _then(_$NetworkErrorImpl(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -601,8 +605,8 @@ class __$$_NetworkErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_NetworkError implements _NetworkError {
-  _$_NetworkError(this.message);
+class _$NetworkErrorImpl implements _NetworkError {
+  _$NetworkErrorImpl(this.message);
 
   @override
   final String message;
@@ -616,7 +620,7 @@ class _$_NetworkError implements _NetworkError {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NetworkError &&
+            other is _$NetworkErrorImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -626,8 +630,8 @@ class _$_NetworkError implements _NetworkError {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NetworkErrorCopyWith<_$_NetworkError> get copyWith =>
-      __$$_NetworkErrorCopyWithImpl<_$_NetworkError>(this, _$identity);
+  _$$NetworkErrorImplCopyWith<_$NetworkErrorImpl> get copyWith =>
+      __$$NetworkErrorImplCopyWithImpl<_$NetworkErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -711,10 +715,10 @@ class _$_NetworkError implements _NetworkError {
 }
 
 abstract class _NetworkError implements CreateEditTaskState {
-  factory _NetworkError(final String message) = _$_NetworkError;
+  factory _NetworkError(final String message) = _$NetworkErrorImpl;
 
   String get message;
   @JsonKey(ignore: true)
-  _$$_NetworkErrorCopyWith<_$_NetworkError> get copyWith =>
+  _$$NetworkErrorImplCopyWith<_$NetworkErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

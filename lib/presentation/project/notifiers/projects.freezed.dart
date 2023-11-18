@@ -81,24 +81,25 @@ class _$ProjectsStateCopyWithImpl<$Res, $Val extends ProjectsState>
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$ProjectsStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$ProjectsStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  _$_Initial();
+class _$InitialImpl implements _Initial {
+  _$InitialImpl();
 
   @override
   String toString() {
@@ -108,7 +109,7 @@ class _$_Initial implements _Initial {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -184,27 +185,29 @@ class _$_Initial implements _Initial {
 }
 
 abstract class _Initial implements ProjectsState {
-  factory _Initial() = _$_Initial;
+  factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$_LoadedCopyWith<$Res> {
-  factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
-      __$$_LoadedCopyWithImpl<$Res>;
+abstract class _$$LoadedImplCopyWith<$Res> {
+  factory _$$LoadedImplCopyWith(
+          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
+      __$$LoadedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadedCopyWithImpl<$Res>
-    extends _$ProjectsStateCopyWithImpl<$Res, _$_Loaded>
-    implements _$$_LoadedCopyWith<$Res> {
-  __$$_LoadedCopyWithImpl(_$_Loaded _value, $Res Function(_$_Loaded) _then)
+class __$$LoadedImplCopyWithImpl<$Res>
+    extends _$ProjectsStateCopyWithImpl<$Res, _$LoadedImpl>
+    implements _$$LoadedImplCopyWith<$Res> {
+  __$$LoadedImplCopyWithImpl(
+      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Loaded implements _Loaded {
-  _$_Loaded();
+class _$LoadedImpl implements _Loaded {
+  _$LoadedImpl();
 
   @override
   String toString() {
@@ -214,7 +217,7 @@ class _$_Loaded implements _Loaded {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loaded);
+        (other.runtimeType == runtimeType && other is _$LoadedImpl);
   }
 
   @override
@@ -290,24 +293,24 @@ class _$_Loaded implements _Loaded {
 }
 
 abstract class _Loaded implements ProjectsState {
-  factory _Loaded() = _$_Loaded;
+  factory _Loaded() = _$LoadedImpl;
 }
 
 /// @nodoc
-abstract class _$$_NetworkErrorCopyWith<$Res> {
-  factory _$$_NetworkErrorCopyWith(
-          _$_NetworkError value, $Res Function(_$_NetworkError) then) =
-      __$$_NetworkErrorCopyWithImpl<$Res>;
+abstract class _$$NetworkErrorImplCopyWith<$Res> {
+  factory _$$NetworkErrorImplCopyWith(
+          _$NetworkErrorImpl value, $Res Function(_$NetworkErrorImpl) then) =
+      __$$NetworkErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$_NetworkErrorCopyWithImpl<$Res>
-    extends _$ProjectsStateCopyWithImpl<$Res, _$_NetworkError>
-    implements _$$_NetworkErrorCopyWith<$Res> {
-  __$$_NetworkErrorCopyWithImpl(
-      _$_NetworkError _value, $Res Function(_$_NetworkError) _then)
+class __$$NetworkErrorImplCopyWithImpl<$Res>
+    extends _$ProjectsStateCopyWithImpl<$Res, _$NetworkErrorImpl>
+    implements _$$NetworkErrorImplCopyWith<$Res> {
+  __$$NetworkErrorImplCopyWithImpl(
+      _$NetworkErrorImpl _value, $Res Function(_$NetworkErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -315,7 +318,7 @@ class __$$_NetworkErrorCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$_NetworkError(
+    return _then(_$NetworkErrorImpl(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -326,8 +329,8 @@ class __$$_NetworkErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_NetworkError implements _NetworkError {
-  _$_NetworkError(this.message);
+class _$NetworkErrorImpl implements _NetworkError {
+  _$NetworkErrorImpl(this.message);
 
   @override
   final String message;
@@ -341,7 +344,7 @@ class _$_NetworkError implements _NetworkError {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NetworkError &&
+            other is _$NetworkErrorImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -351,8 +354,8 @@ class _$_NetworkError implements _NetworkError {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NetworkErrorCopyWith<_$_NetworkError> get copyWith =>
-      __$$_NetworkErrorCopyWithImpl<_$_NetworkError>(this, _$identity);
+  _$$NetworkErrorImplCopyWith<_$NetworkErrorImpl> get copyWith =>
+      __$$NetworkErrorImplCopyWithImpl<_$NetworkErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -424,10 +427,10 @@ class _$_NetworkError implements _NetworkError {
 }
 
 abstract class _NetworkError implements ProjectsState {
-  factory _NetworkError(final String message) = _$_NetworkError;
+  factory _NetworkError(final String message) = _$NetworkErrorImpl;
 
   String get message;
   @JsonKey(ignore: true)
-  _$$_NetworkErrorCopyWith<_$_NetworkError> get copyWith =>
+  _$$NetworkErrorImplCopyWith<_$NetworkErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

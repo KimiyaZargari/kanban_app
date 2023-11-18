@@ -8,8 +8,9 @@ import 'package:lottie/lottie.dart';
 
 import '../notifier/splash.dart';
 
+@RoutePage()
 class SplashPage extends ConsumerWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -17,11 +18,12 @@ class SplashPage extends ConsumerWidget {
     final state = ref.watch(splashNotifierProvider);
     if (state == SplashState.initial(0)) {
       notifier.openBox();
-     // notifier.turn();
+      // notifier.turn();
     }
     ref.listen(splashNotifierProvider, (previous, next) {
       next.mapOrNull(
-          splashCompleted: (_) => context.router.replace(const ProjectsRoute()));
+          splashCompleted: (_) =>
+              context.router.replace(const ProjectsRoute()));
     });
     return Scaffold(
         body: Column(
@@ -39,7 +41,7 @@ class SplashPage extends ConsumerWidget {
               child: AnimatedRotation(
                 duration: const Duration(milliseconds: 300),
                 onEnd: () {
-                //  notifier.turn();
+                  //  notifier.turn();
                 },
                 turns:
                     state.maybeWhen(orElse: () => 0, initial: (turns) => turns),

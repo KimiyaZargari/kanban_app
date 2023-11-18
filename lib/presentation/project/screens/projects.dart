@@ -9,8 +9,9 @@ import 'package:kanban_app/presentation/project/notifiers/projects.dart';
 import 'package:kanban_app/presentation/project/widgets/project_card.dart';
 import 'package:kanban_app/presentation/routes/router.gr.dart';
 
+@RoutePage()
 class ProjectsPage extends ConsumerWidget {
-  const ProjectsPage({Key? key}) : super(key: key);
+  const ProjectsPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,7 +25,6 @@ class ProjectsPage extends ConsumerWidget {
           },
           child: const Icon(Icons.add_rounded),
         ),
-
         child: state.maybeWhen(
           initial: () {
             notifier.getProjects();

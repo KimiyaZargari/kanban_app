@@ -16,14 +16,14 @@ import 'package:kanban_app/presentation/routes/router.gr.dart';
 
 import '../../core/widgets/loading_widget.dart';
 
+@RoutePage()
 class ProjectBoardPage extends ConsumerWidget {
   final String projectName;
 
   const ProjectBoardPage(
       {@pathParam required int id,
       @queryParam this.projectName = 'Board',
-      Key? key})
-      : super(key: key);
+      super.key});
 
   @override
   Widget build(BuildContext context, ref) {

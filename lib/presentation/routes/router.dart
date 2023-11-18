@@ -1,19 +1,17 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:kanban_app/presentation/board/screens/create_edit_task.dart';
-import 'package:kanban_app/presentation/project/screens/create_edit_project.dart';
-import 'package:kanban_app/presentation/project/screens/projects.dart';
-import 'package:kanban_app/presentation/board/screens/board.dart';
-import 'package:kanban_app/presentation/splash/screen/splash.dart';
+import 'router.gr.dart';
 
-@MaterialAutoRouter(
+@AutoRouterConfig(
   replaceInRouteName: 'Page,Route',
-  routes: [
-    AutoRoute(path: '/splash', page: SplashPage, initial: true),
-    AutoRoute(path: '/projects', page: ProjectsPage),
-    AutoRoute(path: '/create_projects', page: CreateEditProjectPage),
-    AutoRoute(path: 'board/:id', page: ProjectBoardPage),
-    AutoRoute(path: 'board/:id/create_task', page: CreateEditTaskPage),
-  ],
 )
-class $AppRouter {}
+class AppRouter extends $AppRouter {
+  @override
+  List<AutoRoute> get routes => [
+        AutoRoute(path: '/splash', page: SplashRoute.page, initial: true),
+        AutoRoute(path: '/projects', page: ProjectsRoute.page),
+        AutoRoute(path: '/create_projects', page: CreateEditProjectRoute.page),
+        AutoRoute(path: '/board/:id', page: ProjectBoardRoute.page),
+        AutoRoute(
+            path: '/board/:id/create_task', page: CreateEditTaskRoute.page),
+      ];
+}

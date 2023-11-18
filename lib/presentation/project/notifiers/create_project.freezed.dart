@@ -93,24 +93,25 @@ class _$CreateProjectStateCopyWithImpl<$Res, $Val extends CreateProjectState>
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$CreateProjectStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$CreateProjectStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  _$_Initial();
+class _$InitialImpl implements _Initial {
+  _$InitialImpl();
 
   @override
   String toString() {
@@ -120,7 +121,7 @@ class _$_Initial implements _Initial {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -208,23 +209,24 @@ class _$_Initial implements _Initial {
 }
 
 abstract class _Initial implements CreateProjectState {
-  factory _Initial() = _$_Initial;
+  factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$_CreatedCopyWith<$Res> {
-  factory _$$_CreatedCopyWith(
-          _$_Created value, $Res Function(_$_Created) then) =
-      __$$_CreatedCopyWithImpl<$Res>;
+abstract class _$$CreatedImplCopyWith<$Res> {
+  factory _$$CreatedImplCopyWith(
+          _$CreatedImpl value, $Res Function(_$CreatedImpl) then) =
+      __$$CreatedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int projectId});
 }
 
 /// @nodoc
-class __$$_CreatedCopyWithImpl<$Res>
-    extends _$CreateProjectStateCopyWithImpl<$Res, _$_Created>
-    implements _$$_CreatedCopyWith<$Res> {
-  __$$_CreatedCopyWithImpl(_$_Created _value, $Res Function(_$_Created) _then)
+class __$$CreatedImplCopyWithImpl<$Res>
+    extends _$CreateProjectStateCopyWithImpl<$Res, _$CreatedImpl>
+    implements _$$CreatedImplCopyWith<$Res> {
+  __$$CreatedImplCopyWithImpl(
+      _$CreatedImpl _value, $Res Function(_$CreatedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -232,7 +234,7 @@ class __$$_CreatedCopyWithImpl<$Res>
   $Res call({
     Object? projectId = null,
   }) {
-    return _then(_$_Created(
+    return _then(_$CreatedImpl(
       null == projectId
           ? _value.projectId
           : projectId // ignore: cast_nullable_to_non_nullable
@@ -243,8 +245,8 @@ class __$$_CreatedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Created implements _Created {
-  _$_Created(this.projectId);
+class _$CreatedImpl implements _Created {
+  _$CreatedImpl(this.projectId);
 
   @override
   final int projectId;
@@ -258,7 +260,7 @@ class _$_Created implements _Created {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Created &&
+            other is _$CreatedImpl &&
             (identical(other.projectId, projectId) ||
                 other.projectId == projectId));
   }
@@ -269,8 +271,8 @@ class _$_Created implements _Created {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreatedCopyWith<_$_Created> get copyWith =>
-      __$$_CreatedCopyWithImpl<_$_Created>(this, _$identity);
+  _$$CreatedImplCopyWith<_$CreatedImpl> get copyWith =>
+      __$$CreatedImplCopyWithImpl<_$CreatedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -354,34 +356,34 @@ class _$_Created implements _Created {
 }
 
 abstract class _Created implements CreateProjectState {
-  factory _Created(final int projectId) = _$_Created;
+  factory _Created(final int projectId) = _$CreatedImpl;
 
   int get projectId;
   @JsonKey(ignore: true)
-  _$$_CreatedCopyWith<_$_Created> get copyWith =>
+  _$$CreatedImplCopyWith<_$CreatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_CreatingCopyWith<$Res> {
-  factory _$$_CreatingCopyWith(
-          _$_Creating value, $Res Function(_$_Creating) then) =
-      __$$_CreatingCopyWithImpl<$Res>;
+abstract class _$$CreatingImplCopyWith<$Res> {
+  factory _$$CreatingImplCopyWith(
+          _$CreatingImpl value, $Res Function(_$CreatingImpl) then) =
+      __$$CreatingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_CreatingCopyWithImpl<$Res>
-    extends _$CreateProjectStateCopyWithImpl<$Res, _$_Creating>
-    implements _$$_CreatingCopyWith<$Res> {
-  __$$_CreatingCopyWithImpl(
-      _$_Creating _value, $Res Function(_$_Creating) _then)
+class __$$CreatingImplCopyWithImpl<$Res>
+    extends _$CreateProjectStateCopyWithImpl<$Res, _$CreatingImpl>
+    implements _$$CreatingImplCopyWith<$Res> {
+  __$$CreatingImplCopyWithImpl(
+      _$CreatingImpl _value, $Res Function(_$CreatingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Creating implements _Creating {
-  _$_Creating();
+class _$CreatingImpl implements _Creating {
+  _$CreatingImpl();
 
   @override
   String toString() {
@@ -391,7 +393,7 @@ class _$_Creating implements _Creating {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Creating);
+        (other.runtimeType == runtimeType && other is _$CreatingImpl);
   }
 
   @override
@@ -479,29 +481,29 @@ class _$_Creating implements _Creating {
 }
 
 abstract class _Creating implements CreateProjectState {
-  factory _Creating() = _$_Creating;
+  factory _Creating() = _$CreatingImpl;
 }
 
 /// @nodoc
-abstract class _$$_ProjectExistsCopyWith<$Res> {
-  factory _$$_ProjectExistsCopyWith(
-          _$_ProjectExists value, $Res Function(_$_ProjectExists) then) =
-      __$$_ProjectExistsCopyWithImpl<$Res>;
+abstract class _$$ProjectExistsImplCopyWith<$Res> {
+  factory _$$ProjectExistsImplCopyWith(
+          _$ProjectExistsImpl value, $Res Function(_$ProjectExistsImpl) then) =
+      __$$ProjectExistsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ProjectExistsCopyWithImpl<$Res>
-    extends _$CreateProjectStateCopyWithImpl<$Res, _$_ProjectExists>
-    implements _$$_ProjectExistsCopyWith<$Res> {
-  __$$_ProjectExistsCopyWithImpl(
-      _$_ProjectExists _value, $Res Function(_$_ProjectExists) _then)
+class __$$ProjectExistsImplCopyWithImpl<$Res>
+    extends _$CreateProjectStateCopyWithImpl<$Res, _$ProjectExistsImpl>
+    implements _$$ProjectExistsImplCopyWith<$Res> {
+  __$$ProjectExistsImplCopyWithImpl(
+      _$ProjectExistsImpl _value, $Res Function(_$ProjectExistsImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ProjectExists implements _ProjectExists {
-  _$_ProjectExists();
+class _$ProjectExistsImpl implements _ProjectExists {
+  _$ProjectExistsImpl();
 
   @override
   String toString() {
@@ -511,7 +513,7 @@ class _$_ProjectExists implements _ProjectExists {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ProjectExists);
+        (other.runtimeType == runtimeType && other is _$ProjectExistsImpl);
   }
 
   @override
@@ -599,24 +601,24 @@ class _$_ProjectExists implements _ProjectExists {
 }
 
 abstract class _ProjectExists implements CreateProjectState {
-  factory _ProjectExists() = _$_ProjectExists;
+  factory _ProjectExists() = _$ProjectExistsImpl;
 }
 
 /// @nodoc
-abstract class _$$_NetworkErrorCopyWith<$Res> {
-  factory _$$_NetworkErrorCopyWith(
-          _$_NetworkError value, $Res Function(_$_NetworkError) then) =
-      __$$_NetworkErrorCopyWithImpl<$Res>;
+abstract class _$$NetworkErrorImplCopyWith<$Res> {
+  factory _$$NetworkErrorImplCopyWith(
+          _$NetworkErrorImpl value, $Res Function(_$NetworkErrorImpl) then) =
+      __$$NetworkErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$_NetworkErrorCopyWithImpl<$Res>
-    extends _$CreateProjectStateCopyWithImpl<$Res, _$_NetworkError>
-    implements _$$_NetworkErrorCopyWith<$Res> {
-  __$$_NetworkErrorCopyWithImpl(
-      _$_NetworkError _value, $Res Function(_$_NetworkError) _then)
+class __$$NetworkErrorImplCopyWithImpl<$Res>
+    extends _$CreateProjectStateCopyWithImpl<$Res, _$NetworkErrorImpl>
+    implements _$$NetworkErrorImplCopyWith<$Res> {
+  __$$NetworkErrorImplCopyWithImpl(
+      _$NetworkErrorImpl _value, $Res Function(_$NetworkErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -624,7 +626,7 @@ class __$$_NetworkErrorCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$_NetworkError(
+    return _then(_$NetworkErrorImpl(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -635,8 +637,8 @@ class __$$_NetworkErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_NetworkError implements _NetworkError {
-  _$_NetworkError(this.message);
+class _$NetworkErrorImpl implements _NetworkError {
+  _$NetworkErrorImpl(this.message);
 
   @override
   final String message;
@@ -650,7 +652,7 @@ class _$_NetworkError implements _NetworkError {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NetworkError &&
+            other is _$NetworkErrorImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -660,8 +662,8 @@ class _$_NetworkError implements _NetworkError {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NetworkErrorCopyWith<_$_NetworkError> get copyWith =>
-      __$$_NetworkErrorCopyWithImpl<_$_NetworkError>(this, _$identity);
+  _$$NetworkErrorImplCopyWith<_$NetworkErrorImpl> get copyWith =>
+      __$$NetworkErrorImplCopyWithImpl<_$NetworkErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -745,10 +747,10 @@ class _$_NetworkError implements _NetworkError {
 }
 
 abstract class _NetworkError implements CreateProjectState {
-  factory _NetworkError(final String message) = _$_NetworkError;
+  factory _NetworkError(final String message) = _$NetworkErrorImpl;
 
   String get message;
   @JsonKey(ignore: true)
-  _$$_NetworkErrorCopyWith<_$_NetworkError> get copyWith =>
+  _$$NetworkErrorImplCopyWith<_$NetworkErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,8 +6,8 @@ part of 'project_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ProjectModel _$$_ProjectModelFromJson(Map<String, dynamic> json) =>
-    _$_ProjectModel(
+_$ProjectModelImpl _$$ProjectModelImplFromJson(Map<String, dynamic> json) =>
+    _$ProjectModelImpl(
       id: json['id'] as int?,
       name: json['name'] as String,
       todo: json['To Do'] as int,
@@ -15,7 +15,7 @@ _$_ProjectModel _$$_ProjectModelFromJson(Map<String, dynamic> json) =>
       inProgress: json['In Progress'] as int,
     );
 
-Map<String, dynamic> _$$_ProjectModelToJson(_$_ProjectModel instance) =>
+Map<String, dynamic> _$$ProjectModelImplToJson(_$ProjectModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
